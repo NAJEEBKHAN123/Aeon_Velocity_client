@@ -22,7 +22,7 @@ const AppContent = () => {
       
       <main className="pt-20">
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="*" element={<Home />} />
           {/* <Route path="/story" element={<OurStory />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/sponsors" element={<Sponsors />} />
