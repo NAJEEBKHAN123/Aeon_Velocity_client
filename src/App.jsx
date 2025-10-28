@@ -5,6 +5,7 @@ import Navbar from './common/Navbar';
 
 // Import your pages
 import Home from './pages/Home.jsx';
+import Footer from './common/Footer.jsx';
 // import OurStory from './pages/OurStory';
 // import Blog from './pages/Blog';
 // import Sponsors from './pages/Sponsors';
@@ -29,6 +30,7 @@ const AppContent = () => {
           <Route path="/contact" element={<Contact />} /> */}
         </Routes>
       </main>
+      <Footer />
     </div>
   );
 };

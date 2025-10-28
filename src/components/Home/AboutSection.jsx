@@ -24,33 +24,73 @@ const AboutSection = () => {
   const currentContent = content[currentLanguage];
 
   return (
-    <section className="py-20 bg-gray-800">
+    <section className="py-20 bg-gradient-to-br from-gray-900 to-blue-900">
       <div className="max-w-4xl mx-auto px-6">
+        {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-white mb-4">
+          <h2 className="text-5xl font-bold text-white mb-6">
             {currentContent.title}
           </h2>
-          <div className="w-20 h-1 bg-cyan-400 mx-auto"></div>
+          <div className="flex justify-center items-center space-x-4">
+            <div className="w-12 h-1 bg-cyan-400 rounded-full"></div>
+            <div className="w-3 h-3 bg-cyan-400 rounded-full"></div>
+            <div className="w-12 h-1 bg-cyan-400 rounded-full"></div>
+          </div>
         </div>
         
-        <div className="bg-gray-700/50 rounded-xl p-8">
-          <p className="text-xl text-gray-300 leading-relaxed text-center">
+        {/* Content Card */}
+        <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-12 border border-white/10 shadow-2xl">
+          {/* Main Text */}
+          <p className="text-2xl text-gray-100 leading-relaxed text-center mb-12 font-light">
             {currentContent.content}
           </p>
           
-          <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-            <div className="p-6 bg-gray-600/30 rounded-lg">
-              <div className="text-2xl font-bold text-cyan-400 mb-2">6th</div>
-              <div className="text-gray-300">{currentContent.rank}</div>
+          {/* Stats Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* National Rank */}
+            <div className="text-center group">
+              <div className="bg-gradient-to-br from-cyan-500/10 to-blue-500/10 rounded-2xl p-8 border border-cyan-500/20 hover:border-cyan-400/40 transition-all duration-300">
+                <div className="text-4xl font-bold text-cyan-400 mb-3 group-hover:scale-110 transition-transform">
+                  6<sup className="text-cyan-300">th</sup>
+                </div>
+                <div className="text-gray-300 font-medium">
+                  {currentContent.rank}
+                </div>
+              </div>
             </div>
-            <div className="p-6 bg-gray-600/30 rounded-lg">
-              <div className="text-2xl font-bold text-cyan-400 mb-2">2026</div>
-              <div className="text-gray-300">{currentContent.target}</div>
+
+            {/* World Target */}
+            <div className="text-center group">
+              <div className="bg-gradient-to-br from-blue-500/10 to-cyan-500/10 rounded-2xl p-8 border border-blue-500/20 hover:border-blue-400/40 transition-all duration-300">
+                <div className="text-4xl font-bold text-blue-400 mb-3 group-hover:scale-110 transition-transform">
+                  2026
+                </div>
+                <div className="text-gray-300 font-medium">
+                  {currentContent.target}
+                </div>
+              </div>
             </div>
-            <div className="p-6 bg-gray-600/30 rounded-lg">
-              <div className="text-2xl font-bold text-cyan-400 mb-2">France</div>
-              <div className="text-gray-300">{currentContent.representation}</div>
+
+            {/* Representation */}
+            <div className="text-center group">
+              <div className="bg-gradient-to-br from-cyan-500/10 to-blue-500/10 rounded-2xl p-8 border border-cyan-500/20 hover:border-cyan-400/40 transition-all duration-300">
+                <div className="text-4xl font-bold text-cyan-400 mb-3 group-hover:scale-110 transition-transform">
+                  🇫🇷
+                </div>
+                <div className="text-gray-300 font-medium">
+                  {currentContent.representation}
+                </div>
+              </div>
             </div>
+          </div>
+        </div>
+
+        {/* Bottom Accent */}
+        <div className="text-center mt-12">
+          <div className="inline-flex items-center space-x-3 text-cyan-300">
+            <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
+            <span className="text-sm font-medium">Aeon Velocity STEM Racing</span>
+            <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
           </div>
         </div>
       </div>
