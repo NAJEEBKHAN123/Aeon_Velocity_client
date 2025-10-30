@@ -6,10 +6,10 @@ import Navbar from './common/Navbar';
 // Import your pages
 import Home from './pages/Home.jsx';
 import Footer from './common/Footer.jsx';
-// import OurStory from './pages/OurStory';
-// import Blog from './pages/Blog';
-// import Sponsors from './pages/Sponsors';
-// import Contact from './pages/Contact';
+import OurStory from './pages/OurStory';
+import Blog from './pages/Blog';
+import Sponsors from './pages/Sponsors';
+import Contact from './pages/Contact';
 
 const AppContent = () => {
   const { currentLanguage, changeLanguage } = useLanguage();
@@ -24,10 +24,10 @@ const AppContent = () => {
       <main className="pt-20">
         <Routes>
           <Route path="*" element={<Home />} />
-          {/* <Route path="/story" element={<OurStory />} />
+          <Route path="/story" element={<OurStory />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/sponsors" element={<Sponsors />} />
-          <Route path="/contact" element={<Contact />} /> */}
+          <Route path="/contact" element={<Contact />} />
         </Routes>
       </main>
       <Footer />

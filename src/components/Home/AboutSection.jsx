@@ -63,7 +63,7 @@ const AboutSection = () => {
             <div className="text-center group">
               <div className="bg-gradient-to-br from-blue-500/10 to-cyan-500/10 rounded-2xl p-8 border border-blue-500/20 hover:border-blue-400/40 transition-all duration-300">
                 <div className="text-4xl font-bold text-blue-400 mb-3 group-hover:scale-110 transition-transform">
-                  2026
+                  2025
                 </div>
                 <div className="text-gray-300 font-medium">
                   {currentContent.target}
