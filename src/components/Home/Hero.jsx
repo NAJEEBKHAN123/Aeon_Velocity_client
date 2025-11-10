@@ -1,91 +1,107 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { useLanguage } from '../../contexts/LanguageContext';
-import hero_img from '../../assets/Hero.jpg';
+import React from "react";
+import hero_img from "../../assets/StemRaching/leftImg.jpg";
+import { motion } from "framer-motion";
+
+const textVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: (i) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: i * 0.3, type: "spring", stiffness: 80, damping: 15 },
+  }),
+};
 
 const Hero = () => {
-  const { currentLanguage } = useLanguage();
-
-  const content = {
-    fr: {
-      title: "Nous ne visons pas la compétition",
-      subtitle: "Nous sommes conçus pour dominer",
-      team: "Aeon Velocity",
-      adventure: "Notre Aventure",
-      sponsor: "Devenez Sponsor"
-    },
-    en: {
-      title: "We don't aim to compete",
-      subtitle: "We are built to dominate", 
-      team: "Aeon Velocity",
-      adventure: "Our Story",
-      sponsor: "Become a Sponsor"
-    }
-  };
-
-  const currentContent = content[currentLanguage];
-
   return (
-    <section className="relative h-screen bg-gray-900 overflow-hidden">
+    <section className="relative h-screen overflow-hidden bg-black">
+      {/* Background Image */}
       <div className="absolute inset-0">
-        <img 
-          src={hero_img} 
-          alt="Aeon Velocity STEM Racing Team"
-          className="w-full h-full object-cover"
+        <img
+          src={hero_img}
+          alt="Hero Background"
+          className="w-full h-full object-cover object-center scale-105 brightness-110 contrast-105"
         />
-        <div className="absolute inset-0 bg-black/50"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-black/20 via-transparent to-black/40"></div>
       </div>
 
-      {/* Border Accents */}
-      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 to-blue-500"></div>
-      <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-cyan-500"></div>
-      <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-cyan-500 to-blue-500"></div>
-      <div className="absolute right-0 top-0 bottom-0 w-1 bg-gradient-to-b from-blue-500 to-cyan-500"></div>
+      {/* Accent Line */}
+      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 shadow-lg shadow-cyan-400/30"></div>
 
-      <div className="relative h-full flex items-center justify-center p-8">
-        <div className="text-center max-w-2xl">
-          <div className="mb-12">
-            <div className="inline-block border border-cyan-400/30 px-6 py-2 rounded-full mb-8">
-              <span className="text-cyan-400 text-sm font-mono tracking-widest">
-                STEM RACING TEAM
-              </span>
-            </div>
-            
-            <h1 className="text-4xl md:text-5xl font-light text-white mb-4 tracking-tight">
-              {currentContent.title}
-            </h1>
-            
-            <h2 className="text-3xl md:text-4xl font-bold text-cyan-400 mb-6 tracking-tight">
-              {currentContent.subtitle}
-            </h2>
-            
-            <div className="text-gray-300 text-lg mb-12">
-              {currentContent.team}
-            </div>
-          </div>
+      {/* Left Text */}
+      <div className="absolute left-16 top-1/2 transform -translate-y-1/2 space-y-6">
+        {/* Main Title */}
+        <motion.h1
+          initial="hidden"
+          animate="visible"
+          custom={0}
+          variants={textVariants}
+          className="text-5xl md:text-7xl font-extrabold uppercase tracking-tight bg-gradient-to-r from-cyan-300 via-blue-400 to-purple-500 bg-clip-text text-transparent drop-shadow-[0_0_20px_rgba(0,255,255,0.7)]"
+        >
+          STEM RACING
+        </motion.h1>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Link
-              to="/story"
-              className="px-8 py-3 bg-white text-gray-900 font-medium rounded-sm hover:bg-gray-100 transition-colors min-w-[160px]"
-            >
-              {currentContent.adventure}
-            </Link>
-            <Link
-              to="/sponsors" 
-              className="px-8 py-3 border border-white text-white font-medium rounded-sm hover:bg-white hover:text-gray-900 transition-colors min-w-[160px]"
-            >
-              {currentContent.sponsor}
-            </Link>
-          </div>
+        {/* Taglines */}
+        <motion.div className="space-y-3 pl-2 border-l-4 border-cyan-400/40">
+          <motion.p
+            custom={1}
+            initial="hidden"
+            animate="visible"
+            variants={textVariants}
+            className="text-white font-semibold uppercase text-xl md:text-2xl tracking-wide drop-shadow-[0_0_10px_rgba(255,255,255,0.7)]"
+          >
+            We don't aim to compete
+          </motion.p>
+          <motion.p
+            custom={2}
+            initial="hidden"
+            animate="visible"
+            variants={textVariants}
+            className="text-white font-black uppercase text-2xl md:text-4xl tracking-tight bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(255,255,255,0.8)]"
+          >
+            We are built to dominate
+          </motion.p>
+        </motion.div>
+
+        {/* Team Name */}
+        <motion.p
+          custom={3}
+          initial="hidden"
+          animate="visible"
+          variants={textVariants}
+          className="text-purple-400 font-extrabold uppercase text-3xl md:text-4xl tracking-widest drop-shadow-[0_0_25px_rgba(128,0,255,0.8)] animate-pulse"
+        >
+          Aeon Velocity
+        </motion.p>
+        <div className="w-24 h-1 bg-gradient-to-r from-cyan-400 to-purple-500 mt-2 rounded-full shadow-lg shadow-cyan-400/40"></div>
+
+        {/* CTA Button */}
+        <motion.div
+          custom={4}
+          initial="hidden"
+          animate="visible"
+          variants={textVariants}
+          className="pt-6"
+        >
+          <button className="bg-gradient-to-r from-cyan-500 via-blue-600 to-purple-500 text-white font-bold py-3 px-10 rounded-full uppercase tracking-widest text-sm shadow-2xl shadow-cyan-500/40 hover:shadow-cyan-400/50 transition-all duration-300 transform hover:scale-105 hover:animate-pulse">
+            Join The Revolution
+          </button>
+        </motion.div>
+      </div>
+
+      {/* Decorative Elements */}
+      <div className="absolute bottom-10 right-10 w-20 h-20 border-2 border-cyan-400/30 rounded-full animate-ping"></div>
+      <div className="absolute top-20 right-1/4 w-10 h-10 border border-purple-400/40 rounded-full animate-pulse"></div>
+
+      {/* Scroll Indicator */}
+      <motion.div
+        animate={{ y: [0, 10, 0] }}
+        transition={{ duration: 2, repeat: Infinity }}
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+      >
+        <div className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center">
+          <div className="w-1 h-3 bg-white/70 rounded-full mt-2"></div>
         </div>
-      </div>
-
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
-        <div className="text-white text-sm animate-pulse">
-          ↓
-        </div>
-      </div>
+      </motion.div>
     </section>
   );
 };

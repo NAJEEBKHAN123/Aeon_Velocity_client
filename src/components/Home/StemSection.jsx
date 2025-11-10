@@ -1,89 +1,95 @@
-import React from 'react';
+import React from "react";
+import topImg from '../../assets/StemRaching/topImg.jpg'
+import leftImg from '../../assets/StemRaching/leftImg.jpg'
 import { useLanguage } from '../../contexts/LanguageContext';
 
-const StemSection = () => {
+const StemRacing = () => {
   const { currentLanguage } = useLanguage();
 
+  // Unsplash image URLs for STEM Racing theme
+  const unsplashImages = {
+    topImg: topImg,
+    leftImg: leftImg,
+    bottomImg: "https://media.istockphoto.com/id/1133992451/photo/racing-team-working-at-pit-stop.webp?a=1&b=1&s=612x612&w=0&k=20&c=ZyqOSr6zEed_IXPsKdKtGfSjQZiJZxczHN9-in4umgM="
+  };
+
   const content = {
-    fr: {
-      title: "C'est quoi STEM Racing ?",
-      description: "STEM Racing (anciennement F1 in Schools) est le plus grand challenge STEM au monde. Plus de 26 000 équipes dans plus de 50 pays s'affrontent pour concevoir, produire et faire courir une mini F1 propulsée par une cartouche de CO₂, selon un règlement international extrêmement exigeant.",
-      criteria: [
-        "L'aérodynamique et la performance de la voiture",
-        "L'innovation et l'optimisation technique",
-        "La présentation devant un jury",
-        "L'identité de marque et la stratégie marketing",
-        "La qualité du dossier technique"
-      ],
-      teams: "Équipes",
-      countries: "Pays",
-      note: "Seules les meilleures équipes nationales accèdent aux finales mondiales. C'est là que nous voulons être. Et c'est là que nous voulons gagner."
-    },
     en: {
-      title: "What is STEM Racing?",
-      description: "STEM Racing (formerly F1 in Schools) is the largest STEM challenge in the world. Over 26,000 teams in more than 50 countries compete to design, produce, and race a mini F1 car propelled by a CO₂ cartridge, according to an extremely demanding international regulation.",
-      criteria: [
-        "Aerodynamics and car performance",
-        "Innovation and technical optimization",
-        "Presentation before a jury",
-        "Brand identity and marketing strategy",
-        "Quality of the technical portfolio"
-      ],
-      teams: "Teams",
-      countries: "Countries",
-      note: "Only the best national teams qualify for the world finals. That's where we want to be. And that's where we want to win."
+      title: "WHAT IS STEM RACING?",
+      paragraph1: "STEM Racing (formerly F1 in Schools) is the only global multidisciplinary challenge in which teams of students aged 9 to 19 design, analyse, manufacture and test a miniature Formula 1 car, and race them down a 20 metre track powered by CO₂ canisters.",
+      paragraph2: "On top of creating these mini rocket ships, teams create a brand surrounding their team, where sponsorships are attained to fund the project and all its elements, which is then documented in a series of portfolios and presentations.",
+      paragraph3: "The aim of STEM Racing is to foster lifelong skills in passionate students to support their education and accelerate careers in Science, Technology, Engineering and Mathematics (STEM). By utilising real-world engineering software, project management techniques and business and marketing strategies, students gain the opportunity to develop a skillset that extends beyond the confines of the classroom.",
+      alt1: "Students working on engineering project",
+      alt2: "Team collaboration on racing project",
+      alt3: "Racing car design and engineering"
+    },
+    fr: {
+      title: "QU'EST-CE QUE STEM RACING ?",
+      paragraph1: "STEM Racing (anciennement F1 in Schools) est le seul défi multidisciplinaire mondial dans lequel des équipes d'étudiants âgés de 9 à 19 ans conçoivent, analysent, fabriquent et testent une mini voiture de Formule 1, et les font courir sur une piste de 20 mètres propulsée par des cartouches de CO₂.",
+      paragraph2: "En plus de créer ces mini-fusées, les équipes créent une marque autour de leur équipe, où des sponsors sont obtenus pour financer le projet et tous ses éléments, qui sont ensuite documentés dans une série de portfolios et présentations.",
+      paragraph3: "L'objectif de STEM Racing est de développer des compétences durables chez les étudiants passionnés pour soutenir leur éducation et accélérer leurs carrières dans les sciences, la technologie, l'ingénierie et les mathématiques (STEM). En utilisant des logiciels d'ingénierie du monde réel, des techniques de gestion de projet et des stratégies commerciales et marketing, les étudiants ont l'opportunité de développer des compétences qui vont au-delà des limites de la salle de classe.",
+      alt1: "Étudiants travaillant sur un projet d'ingénierie",
+      alt2: "Collaboration d'équipe sur un projet de course",
+      alt3: "Conception et ingénierie de voiture de course"
     }
   };
 
   const currentContent = content[currentLanguage];
 
   return (
-    <section className="py-20 bg-gray-900">
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-white mb-4">
-            {currentContent.title}
-          </h2>
-          <div className="w-20 h-1 bg-cyan-400 mx-auto"></div>
+    <section className="bg-white text-[#0B0B0B] py-20 px-6 md:px-12 lg:px-20">
+      <div className="max-w-7xl mx-auto">
+        {/* Title */}
+        <h2 className="text-center text-4xl md:text-5xl font-extrabold italic text-[#0B0B0B] mb-16">
+          {currentContent.title}
+        </h2>
+
+        {/* Top Row */}
+        <div className="grid md:grid-cols-2 gap-10 mb-14 items-center">
+          <div>
+            <p className="text-gray-700 leading-relaxed text-lg">
+              {currentContent.paragraph1}
+            </p>
+          </div>
+          <div>
+            <img
+              src={unsplashImages.topImg}
+              alt={currentContent.alt1}
+              className="shadow-md w-full h-64 object-cover"
+            />
+          </div>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        {/* Middle Row */}
+        <div className="grid md:grid-cols-2 gap-10 mb-14 items-center">
           <div>
-            <p className="text-lg text-gray-300 mb-8 leading-relaxed">
-              {currentContent.description}
+            <img
+              src={unsplashImages.leftImg}
+              alt={currentContent.alt2}
+              className="shadow-md w-full h-64 object-cover"
+            />
+          </div>
+          <div>
+            <p className="text-gray-700 leading-relaxed text-lg">
+              {currentContent.paragraph2}
             </p>
-            
-            <div className="space-y-4">
-              <h3 className="text-xl font-semibold text-cyan-300">
-                {currentLanguage === 'fr' ? 'Critères de jugement :' : 'Judging Criteria:'}
-              </h3>
-              <div className="space-y-3">
-                {currentContent.criteria.map((criterion, index) => (
-                  <div key={index} className="flex items-start space-x-3">
-                    <div className="w-6 h-6 bg-cyan-500/20 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                      <div className="w-2 h-2 bg-cyan-400 rounded-full"></div>
-                    </div>
-                    <span className="text-gray-300">
-                      {criterion}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
-            
-            <p className="text-lg font-semibold text-cyan-300 italic mt-8">
-              {currentContent.note}
+          </div>
+        </div>
+
+        {/* Bottom Row */}
+        <div className="grid md:grid-cols-2 gap-10 items-center">
+          <div>
+            <p className="text-gray-700 leading-relaxed text-lg">
+              {currentContent.paragraph3}
             </p>
           </div>
 
-          <div className="bg-gray-800 rounded-xl p-8">
-            <div className="text-center">
-              <div className="text-5xl font-bold text-cyan-400 mb-2">26,000+</div>
-              <div className="text-xl text-gray-300 mb-8">{currentContent.teams}</div>
-              
-              <div className="text-5xl font-bold text-cyan-400 mb-2">50+</div>
-              <div className="text-xl text-gray-300">{currentContent.countries}</div>
-            </div>
+          <div>
+            <img
+              src={unsplashImages.bottomImg}
+              alt={currentContent.alt3}
+              className="shadow-md w-full h-64 object-cover"
+            />
           </div>
         </div>
       </div>
@@ -91,4 +97,4 @@ const StemSection = () => {
   );
 };
 
-export default StemSection;
+export default StemRacing;
