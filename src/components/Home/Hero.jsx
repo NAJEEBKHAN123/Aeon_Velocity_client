@@ -1,6 +1,7 @@
 import React from "react";
 import hero_img from "../../assets/StemRaching/leftImg.jpg";
 import { motion } from "framer-motion";
+import { useLanguage } from '../../contexts/LanguageContext';
 
 const textVariants = {
   hidden: { opacity: 0, y: 30 },
@@ -12,6 +13,27 @@ const textVariants = {
 };
 
 const Hero = () => {
+  const { currentLanguage } = useLanguage();
+
+  const content = {
+    en: {
+      mainTitle: "STEM RACING",
+      tagline1: "We don't aim to compete",
+      tagline2: "We are built to dominate",
+      teamName: "Aeon Velocity",
+      button: "Join The Revolution",
+    },
+    fr: {
+      mainTitle: "STEM RACING",
+      tagline1: "Nous ne visons pas la compétition",
+      tagline2: "Nous sommes conçus pour dominer",
+      teamName: "Aeon Velocity",
+      button: "Rejoignez la Révolution",
+    },
+  };
+
+  const currentContent = content[currentLanguage];
+
   return (
     <section className="relative h-screen overflow-hidden bg-black">
       {/* Background Image */}
@@ -35,9 +57,14 @@ const Hero = () => {
           animate="visible"
           custom={0}
           variants={textVariants}
-          className="text-5xl md:text-7xl font-extrabold uppercase tracking-tight bg-gradient-to-r from-cyan-300 via-blue-400 to-purple-500 bg-clip-text text-transparent drop-shadow-[0_0_20px_rgba(0,255,255,0.7)]"
+          className="text-5xl md:text-6xl font-extrabold uppercase tracking-tight 
+bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 
+bg-clip-text text-transparent 
+drop-shadow-[0_0_25px_rgba(0,255,255,0.8)] 
+hover:drop-shadow-[0_0_40px_rgba(255,0,255,1)] 
+transition-shadow duration-300"
         >
-          STEM RACING
+          {currentContent.mainTitle}
         </motion.h1>
 
         {/* Taglines */}
@@ -47,9 +74,9 @@ const Hero = () => {
             initial="hidden"
             animate="visible"
             variants={textVariants}
-            className="text-white font-semibold uppercase text-xl md:text-2xl tracking-wide drop-shadow-[0_0_10px_rgba(255,255,255,0.7)]"
+            className="text-gray-200 font-semibold uppercase text-xl md:text-2xl tracking-wide drop-shadow-[0_0_10px_rgba(255,255,255,0.7)]"
           >
-            We don't aim to compete
+            {currentContent.tagline1}
           </motion.p>
           <motion.p
             custom={2}
@@ -58,7 +85,7 @@ const Hero = () => {
             variants={textVariants}
             className="text-white font-black uppercase text-2xl md:text-4xl tracking-tight bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(255,255,255,0.8)]"
           >
-            We are built to dominate
+            {currentContent.tagline2}
           </motion.p>
         </motion.div>
 
@@ -70,7 +97,7 @@ const Hero = () => {
           variants={textVariants}
           className="text-purple-400 font-extrabold uppercase text-3xl md:text-4xl tracking-widest drop-shadow-[0_0_25px_rgba(128,0,255,0.8)] animate-pulse"
         >
-          Aeon Velocity
+          {currentContent.teamName}
         </motion.p>
         <div className="w-24 h-1 bg-gradient-to-r from-cyan-400 to-purple-500 mt-2 rounded-full shadow-lg shadow-cyan-400/40"></div>
 
@@ -83,7 +110,7 @@ const Hero = () => {
           className="pt-6"
         >
           <button className="bg-gradient-to-r from-cyan-500 via-blue-600 to-purple-500 text-white font-bold py-3 px-10 rounded-full uppercase tracking-widest text-sm shadow-2xl shadow-cyan-500/40 hover:shadow-cyan-400/50 transition-all duration-300 transform hover:scale-105 hover:animate-pulse">
-            Join The Revolution
+            {currentContent.button}
           </button>
         </motion.div>
       </div>

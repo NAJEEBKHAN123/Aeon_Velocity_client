@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 const BlogPage = () => {
   const { currentLanguage } = useLanguage();
   const [activeCategory, setActiveCategory] = useState('all');
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   const content = {
     fr: {
@@ -159,42 +160,140 @@ const BlogPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900/10 to-cyan-900/10">
-      {/* Hero Section */}
-      <section className="relative py-24 bg-gradient-to-br from-gray-900 to-blue-900 overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_20%,_rgba(0,0,0,0.8)_80%)]"></div>
-        <div className="relative max-w-6xl mx-auto px-6 text-center">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
+      {/* Clean Hero Section */}
+      <section className="relative py-24 overflow-hidden min-h-[70vh] flex items-center justify-center">
+        {/* Clean Background Image */}
+        <div className="absolute inset-0">
+          <div 
+            className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000 ${
+              imageLoaded ? 'opacity-15' : 'opacity-0'
+            }`}
+            style={{
+              backgroundImage: 'url("https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80")',
+            }}
+          >
+            {/* Preload image */}
+            <img 
+              src="https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80" 
+              alt="" 
+              className="hidden" 
+              onLoad={() => setImageLoaded(true)}
+            />
+          </div>
+          
+          {/* Light Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-br from-white/60 via-blue-50/40 to-indigo-100/30"></div>
+          
+          {/* Subtle Animated Background Elements */}
+          <div className="absolute inset-0 overflow-hidden">
+            <motion.div
+              className="absolute top-20 right-10 w-72 h-72 bg-cyan-100 rounded-full mix-blend-multiply filter blur-xl opacity-20"
+              animate={{
+                scale: [1, 1.1, 1],
+                rotate: [0, 90, 0],
+              }}
+              transition={{
+                duration: 8,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
+            <motion.div
+              className="absolute bottom-40 left-10 w-72 h-72 bg-blue-100 rounded-full mix-blend-multiply filter blur-xl opacity-20"
+              animate={{
+                scale: [1.1, 1, 1.1],
+                rotate: [90, 0, 90],
+              }}
+              transition={{
+                duration: 10,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
+          </div>
+        </div>
+
+        {/* Content */}
+        <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <div className="inline-flex items-center px-4 py-2 bg-cyan-500/10 border border-cyan-500/20 rounded-full mb-6">
-              <div className="w-2 h-2 bg-cyan-400 rounded-full mr-2 animate-pulse"></div>
-              <span className="text-cyan-300 text-sm font-semibold tracking-wider uppercase">
+            {/* Subtitle Badge */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="inline-flex items-center px-6 py-3 bg-white/80 backdrop-blur-md border border-gray-200/50 rounded-2xl mb-8 shadow-lg"
+            >
+              <div className="w-3 h-3 bg-cyan-500 rounded-full mr-3 animate-pulse"></div>
+              <span className="text-gray-700 text-lg font-semibold tracking-wider uppercase">
                 {currentContent.subtitle}
               </span>
-            </div>
+            </motion.div>
             
-            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6">
+            {/* Main Title */}
+            <motion.h1
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="text-6xl md:text-8xl font-black mb-8 leading-tight bg-gradient-to-r from-cyan-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent"
+            >
               {currentContent.title}
-            </h1>
+            </motion.h1>
             
-            <div className="flex justify-center items-center space-x-4 mb-8">
-              <div className="w-20 h-1 bg-gradient-to-r from-transparent to-cyan-400"></div>
-              <div className="w-3 h-3 bg-cyan-400 rounded-full"></div>
-              <div className="w-20 h-1 bg-gradient-to-r from-cyan-400 to-transparent"></div>
-            </div>
+            {/* Decorative Line */}
+            <motion.div
+              initial={{ opacity: 0, width: 0 }}
+              animate={{ opacity: 1, width: "200px" }}
+              transition={{ duration: 0.8, delay: 0.5 }}
+              className="flex justify-center items-center space-x-4 mb-8 mx-auto"
+            >
+              <div className="w-20 h-1 bg-gradient-to-r from-transparent to-cyan-500"></div>
+              <motion.div 
+                className="w-4 h-4 bg-cyan-500 rounded-full"
+                animate={{ scale: [1, 1.5, 1] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              />
+              <div className="w-20 h-1 bg-gradient-to-r from-cyan-500 to-transparent"></div>
+            </motion.div>
             
-            <p className="text-xl text-gray-300 leading-relaxed max-w-4xl mx-auto font-light">
+            {/* Description */}
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.7 }}
+              className="text-2xl md:text-3xl text-gray-700 leading-relaxed max-w-4xl mx-auto font-light bg-white/70 backdrop-blur-sm p-8 rounded-3xl border border-gray-200/50 shadow-lg"
+            >
               {currentContent.description}
-            </p>
+            </motion.p>
+
+            {/* Scroll Indicator */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 1 }}
+              className="mt-12"
+            >
+              <motion.div
+                animate={{ y: [0, 10, 0] }}
+                transition={{ duration: 2, repeat: Infinity }}
+                className="text-cyan-600 text-sm font-semibold tracking-widest uppercase flex flex-col items-center"
+              >
+                <span>{currentLanguage === 'fr' ? 'Explorer les Articles' : 'Explore Posts'}</span>
+                <svg className="w-6 h-6 mt-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
+              </motion.div>
+            </motion.div>
           </motion.div>
         </div>
       </section>
 
       {/* Category Filter */}
-      <section className="py-12 bg-gray-800/30 backdrop-blur-sm">
+      <section className="py-12 bg-white/50 backdrop-blur-sm">
         <div className="max-w-6xl mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -211,7 +310,7 @@ const BlogPage = () => {
                 className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 ${
                   activeCategory === category.id
                     ? 'bg-cyan-500 text-white shadow-lg shadow-cyan-500/25'
-                    : 'bg-gray-700/50 text-gray-300 hover:bg-gray-600/50 hover:text-white'
+                    : 'bg-white/80 text-gray-700 hover:bg-gray-100 hover:text-gray-900 border border-gray-200/50'
                 }`}
               >
                 {category.label}
@@ -230,16 +329,16 @@ const BlogPage = () => {
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
               {currentContent.latestPosts}
             </h2>
-            <div className="w-24 h-1 bg-cyan-400 mx-auto rounded-full"></div>
+            <div className="w-24 h-1 bg-cyan-500 mx-auto rounded-full"></div>
           </motion.div>
 
           {/* Posts Grid */}
           <motion.div 
             layout
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+            className="grid md:grid-cols-2 lg:grid-cols-3 px-5 gap-8"
           >
             {filteredPosts.map((post, index) => (
               <BlogPostCard 
@@ -262,7 +361,7 @@ const BlogPage = () => {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 border-2 border-cyan-400 text-cyan-400 font-semibold rounded-xl hover:bg-cyan-400 hover:text-gray-900 transition-all duration-300"
+              className="px-8 py-4 border-2 border-cyan-500 text-cyan-600 font-semibold rounded-xl hover:bg-cyan-500 hover:text-white transition-all duration-300 bg-white/80 backdrop-blur-sm"
             >
               {currentContent.viewAll}
             </motion.button>
@@ -271,17 +370,17 @@ const BlogPage = () => {
       </section>
 
       {/* Next Page CTA */}
-      <section className="py-20 bg-gray-800/30 backdrop-blur-sm">
+      <section className="py-20 bg-gradient-to-r from-cyan-50 to-blue-50">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           className="max-w-2xl mx-auto px-6 text-center"
         >
-          <h3 className="text-3xl font-bold text-white mb-6">
+          <h3 className="text-3xl font-bold text-gray-800 mb-6">
             {currentContent.nextPage}
           </h3>
-          <p className="text-gray-300 text-lg mb-8">
+          <p className="text-gray-600 text-lg mb-8">
             {currentLanguage === 'fr' 
               ? "Rejoignez-nous dans notre quête pour le titre mondial et bénéficiez d'une visibilité exceptionnelle."
               : "Join us in our quest for the world title and benefit from exceptional visibility."
@@ -313,30 +412,30 @@ const BlogPostCard = ({ post, index, currentLanguage, readMoreText }) => {
       whileHover={{ y: -8, transition: { duration: 0.3 } }}
       className="group cursor-pointer"
     >
-      <div className="bg-gray-800/40 backdrop-blur-sm rounded-2xl border border-gray-700/30 hover:border-cyan-500/40 transition-all duration-300 overflow-hidden h-full flex flex-col">
+      <div className="bg-white/80 backdrop-blur-sm rounded-2xl border border-gray-200/50 hover:border-cyan-500/40 transition-all duration-300 overflow-hidden h-full flex flex-col shadow-lg hover:shadow-xl">
         {/* Header with Icon */}
-        <div className={`p-6 bg-gradient-to-br from-${post.color}-500/10 to-${post.color}-600/10 border-b border-gray-700/30`}>
+        <div className={`p-6 bg-gradient-to-br from-${post.color}-100 to-${post.color}-200 border-b border-gray-200/50`}>
           <div className="flex items-center justify-between mb-4">
             <div className="text-4xl">{post.image}</div>
-            <span className={`text-${post.color}-400 text-sm font-semibold px-3 py-1 bg-${post.color}-500/20 rounded-full`}>
+            <span className={`text-${post.color}-700 text-sm font-semibold px-3 py-1 bg-${post.color}-200/50 rounded-full`}>
               {post.readTime}
             </span>
           </div>
-          <span className={`text-${post.color}-400 text-xs font-medium uppercase tracking-wide`}>
+          <span className={`text-${post.color}-600 text-xs font-medium uppercase tracking-wide`}>
             {post.category}
           </span>
         </div>
 
         {/* Content */}
         <div className="p-6 flex-grow">
-          <h3 className="text-xl font-bold text-white mb-3 group-hover:text-cyan-300 transition-colors">
+          <h3 className="text-xl font-bold text-gray-800 mb-3 group-hover:text-cyan-600 transition-colors">
             {post.title[currentLanguage]}
           </h3>
-          <p className="text-gray-300 leading-relaxed mb-4 flex-grow">
+          <p className="text-gray-600 leading-relaxed mb-4 flex-grow">
             {post.excerpt[currentLanguage]}
           </p>
           
-          <div className="flex items-center justify-between text-sm text-gray-400 mb-4">
+          <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
             <span>{new Date(post.date).toLocaleDateString(currentLanguage === 'fr' ? 'fr-FR' : 'en-US', { 
               year: 'numeric', 
               month: 'long', 
@@ -349,7 +448,7 @@ const BlogPostCard = ({ post, index, currentLanguage, readMoreText }) => {
         <div className="p-6 pt-0">
           <motion.button
             whileHover={{ x: 5 }}
-            className={`text-${post.color}-400 font-semibold flex items-center group-hover:text-${post.color}-300 transition-colors`}
+            className={`text-${post.color}-600 font-semibold flex items-center group-hover:text-${post.color}-700 transition-colors`}
           >
             {readMoreText}
             <svg 
