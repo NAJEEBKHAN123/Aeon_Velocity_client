@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { Mail, User, MessageSquare, Send, CheckCircle, Building2, Phone, MapPin, Clock, Sparkles, ArrowRight } from 'lucide-react';
+import { Mail, User, MessageSquare, Send, CheckCircle, Phone, MapPin, Building2, Home, Book, Users, Heart } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { useLanguage } from "../contexts/LanguageContext";
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -11,7 +13,8 @@ const ContactPage = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [focusedField, setFocusedField] = useState(null);
+  const navigate = useNavigate();
+  const { currentLanguage } = useLanguage(); // Get language from context
 
   const handleChange = (e) => {
     setFormData({
@@ -24,332 +27,446 @@ const ContactPage = () => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 1500));
     
     setIsSubmitting(false);
     setIsSubmitted(true);
     setFormData({ name: '', email: '', company: '', subject: '', message: '' });
     
-    setTimeout(() => {
-      setIsSubmitted(false);
-    }, 5000);
+    setTimeout(() => setIsSubmitted(false), 4000);
   };
 
+  // Language content
+  const content = {
+    fr: {
+      title: "Contactez-Nous",
+      subtitle: "Une question ? Un projet ? N'hésitez pas à nous contacter, nous serions ravis d'échanger avec vous.",
+      formTitle: "Envoyer un Message",
+      formSubtitle: "Nous répondons dans les 24 heures",
+      fields: {
+        name: "Nom *",
+        email: "Email *",
+        company: "Entreprise",
+        companyOptional: "(Optionnel)",
+        subject: "Sujet *",
+        message: "Message *"
+      },
+      placeholders: {
+        name: "Votre nom",
+        email: "votre.email@example.com",
+        company: "Votre entreprise",
+        message: "Parlez-nous de votre projet..."
+      },
+      subjectOptions: [
+        { value: '', label: 'Sélectionnez un sujet' },
+        { value: 'partnership', label: 'Partenariat' },
+        { value: 'sponsorship', label: 'Sponsoring' },
+        { value: 'technical', label: 'Support Technique' },
+        { value: 'media', label: 'Relations Médias' },
+        { value: 'career', label: 'Opportunité de Carrière' },
+        { value: 'other', label: 'Autre' }
+      ],
+      submit: {
+        sending: "Envoi en cours...",
+        send: "Envoyer le Message"
+      },
+      success: {
+        title: "Message envoyé avec succès !",
+        message: "Nous vous recontacterons bientôt."
+      },
+      contactInfo: {
+        title: "Informations de Contact",
+        email: "Email",
+        phone: "Téléphone",
+        location: "Localisation"
+      },
+      quickResponse: {
+        title: "Réponse Rapide",
+        averageTime: "Temps de réponse moyen :",
+        availability: "Disponibilité :",
+        support: "Support :",
+        values: {
+          time: "Moins de 24h",
+          availability: "Lun - Ven",
+          support: "Urgence 24/7"
+        }
+      },
+      explore: {
+        title: "Explorez Notre Site",
+        home: "Accueil",
+        story: "Aventure",
+        blog: "Blog",
+        sponsors: "Sponsors"
+      },
+      cta: {
+        title: "Prêt à Commencer ?",
+        subtitle: "Envoyez-nous vos idées et nous vous répondrons avec une proposition détaillée.",
+        primary: "Découvrir Notre Aventure",
+        secondary: "Devenir Sponsor"
+      }
+    },
+    en: {
+      title: "Get in Touch",
+      subtitle: "Have a question or a project? Don't hesitate to contact us, we'd be happy to chat with you.",
+      formTitle: "Send a Message",
+      formSubtitle: "We respond within 24 hours",
+      fields: {
+        name: "Name *",
+        email: "Email *",
+        company: "Company",
+        companyOptional: "(Optional)",
+        subject: "Subject *",
+        message: "Message *"
+      },
+      placeholders: {
+        name: "Your name",
+        email: "your.email@example.com",
+        company: "Your company",
+        message: "Tell us about your project..."
+      },
+      subjectOptions: [
+        { value: '', label: 'Select a subject' },
+        { value: 'partnership', label: 'Partnership' },
+        { value: 'sponsorship', label: 'Sponsorship' },
+        { value: 'technical', label: 'Technical Support' },
+        { value: 'media', label: 'Media Relations' },
+        { value: 'career', label: 'Career Opportunity' },
+        { value: 'other', label: 'Other' }
+      ],
+      submit: {
+        sending: "Sending...",
+        send: "Send Message"
+      },
+      success: {
+        title: "Message sent successfully!",
+        message: "We'll get back to you soon."
+      },
+      contactInfo: {
+        title: "Contact Information",
+        email: "Email",
+        phone: "Phone",
+        location: "Location"
+      },
+      quickResponse: {
+        title: "Fast Response",
+        averageTime: "Average response time:",
+        availability: "Availability:",
+        support: "Support:",
+        values: {
+          time: "Under 24 hours",
+          availability: "Mon - Fri",
+          support: "24/7 Emergency"
+        }
+      },
+      explore: {
+        title: "Explore Our Site",
+        home: "Home",
+        story: "Our Story",
+        blog: "Blog",
+        sponsors: "Sponsors"
+      },
+      cta: {
+        title: "Ready to Get Started?",
+        subtitle: "Send us your ideas and we'll get back to you with a detailed proposal.",
+        primary: "Discover Our Story",
+        secondary: "Become a Sponsor"
+      }
+    }
+  };
+
+  // Safe language selection with fallback
+  const getLanguageContent = () => {
+    const lang = content[currentLanguage];
+    if (!lang) {
+      console.warn(`Language '${currentLanguage}' not found, defaulting to English`);
+      return content.en;
+    }
+    return lang;
+  };
+
+  const lang = getLanguageContent();
+
+  const contactInfo = [
+    {
+      icon: Mail,
+      label: lang.contactInfo.email,
+      value: 'hello@example.com',
+      href: 'mailto:hello@example.com'
+    },
+    {
+      icon: Phone,
+      label: lang.contactInfo.phone,
+      value: '+1 (234) 567-8900',
+      href: 'tel:+1234567890'
+    },
+    {
+      icon: MapPin,
+      label: lang.contactInfo.location,
+      value: currentLanguage === 'fr' ? 'Paris, France' : 'Paris, France'
+    }
+  ];
+
+  const navigationItems = [
+    { path: '/', icon: Home, label: lang.explore.home },
+    { path: '/story', icon: Book, label: lang.explore.story },
+    { path: '/blog', icon: Users, label: lang.explore.blog },
+    { path: '/sponsors', icon: Heart, label: lang.explore.sponsors }
+  ];
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-blue-950 to-slate-900">
-      {/* Animated Background */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse delay-700"></div>
+    <div className="min-h-screen bg-slate-50">
+      {/* Header */}
+      <div className="bg-white border-b">
+        <div className="max-w-4xl mx-auto px-6 py-16 text-center">
+          <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
+            {lang.title}
+          </h1>
+          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+            {lang.subtitle}
+          </p>
+        </div>
       </div>
 
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-20">
-        <div className="max-w-7xl mx-auto px-6 text-center">
-          <div className="inline-flex items-center px-4 py-2 bg-cyan-500/10 border border-cyan-400/30 rounded-full mb-8 backdrop-blur-sm">
-            <Sparkles className="w-4 h-4 text-cyan-400 mr-2" />
-            <span className="text-cyan-300 text-sm font-semibold tracking-wider uppercase">
-              Let's Connect
-            </span>
-          </div>
-          
-          <h1 className="text-6xl md:text-7xl font-bold text-white mb-6 bg-gradient-to-r from-white via-cyan-200 to-blue-200 bg-clip-text text-transparent">
-            Get In Touch
-          </h1>
-          
-          <div className="flex justify-center items-center space-x-4 mb-8">
-            <div className="w-24 h-[2px] bg-gradient-to-r from-transparent via-cyan-400 to-cyan-400"></div>
-            <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
-            <div className="w-24 h-[2px] bg-gradient-to-l from-transparent via-cyan-400 to-cyan-400"></div>
-          </div>
-          
-          <p className="text-xl text-gray-300 leading-relaxed max-w-3xl mx-auto">
-            Ready to transform your ideas into reality? Let's discuss your project and create something extraordinary together.
-          </p>
-        </div>
-      </section>
-
       {/* Main Content */}
-      <section className="relative pb-32">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid lg:grid-cols-5 gap-8">
-            {/* Contact Form - 3 columns */}
-            <div className="lg:col-span-3">
-              <div className="relative group">
-                <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 via-blue-500 to-cyan-500 rounded-3xl blur-xl opacity-30 group-hover:opacity-40 transition duration-500"></div>
-                <div className="relative bg-slate-900/90 backdrop-blur-xl rounded-2xl border border-cyan-500/20 p-8 md:p-10">
-                  <div className="flex items-center gap-3 mb-8">
-                    <div className="w-12 h-12 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-xl flex items-center justify-center">
-                      <Send className="w-6 h-6 text-white" />
+      <div className="max-w-6xl mx-auto px-6 py-12">
+        <div className="grid lg:grid-cols-2 gap-12">
+          {/* Contact Form */}
+          <div className="bg-white rounded-2xl shadow-sm border p-8">
+            <div className="flex items-center gap-3 mb-8">
+              <div className="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center">
+                <Send className="w-5 h-5 text-white" />
+              </div>
+              <div>
+                <h2 className="text-2xl font-bold text-slate-900">{lang.formTitle}</h2>
+                <p className="text-slate-500">{lang.formSubtitle}</p>
+              </div>
+            </div>
+
+            <form onSubmit={handleSubmit} className="space-y-6">
+              {/* Name & Email Row */}
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-2">
+                    {lang.fields.name}
+                  </label>
+                  <div className="relative">
+                    <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+                    <input
+                      type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      required
+                      placeholder={lang.placeholders.name}
+                      className="w-full pl-10 pr-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-2">
+                    {lang.fields.email}
+                  </label>
+                  <div className="relative">
+                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
+                      placeholder={lang.placeholders.email}
+                      className="w-full pl-10 pr-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Company & Subject Row */}
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-2">
+                    {lang.fields.company} <span className="text-slate-400 text-xs">{lang.fields.companyOptional}</span>
+                  </label>
+                  <div className="relative">
+                    <Building2 className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+                    <input
+                      type="text"
+                      name="company"
+                      value={formData.company}
+                      onChange={handleChange}
+                      placeholder={lang.placeholders.company}
+                      className="w-full pl-10 pr-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-2">
+                    {lang.fields.subject}
+                  </label>
+                  <div className="relative">
+                    <MessageSquare className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+                    <select
+                      name="subject"
+                      value={formData.subject}
+                      onChange={handleChange}
+                      required
+                      className="w-full pl-10 pr-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors appearance-none bg-white cursor-pointer"
+                    >
+                      {lang.subjectOptions.map((option) => (
+                        <option key={option.value} value={option.value}>
+                          {option.label}
+                        </option>
+                      ))}
+                    </select>
+                    <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
+                      <svg className="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Message */}
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-2">
+                  {lang.fields.message}
+                </label>
+                <div className="relative">
+                  <MessageSquare className="absolute left-3 top-3 w-5 h-5 text-slate-400" />
+                  <textarea
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    required
+                    rows="5"
+                    placeholder={lang.placeholders.message}
+                    className="w-full pl-10 pr-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors resize-none"
+                  />
+                </div>
+              </div>
+
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full bg-blue-500 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-600 disabled:bg-blue-400 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2"
+              >
+                {isSubmitting ? (
+                  <>
+                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                    {lang.submit.sending}
+                  </>
+                ) : (
+                  <>
+                    <Send className="w-4 h-4" />
+                    {lang.submit.send}
+                  </>
+                )}
+              </button>
+
+              {isSubmitted && (
+                <div className="bg-green-50 border border-green-200 rounded-lg p-4 flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <div>
+                    <p className="text-green-800 font-medium">{lang.success.title}</p>
+                    <p className="text-green-600 text-sm">{lang.success.message}</p>
+                  </div>
+                </div>
+              )}
+            </form>
+          </div>
+
+          {/* Contact Information */}
+          <div className="space-y-8">
+            <div className="bg-white rounded-2xl shadow-sm border p-8">
+              <h3 className="text-xl font-bold text-slate-900 mb-6">{lang.contactInfo.title}</h3>
+              
+              <div className="space-y-4">
+                {contactInfo.map((item, index) => (
+                  <div
+                    key={index}
+                    className={`flex items-start gap-4 p-4 rounded-lg transition-colors ${
+                      item.href ? 'hover:bg-slate-50 cursor-pointer' : ''
+                    }`}
+                    onClick={item.href ? () => window.open(item.href, '_blank') : undefined}
+                  >
+                    <div className="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <item.icon className="w-6 h-6 text-blue-500" />
                     </div>
                     <div>
-                      <h2 className="text-3xl font-bold text-white">Send a Message</h2>
-                      <p className="text-gray-400 text-sm">Fill out the form below</p>
+                      <div className="text-sm text-slate-500 mb-1">{item.label}</div>
+                      <div className="text-slate-900 font-medium">{item.value}</div>
                     </div>
                   </div>
-                  
-                  <div className="space-y-6">
-                    {/* Name & Email Row */}
-                    <div className="grid md:grid-cols-2 gap-6">
-                      <div className="relative">
-                        <label className={`block text-sm font-semibold mb-2 transition-colors duration-300 ${
-                          focusedField === 'name' ? 'text-cyan-400' : 'text-gray-300'
-                        }`}>
-                          Full Name *
-                        </label>
-                        <div className="relative">
-                          <User className={`absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 transition-colors duration-300 ${
-                            focusedField === 'name' ? 'text-cyan-400' : 'text-gray-500'
-                          }`} />
-                          <input
-                            type="text"
-                            name="name"
-                            value={formData.name}
-                            onChange={handleChange}
-                            onFocus={() => setFocusedField('name')}
-                            onBlur={() => setFocusedField(null)}
-                            placeholder="John Doe"
-                            className="w-full pl-12 pr-4 py-3.5 bg-slate-800/50 border-2 border-slate-700 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-cyan-400 focus:bg-slate-800 focus:ring-4 focus:ring-cyan-400/10 transition-all duration-300"
-                          />
-                        </div>
-                      </div>
+                ))}
+              </div>
+            </div>
 
-                      <div className="relative">
-                        <label className={`block text-sm font-semibold mb-2 transition-colors duration-300 ${
-                          focusedField === 'email' ? 'text-cyan-400' : 'text-gray-300'
-                        }`}>
-                          Email Address *
-                        </label>
-                        <div className="relative">
-                          <Mail className={`absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 transition-colors duration-300 ${
-                            focusedField === 'email' ? 'text-cyan-400' : 'text-gray-500'
-                          }`} />
-                          <input
-                            type="email"
-                            name="email"
-                            value={formData.email}
-                            onChange={handleChange}
-                            onFocus={() => setFocusedField('email')}
-                            onBlur={() => setFocusedField(null)}
-                            placeholder="john@example.com"
-                            className="w-full pl-12 pr-4 py-3.5 bg-slate-800/50 border-2 border-slate-700 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-cyan-400 focus:bg-slate-800 focus:ring-4 focus:ring-cyan-400/10 transition-all duration-300"
-                          />
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Company & Subject Row */}
-                    <div className="grid md:grid-cols-2 gap-6">
-                      <div className="relative">
-                        <label className={`block text-sm font-semibold mb-2 transition-colors duration-300 ${
-                          focusedField === 'company' ? 'text-cyan-400' : 'text-gray-300'
-                        }`}>
-                          Company
-                        </label>
-                        <div className="relative">
-                          <Building2 className={`absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 transition-colors duration-300 ${
-                            focusedField === 'company' ? 'text-cyan-400' : 'text-gray-500'
-                          }`} />
-                          <input
-                            type="text"
-                            name="company"
-                            value={formData.company}
-                            onChange={handleChange}
-                            onFocus={() => setFocusedField('company')}
-                            onBlur={() => setFocusedField(null)}
-                            placeholder="Company name"
-                            className="w-full pl-12 pr-4 py-3.5 bg-slate-800/50 border-2 border-slate-700 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-cyan-400 focus:bg-slate-800 focus:ring-4 focus:ring-cyan-400/10 transition-all duration-300"
-                          />
-                        </div>
-                      </div>
-
-                      <div className="relative">
-                        <label className={`block text-sm font-semibold mb-2 transition-colors duration-300 ${
-                          focusedField === 'subject' ? 'text-cyan-400' : 'text-gray-300'
-                        }`}>
-                          Subject *
-                        </label>
-                        <div className="relative">
-                          <MessageSquare className={`absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 transition-colors duration-300 ${
-                            focusedField === 'subject' ? 'text-cyan-400' : 'text-gray-500'
-                          }`} />
-                          <select
-                            name="subject"
-                            value={formData.subject}
-                            onChange={handleChange}
-                            onFocus={() => setFocusedField('subject')}
-                            onBlur={() => setFocusedField(null)}
-                            className="w-full pl-12 pr-4 py-3.5 bg-slate-800/50 border-2 border-slate-700 rounded-xl text-white focus:outline-none focus:border-cyan-400 focus:bg-slate-800 focus:ring-4 focus:ring-cyan-400/10 transition-all duration-300 appearance-none cursor-pointer"
-                          >
-                            <option value="">Select a subject</option>
-                            <option value="partnership">Partnership</option>
-                            <option value="sponsorship">Sponsorship</option>
-                            <option value="technical">Technical Support</option>
-                            <option value="media">Media Relations</option>
-                            <option value="other">Other</option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Message */}
-                    <div className="relative">
-                      <label className={`block text-sm font-semibold mb-2 transition-colors duration-300 ${
-                        focusedField === 'message' ? 'text-cyan-400' : 'text-gray-300'
-                      }`}>
-                        Your Message *
-                      </label>
-                      <textarea
-                        name="message"
-                        value={formData.message}
-                        onChange={handleChange}
-                        onFocus={() => setFocusedField('message')}
-                        onBlur={() => setFocusedField(null)}
-                        rows="6"
-                        placeholder="Tell us about your project or inquiry..."
-                        className="w-full px-4 py-3.5 bg-slate-800/50 border-2 border-slate-700 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-cyan-400 focus:bg-slate-800 focus:ring-4 focus:ring-cyan-400/10 transition-all duration-300 resize-none"
-                      />
-                    </div>
-
-                    {/* Submit Button */}
-                    <button
-                      onClick={handleSubmit}
-                      disabled={isSubmitting}
-                      className="w-full py-4 px-6 bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold rounded-xl hover:from-cyan-600 hover:to-blue-600 disabled:from-gray-600 disabled:to-gray-600 disabled:cursor-not-allowed transition-all duration-300 shadow-lg shadow-cyan-500/30 hover:shadow-cyan-500/50 hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-3 group"
-                    >
-                      {isSubmitting ? (
-                        <>
-                          <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                          <span>Sending...</span>
-                        </>
-                      ) : (
-                        <>
-                          <span>Send Message</span>
-                          <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
-                        </>
-                      )}
-                    </button>
-                  </div>
-
-                  {/* Success Message */}
-                  {isSubmitted && (
-                    <div className="mt-6 bg-gradient-to-r from-green-500/10 to-emerald-500/10 border-2 border-green-500/50 rounded-xl p-4 flex items-start gap-3">
-                      <CheckCircle className="w-6 h-6 text-green-400 flex-shrink-0 mt-0.5" />
-                      <div>
-                        <p className="text-green-400 font-semibold mb-1">Message Sent Successfully!</p>
-                        <p className="text-green-300/80 text-sm">Thank you for reaching out. We'll get back to you within 24 hours.</p>
-                      </div>
-                    </div>
-                  )}
+            {/* Quick Response */}
+            <div className="bg-blue-50 rounded-2xl border border-blue-200 p-8">
+              <h3 className="text-xl font-bold text-slate-900 mb-4">{lang.quickResponse.title}</h3>
+              <div className="space-y-3">
+                <div className="flex justify-between items-center">
+                  <span className="text-slate-600">{lang.quickResponse.averageTime}</span>
+                  <span className="font-semibold text-blue-600">{lang.quickResponse.values.time}</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-slate-600">{lang.quickResponse.availability}</span>
+                  <span className="font-semibold text-blue-600">{lang.quickResponse.values.availability}</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-slate-600">{lang.quickResponse.support}</span>
+                  <span className="font-semibold text-blue-600">{lang.quickResponse.values.support}</span>
                 </div>
               </div>
             </div>
 
-            {/* Contact Info Sidebar - 2 columns */}
-            <div className="lg:col-span-2 space-y-6">
-              {/* Contact Information Card */}
-              <div className="bg-slate-900/60 backdrop-blur-xl rounded-2xl border border-cyan-500/20 p-6">
-                <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
-                  <div className="w-8 h-8 bg-cyan-500/20 rounded-lg flex items-center justify-center">
-                    <Phone className="w-4 h-4 text-cyan-400" />
-                  </div>
-                  Contact Info
-                </h3>
-                
-                <div className="space-y-4">
-                  <a href="mailto:contact@example.com" className="flex items-start gap-4 p-4 bg-slate-800/50 rounded-xl hover:bg-slate-800 hover:border-cyan-400/30 border border-transparent transition-all duration-300 group">
-                    <div className="w-10 h-10 bg-cyan-500/20 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-cyan-500/30 transition-colors">
-                      <Mail className="w-5 h-5 text-cyan-400" />
-                    </div>
-                    <div>
-                      <div className="text-gray-400 text-xs font-medium mb-1">Email</div>
-                      <div className="text-white font-medium group-hover:text-cyan-400 transition-colors">contact@example.com</div>
-                    </div>
-                  </a>
-
-                  <a href="tel:+1234567890" className="flex items-start gap-4 p-4 bg-slate-800/50 rounded-xl hover:bg-slate-800 hover:border-cyan-400/30 border border-transparent transition-all duration-300 group">
-                    <div className="w-10 h-10 bg-blue-500/20 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-blue-500/30 transition-colors">
-                      <Phone className="w-5 h-5 text-blue-400" />
-                    </div>
-                    <div>
-                      <div className="text-gray-400 text-xs font-medium mb-1">Phone</div>
-                      <div className="text-white font-medium group-hover:text-cyan-400 transition-colors">+1 (234) 567-8900</div>
-                    </div>
-                  </a>
-
-                  <div className="flex items-start gap-4 p-4 bg-slate-800/50 rounded-xl">
-                    <div className="w-10 h-10 bg-purple-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <MapPin className="w-5 h-5 text-purple-400" />
-                    </div>
-                    <div>
-                      <div className="text-gray-400 text-xs font-medium mb-1">Location</div>
-                      <div className="text-white font-medium">San Francisco, CA</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Quick Stats */}
-              <div className="bg-slate-900/60 backdrop-blur-xl rounded-2xl border border-cyan-500/20 p-6">
-                <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
-                  <div className="w-8 h-8 bg-cyan-500/20 rounded-lg flex items-center justify-center">
-                    <Clock className="w-4 h-4 text-cyan-400" />
-                  </div>
-                  Response Time
-                </h3>
-                
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="bg-gradient-to-br from-cyan-500/10 to-blue-500/10 rounded-xl p-4 border border-cyan-500/20">
-                    <div className="text-3xl font-bold text-cyan-400 mb-1">24/7</div>
-                    <div className="text-sm text-gray-300">Available</div>
-                  </div>
-                  <div className="bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-xl p-4 border border-blue-500/20">
-                    <div className="text-3xl font-bold text-blue-400 mb-1">&lt;24h</div>
-                    <div className="text-sm text-gray-300">Response</div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Social Links */}
-              <div className="bg-slate-900/60 backdrop-blur-xl rounded-2xl border border-cyan-500/20 p-6">
-                <h3 className="text-xl font-bold text-white mb-4">Follow Us</h3>
-                <div className="flex gap-3">
-                  {['linkedin', 'twitter', 'instagram', 'facebook'].map((social) => (
-                    <a
-                      key={social}
-                      href="#"
-                      className="w-12 h-12 bg-slate-800/50 rounded-xl flex items-center justify-center hover:bg-cyan-500/20 hover:border-cyan-400/50 border border-transparent transition-all duration-300 group"
-                    >
-                      <div className="w-5 h-5 bg-gradient-to-br from-cyan-400 to-blue-400 rounded group-hover:scale-110 transition-transform"></div>
-                    </a>
-                  ))}
-                </div>
+            {/* Navigation Links */}
+            <div className="bg-white rounded-2xl shadow-sm border p-8">
+              <h3 className="text-xl font-bold text-slate-900 mb-4">{lang.explore.title}</h3>
+              <div className="grid grid-cols-2 gap-3">
+                {navigationItems.map((item, index) => (
+                  <button 
+                    key={index}
+                    onClick={() => navigate(item.path)}
+                    className="flex items-center gap-2 p-3 bg-slate-100 hover:bg-blue-100 text-slate-700 hover:text-blue-600 rounded-lg transition-colors"
+                  >
+                    <item.icon className="w-4 h-4" />
+                    {item.label}
+                  </button>
+                ))}
               </div>
             </div>
           </div>
         </div>
-      </section>
+      </div>
 
-      {/* CTA Section */}
-      <section className="relative py-20 bg-gradient-to-r from-cyan-500/10 via-blue-500/10 to-purple-500/10">
+      {/* Footer CTA */}
+      <div className="bg-slate-900 text-white py-16">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <h3 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Ready to Get Started?
-          </h3>
-          <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-            Join hundreds of satisfied clients who have transformed their businesses with our solutions.
+          <h3 className="text-3xl font-bold mb-4">{lang.cta.title}</h3>
+          <p className="text-slate-300 mb-8 max-w-2xl mx-auto">
+            {lang.cta.subtitle}
           </p>
-          
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold rounded-xl hover:from-cyan-600 hover:to-blue-600 transition-all duration-300 shadow-lg shadow-cyan-500/30 hover:shadow-cyan-500/50 hover:-translate-y-0.5">
-              Schedule a Call
+            <button 
+              onClick={() => navigate('/story')}
+              className="bg-blue-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-600 transition-colors"
+            >
+              {lang.cta.primary}
             </button>
-            <button className="px-8 py-4 border-2 border-cyan-400 text-cyan-400 font-semibold rounded-xl hover:bg-cyan-400 hover:text-slate-900 transition-all duration-300">
-              View Our Work
+            <button 
+              onClick={() => navigate('/sponsors')}
+              className="border border-slate-600 text-slate-300 px-8 py-3 rounded-lg font-semibold hover:bg-slate-800 transition-colors"
+            >
+              {lang.cta.secondary}
             </button>
           </div>
         </div>
-      </section>
+      </div>
     </div>
   );
 };
