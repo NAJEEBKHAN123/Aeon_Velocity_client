@@ -233,12 +233,12 @@ const Navbar = ({ currentLanguage, onLanguageChange }) => {
 
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="p-2 rounded-lg bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 text-gray-300 hover:text-white transition-all duration-300"
+              className=" rounded-lg  text-gray-300 hover:text-white transition-all duration-300"
               aria-label="Menu"
             >
               {isOpen ? (
                 <svg
-                  className="w-5 h-5"
+                  className="w-8 h-8"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -252,7 +252,7 @@ const Navbar = ({ currentLanguage, onLanguageChange }) => {
                 </svg>
               ) : (
                 <svg
-                  className="w-5 h-5"
+                  className="w-12 h-12"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
