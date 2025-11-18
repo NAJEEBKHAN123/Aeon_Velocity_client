@@ -75,7 +75,7 @@ const CtaSection = () => {
       </div>
 
       <motion.div 
-        className="relative max-w-6xl mx-auto px-6"
+        className="relative max-w-6xl mx-auto px-4 sm:px-5"
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
@@ -113,9 +113,9 @@ const CtaSection = () => {
           variants={itemVariants}
         >
           <div className="absolute -inset-4 bg-gradient-to-r from-cyan-500/10 via-blue-500/10 to-cyan-500/10 rounded-3xl blur-xl"></div>
-          <div className="relative bg-gray-800/40 backdrop-blur-xl rounded-2xl border border-gray-700/50 p-12 lg:p-16">
+          <div className="relative bg-gray-800/40 backdrop-blur-xl rounded-2xl border border-gray-700/50 p-6 lg:p-16">
             <motion.p 
-              className="text-2xl lg:text-3xl text-gray-200 leading-relaxed text-center font-light mb-12"
+              className="text-base lg:text-3xl text-gray-200 leading-relaxed text-center font-light mb-12"
               variants={itemVariants}
             >
               {currentContent.content}
@@ -160,7 +160,7 @@ const CtaSection = () => {
               >
                 <Link
                   to="/sponsors"
-                  className="group relative inline-flex items-center px-12 py-5 bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-bold text-lg rounded-xl hover:from-cyan-600 hover:to-blue-600 transition-all duration-300 shadow-2xl shadow-cyan-500/25 hover:shadow-cyan-500/40"
+                  className="group relative inline-flex items-center px-4 md:px-12 py-5 bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-bold  md:text-large rounded-xl hover:from-cyan-600 hover:to-blue-600 transition-all duration-300 shadow-2xl shadow-cyan-500/25 hover:shadow-cyan-500/40"
                 >
                   {/* Button Background Effect */}
                   <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-xl blur opacity-30 group-hover:opacity-50 transition duration-300"></div>

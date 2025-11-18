@@ -37,7 +37,7 @@ const StemRacing = () => {
   const currentContent = content[currentLanguage];
 
   return (
-    <section className="bg-white text-[#0B0B0B] py-20 px-6 md:px-12 lg:px-20">
+    <section className="bg-white text-[#0B0B0B] py-20 px-4 sm:px-6 xl:px-16">
       <div className="max-w-7xl mx-auto">
         {/* Title */}
         <h2 className="text-center text-4xl md:text-5xl font-extrabold italic text-[#0B0B0B] mb-16">
@@ -46,12 +46,12 @@ const StemRacing = () => {
 
         {/* Top Row */}
         <div className="grid md:grid-cols-2 gap-10 mb-14 items-center">
-          <div>
+          <div className="order-1 md:order-1">
             <p className="text-gray-700 leading-relaxed text-lg">
               {currentContent.paragraph1}
             </p>
           </div>
-          <div>
+          <div className="order-2 md:order-2">
             <img
               src={unsplashImages.topImg}
               alt={currentContent.alt1}
@@ -62,14 +62,14 @@ const StemRacing = () => {
 
         {/* Middle Row */}
         <div className="grid md:grid-cols-2 gap-10 mb-14 items-center">
-          <div>
+          <div className="order-2 md:order-1">
             <img
               src={unsplashImages.leftImg}
               alt={currentContent.alt2}
               className="shadow-md w-full h-64 object-cover"
             />
           </div>
-          <div>
+          <div className="order-1 md:order-2">
             <p className="text-gray-700 leading-relaxed text-lg">
               {currentContent.paragraph2}
             </p>
@@ -78,13 +78,12 @@ const StemRacing = () => {
 
         {/* Bottom Row */}
         <div className="grid md:grid-cols-2 gap-10 items-center">
-          <div>
+          <div className="order-1 md:order-1">
             <p className="text-gray-700 leading-relaxed text-lg">
               {currentContent.paragraph3}
             </p>
           </div>
-
-          <div>
+          <div className="order-2 md:order-2">
             <img
               src={unsplashImages.bottomImg}
               alt={currentContent.alt3}

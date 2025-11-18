@@ -61,7 +61,7 @@ const ContactPage = () => {
       },
       placeholders: {
         name: "Votre nom",
-        email: "votre.email@example.com",
+        email: "contact@aeon-velocity.com",
         company: "Votre entreprise",
         message: "Parlez-nous de votre projet..."
       },
@@ -122,7 +122,7 @@ const ContactPage = () => {
       },
       placeholders: {
         name: "Your name",
-        email: "your.email@example.com",
+        email: "contact@aeon-velocity.com",
         company: "Your company",
         message: "Tell us about your project..."
       },
@@ -186,19 +186,19 @@ const ContactPage = () => {
     {
       icon: Mail,
       label: lang.contactInfo.email,
-      value: 'hello@example.com',
-      href: 'mailto:hello@example.com'
+      value: 'contact@aeon-velocity.com',
+      href: 'mailto:contact@aeon-velocity.com'
     },
     {
       icon: Phone,
       label: lang.contactInfo.phone,
-      value: '+1 (234) 567-8900',
-      href: 'tel:+1234567890'
+      value: '+33 783 182 860',
+      href: 'tel:+33783182860'
     },
     {
       icon: MapPin,
       label: lang.contactInfo.location,
-      value: currentLanguage === 'fr' ? 'Paris, France' : 'Paris, France'
+      value: currentLanguage === 'fr' ? 'Toulon, France' : 'Toulon, France'
     }
   ];
 

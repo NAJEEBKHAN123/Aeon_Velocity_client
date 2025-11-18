@@ -496,7 +496,7 @@ const SponsorsPage = () => {
 
       {/* Partnership Tiers Section */}
       <section className="relative py-20">
-        <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-6">
+        <div className="relative z-10 max-w-7xl mx-auto px-0 sm:px-0 md:px-0">
           {/* Section Background */}
           <div className="absolute inset-0 -inset-y-24 bg-gradient-to-b from-white/40 via-blue-50/60 to-indigo-50/70 backdrop-blur-sm rounded-3xl"></div>
           
@@ -520,7 +520,7 @@ const SponsorsPage = () => {
             {currentContent.benefits}
           </motion.p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-8 relative z-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-4 sm:px-5 md:px-5 lg:px-6 xl:px-16 relative z-10">
             <PartnershipTier tier="platinum" content={currentContent.tiers.platinum} isHighlighted={true} />
             <PartnershipTier tier="gold" content={currentContent.tiers.gold} />
             <PartnershipTier tier="silver" content={currentContent.tiers.silver} />

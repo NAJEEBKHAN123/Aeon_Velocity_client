@@ -25,7 +25,7 @@ const AboutSection = () => {
 
   return (
     <section className="py-20 bg-gradient-to-br from-gray-900 to-blue-900">
-      <div className="max-w-4xl mx-auto px-6">
+      <div className="max-w-4xl mx-auto px-4 sm:px-5">
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-5xl font-bold text-white mb-6">
@@ -39,9 +39,9 @@ const AboutSection = () => {
         </div>
         
         {/* Content Card */}
-        <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-12 border border-white/10 shadow-2xl">
+        <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 shadow-2xl">
           {/* Main Text */}
-          <p className="text-2xl text-gray-100 leading-relaxed text-center mb-12 font-light">
+          <p className="text-base md:text-2xl text-gray-100 leading-relaxed text-center mb-12 font-light">
             {currentContent.content}
           </p>
           

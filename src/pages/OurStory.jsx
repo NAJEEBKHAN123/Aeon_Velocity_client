@@ -455,7 +455,7 @@ const TimelineSection = ({ currentContent, timeline }) => {
 
   return (
     <section className="relative py-16 md:py-24" aria-labelledby="timeline-title">
-      <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-6">
+      <div className="relative z-10 max-w-7xl mx-auto sm:px-2 ">
         <motion.h2
           id="timeline-title"
           initial={{ opacity: 0, y: 40 }}
@@ -467,7 +467,7 @@ const TimelineSection = ({ currentContent, timeline }) => {
           {currentContent.timelineTitle}
         </motion.h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 px-3 md:px-5 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 px-3 md:px-14 lg:gap-8">
           {timeline.map((item, index) => (
             <TimelineItem
               key={index}
@@ -544,7 +544,7 @@ const CTASection = ({ currentContent }) => (
       </motion.p>
 
       <motion.button
-        className="px-8 md:px-12 py-3 md:py-4 bg-white text-blue-700 font-black text-base md:text-lg rounded-2xl shadow-2xl transition-all duration-300 backdrop-blur-sm hover:scale-105 hover:shadow-3xl focus:outline-none focus:ring-4 focus:ring-white focus:ring-opacity-50"
+        className="px-8 md:px-12 py-3 md:py-4 bg-white cursor-pointer text-blue-700 font-black text-base md:text-lg rounded-2xl shadow-2xl transition-all duration-300 backdrop-blur-sm hover:scale-105 hover:shadow-3xl focus:outline-none focus:ring-4 focus:ring-white focus:ring-opacity-50"
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
       >

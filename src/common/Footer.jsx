@@ -24,8 +24,8 @@ const Footer = () => {
       },
       contactInfo: {
         email: "contact@aeon-velocity.com",
-        phone: "+33 7 83 18 28 60",
-        location: "France"
+        phone: "+33 783 182 860",
+        location: "Toulon, France"
       }
     },
     en: {
@@ -45,8 +45,8 @@ const Footer = () => {
       },
       contactInfo: {
         email: "contact@aeon-velocity.com",
-        phone: "+33 7 83 18 28 60", 
-        location: "France"
+        phone: "+33 783 182 860", 
+        location: "Toulon, France"
       }
     }
   };

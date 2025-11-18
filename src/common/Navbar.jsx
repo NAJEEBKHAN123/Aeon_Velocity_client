@@ -54,7 +54,7 @@ const Navbar = ({ currentLanguage, onLanguageChange }) => {
           : "bg-transparent"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-0 sm:px-0 lg:pr-4 xl:px-12 xl:pr-16" >
         <div className="flex items-center justify-between h-16 sm:h-18 md:h-20">
           {/* Logo - Optimized for all screens */}
           <Link
@@ -112,7 +112,7 @@ const Navbar = ({ currentLanguage, onLanguageChange }) => {
           </div>
 
           {/* Desktop Language Switcher */}
-          <div className="hidden lg:flex items-center space-x-2 bg-gray-800/50 backdrop-blur-sm rounded-xl p-1 border border-gray-700/50 ml-4">
+          <div className="hidden lg:flex items-center space-x-2 bg-gray-800/50 backdrop-blur-sm rounded-xl p-1  border border-gray-700/50 ml-4">
             <button
               onClick={() => onLanguageChange("fr")}
               className={`px-3 xl:px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
@@ -136,7 +136,7 @@ const Navbar = ({ currentLanguage, onLanguageChange }) => {
           </div>
 
           {/* Tablet Navigation - Shows on medium screens */}
-          <div className="hidden md:flex lg:hidden items-center space-x-3">
+          <div className="hidden md:flex lg:hidden md:px-5 items-center space-x-3">
             <div className="flex items-center bg-gray-800/50 backdrop-blur-sm rounded-xl p-1 border border-gray-700/50">
               <button
                 onClick={() => onLanguageChange("fr")}
@@ -206,7 +206,7 @@ const Navbar = ({ currentLanguage, onLanguageChange }) => {
           </div>
 
           {/* Mobile menu button - Shows on small screens */}
-          <div className="flex md:hidden items-center space-x-2">
+          <div className="flex md:hidden items-center px-4 sm:px-5 md:px-6 lg:px-5  space-x-2">
             {/* Mobile Language Switcher */}
             <div className="flex items-center bg-gray-800/50 backdrop-blur-sm rounded-lg p-1 border border-gray-700/50">
               <button
