@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Mail, User, MessageSquare, Send, CheckCircle, Phone, MapPin, Building2, Home, Book, Users, Heart } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from "../contexts/LanguageContext";
@@ -36,6 +36,13 @@ const ContactPage = () => {
     
     setTimeout(() => setIsSubmitted(false), 4000);
   };
+  useEffect(() => {
+  window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: 'smooth'
+  });
+}, []);
 
   // Language content
   const content = {
@@ -92,13 +99,7 @@ const ContactPage = () => {
           support: "Urgence 24/7"
         }
       },
-      explore: {
-        title: "Explorez Notre Site",
-        home: "Accueil",
-        story: "Aventure",
-        blog: "Blog",
-        sponsors: "Sponsors"
-      },
+
       cta: {
         title: "Prêt à Commencer ?",
         subtitle: "Envoyez-nous vos idées et nous vous répondrons avec une proposition détaillée.",
@@ -159,13 +160,7 @@ const ContactPage = () => {
           support: "24/7 Emergency"
         }
       },
-      explore: {
-        title: "Explore Our Site",
-        home: "Home",
-        story: "Our Story",
-        blog: "Blog",
-        sponsors: "Sponsors"
-      },
+
       cta: {
         title: "Ready to Get Started?",
         subtitle: "Send us your ideas and we'll get back to you with a detailed proposal.",
@@ -207,12 +202,6 @@ const ContactPage = () => {
     }
   ];
 
-  const navigationItems = [
-    { path: '/', icon: Home, label: lang.explore.home },
-    { path: '/story', icon: Book, label: lang.explore.story },
-    { path: '/blog', icon: Users, label: lang.explore.blog },
-    { path: '/sponsors', icon: Heart, label: lang.explore.sponsors }
-  ];
 
   return (
     <div className="min-h-screen bg-slate-50">
@@ -424,22 +413,7 @@ const ContactPage = () => {
               </div>
             </div>
 
-            {/* Navigation Links */}
-            <div className="bg-white rounded-2xl shadow-sm border p-8">
-              <h3 className="text-xl font-bold text-slate-900 mb-4">{lang.explore.title}</h3>
-              <div className="grid grid-cols-2 gap-3">
-                {navigationItems.map((item, index) => (
-                  <button 
-                    key={index}
-                    onClick={() => navigate(item.path)}
-                    className="flex items-center gap-2 p-3 bg-slate-100 hover:bg-blue-100 text-slate-700 hover:text-blue-600 rounded-lg transition-colors"
-                  >
-                    <item.icon className="w-4 h-4" />
-                    {item.label}
-                  </button>
-                ))}
-              </div>
-            </div>
+          
           </div>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback } from "react";
+import React, { useState, useMemo, useCallback, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "../contexts/LanguageContext";
 
@@ -557,6 +557,15 @@ const CTASection = ({ currentContent }) => (
 const StoryPage = () => {
   const { currentLanguage } = useLanguage();
   const currentContent = STORY_CONTENT[currentLanguage] || STORY_CONTENT.en;
+
+  // Scroll to top when component mounts - MOVED TO MAIN COMPONENT
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+  }, []);
 
   return (
     <article className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 text-gray-900 relative overflow-hidden">
