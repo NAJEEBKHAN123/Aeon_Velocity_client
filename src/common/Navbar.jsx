@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import logo from "../assets/Logo.png";
 
@@ -7,14 +7,30 @@ const Navbar = ({ currentLanguage, onLanguageChange }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeTab, setActiveTab] = useState("accueil");
   const location = useLocation();
+  const scrollTimeout = useRef(null);
 
-  // Handle scroll effect
+  // Fixed scroll handler with throttling
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      if (scrollTimeout.current) {
+        clearTimeout(scrollTimeout.current);
+      }
+
+      scrollTimeout.current = setTimeout(() => {
+        const scrolled = window.scrollY > 20;
+        setIsScrolled(scrolled);
+      }, 10);
     };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    handleScroll(); // Initial check
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (scrollTimeout.current) {
+        clearTimeout(scrollTimeout.current);
+      }
+    };
   }, []);
 
   // Set active tab based on route
@@ -48,11 +64,7 @@ const Navbar = ({ currentLanguage, onLanguageChange }) => {
 
   return (
     <nav
-      className={`fixed top-0 w-full z-50 transition-all duration-500 ${
-        isScrolled
-          ? "bg-[#1A1F4b] backdrop-blur-xl shadow-2xl border-b border-gray-800/50"
-          : "bg-transparent"
-      }`}
+      className={`fixed bg-[#1A1F4b] top-0 w-full z-50 transition-all duration-300`}
     >
       <div className="max-w-7xl mx-auto px-0 sm:px-0 lg:pr-4 xl:px-12 xl:pr-16" >
         <div className="flex items-center justify-between h-16 sm:h-18 md:h-20">
@@ -84,8 +96,6 @@ const Navbar = ({ currentLanguage, onLanguageChange }) => {
                 filter: 'brightness(1.1) contrast(1.1)'
               }}
             />
-            
-          
           </Link>
 
           {/* Desktop Navigation - Shows on large screens */}
@@ -206,7 +216,7 @@ const Navbar = ({ currentLanguage, onLanguageChange }) => {
           </div>
 
           {/* Mobile menu button - Shows on small screens */}
-          <div className="flex md:hidden items-center px-4 sm:px-5 md:px-6 lg:px-5  space-x-2">
+          <div className="flex md:hidden items-center px-3   sm:px-5 md:px-6 lg:px-5  space-x-2">
             {/* Mobile Language Switcher */}
             <div className="flex items-center bg-gray-800/50 backdrop-blur-sm rounded-lg p-1 border border-gray-700/50">
               <button
@@ -247,7 +257,7 @@ const Navbar = ({ currentLanguage, onLanguageChange }) => {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
+                    d="M6 18L18-6M6 6l12 12"
                   />
                 </svg>
               ) : (
