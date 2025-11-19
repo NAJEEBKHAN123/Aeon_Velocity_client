@@ -1,6 +1,7 @@
 import React, { useState, useMemo, useCallback, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "../contexts/LanguageContext";
+import { Link } from "react-router-dom";
 
 const STORY_CONTENT = {
   fr: {
@@ -543,6 +544,7 @@ const CTASection = ({ currentContent }) => (
         {currentContent.ctaDescription}
       </motion.p>
 
+     <Link to='/sponsors'>
       <motion.button
         className="px-8 md:px-12 py-3 md:py-4 bg-white cursor-pointer text-blue-700 font-black text-base md:text-lg rounded-2xl shadow-2xl transition-all duration-300 backdrop-blur-sm hover:scale-105 hover:shadow-3xl focus:outline-none focus:ring-4 focus:ring-white focus:ring-opacity-50"
         whileHover={{ scale: 1.05 }}
@@ -550,6 +552,7 @@ const CTASection = ({ currentContent }) => (
       >
         {currentContent.cta}
       </motion.button>
+      </Link>
     </div>
   </section>
 );

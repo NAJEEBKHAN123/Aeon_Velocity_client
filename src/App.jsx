@@ -10,6 +10,7 @@ import OurStory from './pages/OurStory';
 import Blog from './pages/Blog';
 import Sponsors from './pages/Sponsors';
 import Contact from './pages/Contact';
+import ScrollToTop from './common/ScrollToTop.jsx';
 
 const AppContent = () => {
   const { currentLanguage, changeLanguage } = useLanguage();
@@ -21,16 +22,18 @@ const AppContent = () => {
         onLanguageChange={changeLanguage} 
       />
       
-      <main className="pt-20">
+      <main>
         <Routes>
-          <Route path="*" element={<Home />} />
+          <Route path="/" element={<Home />} />
           <Route path="/story" element={<OurStory />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/sponsors" element={<Sponsors />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
       </main>
+      
       <Footer />
+      <ScrollToTop />
     </div>
   );
 };

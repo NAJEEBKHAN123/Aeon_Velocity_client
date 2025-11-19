@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import logo from "../assets/Logo.png";
+import { FaInstagram, FaTiktok, FaFacebook, FaYoutube, FaTwitter } from "react-icons/fa";
 
 const Navbar = ({ currentLanguage, onLanguageChange }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -8,6 +9,40 @@ const Navbar = ({ currentLanguage, onLanguageChange }) => {
   const [activeTab, setActiveTab] = useState("accueil");
   const location = useLocation();
   const scrollTimeout = useRef(null);
+
+  // Social media links
+  const socialLinks = [
+    { 
+      icon: <FaInstagram className="w-5 h-5" />, 
+      url: "https://instagram.com/aeonvelocity",
+      name: "Instagram",
+      color: "hover:text-pink-500"
+    },
+    { 
+      icon: <FaTiktok className="w-5 h-5" />, 
+      url: "https://tiktok.com/@aeonvelocity",
+      name: "TikTok",
+      color: "hover:text-black"
+    },
+    { 
+      icon: <FaFacebook className="w-5 h-5" />, 
+      url: "https://facebook.com/aeonvelocity",
+      name: "Facebook",
+      color: "hover:text-blue-600"
+    },
+    { 
+      icon: <FaYoutube className="w-5 h-5" />, 
+      url: "https://youtube.com/@aeonvelocity",
+      name: "YouTube",
+      color: "hover:text-red-600"
+    },
+    { 
+      icon: <FaTwitter className="w-5 h-5" />, 
+      url: "https://twitter.com/aeonvelocity",
+      name: "Twitter",
+      color: "hover:text-blue-400"
+    },
+  ];
 
   // Fixed scroll handler with throttling
   useEffect(() => {
@@ -66,7 +101,7 @@ const Navbar = ({ currentLanguage, onLanguageChange }) => {
     <nav
       className={`fixed bg-[#1A1F4b] top-0 w-full z-50 transition-all duration-300`}
     >
-      <div className="max-w-7xl mx-auto px-0 sm:px-0 lg:pr-4 xl:px-12 xl:pr-16" >
+      <div className="max-w-7xl mx-auto px-0 sm:px-0 lg:pr-4 xl:px-12 xl:pr-16">
         <div className="flex items-center justify-between h-16 sm:h-18 md:h-20">
           {/* Logo - Optimized for all screens */}
           <Link
@@ -122,7 +157,7 @@ const Navbar = ({ currentLanguage, onLanguageChange }) => {
           </div>
 
           {/* Desktop Language Switcher */}
-          <div className="hidden lg:flex items-center space-x-2 bg-gray-800/50 backdrop-blur-sm rounded-xl p-1  border border-gray-700/50 ml-4">
+          <div className="hidden lg:flex items-center space-x-2 bg-gray-800/50 backdrop-blur-sm rounded-xl p-1 border border-gray-700/50 ml-4">
             <button
               onClick={() => onLanguageChange("fr")}
               className={`px-3 xl:px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
@@ -216,7 +251,7 @@ const Navbar = ({ currentLanguage, onLanguageChange }) => {
           </div>
 
           {/* Mobile menu button - Shows on small screens */}
-          <div className="flex md:hidden items-center px-3   sm:px-5 md:px-6 lg:px-5  space-x-2">
+          <div className="flex md:hidden items-center px-3 sm:px-5 md:px-6 lg:px-5 space-x-2">
             {/* Mobile Language Switcher */}
             <div className="flex items-center bg-gray-800/50 backdrop-blur-sm rounded-lg p-1 border border-gray-700/50">
               <button
@@ -243,7 +278,7 @@ const Navbar = ({ currentLanguage, onLanguageChange }) => {
 
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className=" rounded-lg  text-gray-300 hover:text-white transition-all duration-300"
+              className="rounded-lg text-gray-300 hover:text-white transition-all duration-300"
               aria-label="Menu"
             >
               {isOpen ? (
@@ -257,12 +292,12 @@ const Navbar = ({ currentLanguage, onLanguageChange }) => {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth={2}
-                    d="M6 18L18-6M6 6l12 12"
+                    d="M6 18L18 6M6 6l12 12"
                   />
                 </svg>
               ) : (
                 <svg
-                  className="w-12 h-12"
+                  className="w-8 h-8"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -282,7 +317,7 @@ const Navbar = ({ currentLanguage, onLanguageChange }) => {
         {/* Mobile & Tablet Navigation Menu */}
         <div
           className={`transition-all duration-300 overflow-hidden ${
-            isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+            isOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
           } md:lg:hidden`}
         >
           <div className="bg-gray-800/90 backdrop-blur-xl rounded-xl border border-gray-700/50 p-4 mt-2">
@@ -305,6 +340,28 @@ const Navbar = ({ currentLanguage, onLanguageChange }) => {
                 </Link>
               ))}
               
+              {/* Social Media Icons Section */}
+              <div className="pt-4 border-t border-gray-700/50">
+                <p className="text-center text-gray-400 text-sm font-medium mb-3">
+                  {currentLanguage === "fr" ? "Suivez-nous" : "Follow Us"}
+                </p>
+                <div className="flex justify-center items-center space-x-4">
+                  {socialLinks.map((social) => (
+                    <a
+                      key={social.name}
+                      href={social.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => setIsOpen(false)}
+                      className={`text-gray-400 p-2 rounded-lg bg-white/5 backdrop-blur-sm border border-white/10 hover:border-white/30 ${social.color} transition-all duration-300 hover:scale-110`}
+                      aria-label={`Follow us on ${social.name}`}
+                    >
+                      {social.icon}
+                    </a>
+                  ))}
+                </div>
+              </div>
+
               {/* Additional CTA for mobile */}
               <div className="pt-4 border-t border-gray-700/50">
                 <Link

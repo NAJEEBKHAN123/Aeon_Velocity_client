@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "../contexts/LanguageContext";
 
@@ -215,8 +215,6 @@ const SPONSORS_DATA = {
 const SponsorCard = ({ sponsor, isCurrent = true }) => {
   const [isHovered, setIsHovered] = useState(false);
 
-
-
   const tierGradients = {
     platinum: "bg-gradient-to-r from-purple-500 to-pink-500",
     gold: "bg-gradient-to-r from-yellow-500 to-orange-500",
@@ -379,6 +377,17 @@ const SponsorsPage = () => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const currentContent = SPONSOR_CONTENT[currentLanguage] || SPONSOR_CONTENT.en;
 
+  // FIXED: Scroll to top when component mounts - moved to main component
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+  }, []);
+
+  // Memoized sponsors data
+  const sponsorsData = useMemo(() => SPONSORS_DATA, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 text-gray-900 relative overflow-hidden">
@@ -492,7 +501,25 @@ const SponsorsPage = () => {
       </section>
 
       {/* Sponsors Grid Section */}
+      <section className="relative py-20">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.h2
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-3xl md:text-4xl font-bold text-center mb-12 bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent"
+          >
+            {currentContent.currentSponsors}
+          </motion.h2>
 
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {sponsorsData.current.map((sponsor) => (
+              <SponsorCard key={sponsor.id} sponsor={sponsor} isCurrent={true} />
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Partnership Tiers Section */}
       <section className="relative py-20">
