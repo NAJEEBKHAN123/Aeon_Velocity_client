@@ -222,7 +222,7 @@ const BlogPage = () => {
         </div>
 
         {/* Content */}
-        <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
+        <div className="relative z-10 max-w-6xl mx-auto px-4 text-center">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
@@ -346,7 +346,7 @@ const BlogPage = () => {
           {/* Posts Grid */}
           <motion.div 
             layout
-            className="grid md:grid-cols-2 lg:grid-cols-3 px-5 gap-8"
+            className="grid md:grid-cols-2 lg:grid-cols-3 px-4 gap-8"
           >
             {filteredPosts.map((post, index) => (
               <BlogPostCard 

@@ -52,7 +52,7 @@ const Hero = () => {
 
       {/* Main Content Container */}
       <div className="relative w-full max-w-7xl mx-auto px-4 xs:px-4 sm:px-6 lg:px-4">
-        <div className="flex flex-col justify-center items-start min-h-[70vh] sm:min-h-screen py-4 sm:py-12 md:py-16">
+        <div className="flex flex-col justify-center items-start min-h-[70vh] sm:min-h-screen py-4 sm:py-12 md:py-20">
           {/* Text Content - Left aligned on all screens */}
           <div className="text-start w-full max-w-3xl mx-auto md:mx-0 md:pl-8 lg:pl-12 xl:pl-16">
             {/* Main Title */}
@@ -61,7 +61,7 @@ const Hero = () => {
   animate="visible"
   custom={0}
   variants={textVariants}
-  className="text-4xl xs:text-3xl sm:text-4xl lg:text-5xl font-extrabold uppercase tracking-tight 
+  className="text-4xl xs:text-3xl mt-10 sm:text-4xl lg:text-5xl font-extrabold uppercase tracking-tight 
              bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 
              bg-clip-text text-transparent 
              leading-tight sm:leading-normal"
@@ -70,7 +70,7 @@ const Hero = () => {
 </motion.h1>
 
             {/* Taglines */}
-            <motion.div className="space-y-3 xs:space-y-4 sm:space-y-5 mt-6 xs:mt-8 sm:mt-10 md:mt-12 md:pl-3 md:border-l-4 md:border-cyan-400/40">
+            <motion.div className="space-y-3 xs:space-y-4 sm:space-y-2 mt-6 xs:mt-8 sm:mt-10 md:mt-5 md:pl-3 md:border-l-4 md:border-cyan-400/40">
               <motion.p
                 custom={1}
                 initial="hidden"

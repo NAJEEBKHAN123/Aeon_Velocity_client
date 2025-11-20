@@ -207,7 +207,7 @@ const ContactPage = () => {
     <div className="min-h-screen bg-slate-50">
       {/* Header */}
       <div className="bg-white border-b">
-        <div className="max-w-4xl mx-auto px-6 py-16 text-center">
+        <div className="max-w-4xl mx-auto px-6 py-20 mt-4  text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
             {lang.title}
           </h1>
@@ -218,7 +218,7 @@ const ContactPage = () => {
       </div>
 
       {/* Main Content */}
-      <div className="max-w-6xl mx-auto px-6 py-12">
+      <div className="max-w-6xl mx-auto px-4 py-12">
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Contact Form */}
           <div className="bg-white rounded-2xl shadow-sm border p-8">

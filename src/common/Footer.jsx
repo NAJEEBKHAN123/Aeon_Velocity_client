@@ -141,7 +141,7 @@ const Footer = () => {
               <div className="w-2 h-2 bg-cyan-400 rounded-full mr-3 animate-pulse"></div>
               {currentContent.quickLinks}
             </h3>
-            <ul className="space-y-4">
+            <ul className="space-y-0 md:space-y-4">
               {Object.entries(currentContent.links).map(([key, value]) => (
                 <li key={key}>
                   <Link 
@@ -228,7 +228,7 @@ const Footer = () => {
           <div className="flex flex-col lg:flex-row justify-between items-center space-y-6 lg:space-y-0">
             {/* Copyright */}
             <div className="text-gray-400 text-sm flex items-center">
-              <span>© 2024 Aeon Velocity. {currentContent.rights}</span>
+              <span>© 2025 Aeon Velocity. {currentContent.rights}</span>
             </div>
             
             {/* Enhanced Social Links */}

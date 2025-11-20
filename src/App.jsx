@@ -11,6 +11,7 @@ import Blog from './pages/Blog';
 import Sponsors from './pages/Sponsors';
 import Contact from './pages/Contact';
 import ScrollToTop from './common/ScrollToTop.jsx';
+import NotFound from './common/NotFound.jsx';
 
 const AppContent = () => {
   const { currentLanguage, changeLanguage } = useLanguage();
@@ -29,6 +30,7 @@ const AppContent = () => {
           <Route path="/blog" element={<Blog />} />
           <Route path="/sponsors" element={<Sponsors />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
       

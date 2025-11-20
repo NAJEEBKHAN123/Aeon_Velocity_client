@@ -212,7 +212,7 @@ const HeroSection = ({ currentContent }) => {
 
   return (
     <section 
-      className="relative py-8 md:py-12 text-center min-h-[60vh] md:min-h-[80vh] flex items-center justify-center"
+      className="relative py-8 mt-16 md:mt-4 md:py-24 text-center min-h-[60vh] md:min-h-[80vh] flex items-center justify-center"
       aria-labelledby="hero-title"
     >
       {/* Background Image with Optimized Loading */}

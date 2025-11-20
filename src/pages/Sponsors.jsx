@@ -1,12 +1,16 @@
 import React, { useState, useMemo, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "../contexts/LanguageContext";
+import sponsorLogo from "/Sponsor/spon.png";
+import { Link } from "react-router-dom";
 
+// ... (SPONSOR_CONTENT and SPONSORS_DATA remain unchanged) ...
 const SPONSOR_CONTENT = {
   fr: {
     title: "Nos Sponsors",
     subtitle: "Partenaires de Notre Succès",
-    introduction: "Notre ascension vers l'excellence est rendue possible grâce au soutien de nos partenaires visionnaires. Ensemble, nous repoussons les limites de l'innovation et de la performance.",
+    introduction:
+      "Notre ascension vers l'excellence est rendue possible grâce au soutien de nos partenaires visionnaires. Ensemble, nous repoussons les limites de l'innovation et de la performance.",
     currentSponsors: "Sponsors Actuels",
     previousSponsors: "Anciens Sponsors",
     becomeSponsor: "Devenir Sponsor",
@@ -23,8 +27,8 @@ const SPONSOR_CONTENT = {
           "Événements exclusifs",
           "Mentions sur tous les supports",
           "Espace branding dédié",
-          "Accès aux données techniques"
-        ]
+          "Accès aux données techniques",
+        ],
       },
       gold: {
         name: "Or",
@@ -35,8 +39,8 @@ const SPONSOR_CONTENT = {
           "Invitations aux événements",
           "Contenu dédié",
           "Support technique prioritaire",
-          "Présence sur le stand"
-        ]
+          "Présence sur le stand",
+        ],
       },
       silver: {
         name: "Argent",
@@ -47,8 +51,8 @@ const SPONSOR_CONTENT = {
           "Support technique",
           "Kit de communication",
           "Photos professionnelles",
-          "Interviews d'équipe"
-        ]
+          "Interviews d'équipe",
+        ],
       },
       bronze: {
         name: "Bronze",
@@ -59,18 +63,20 @@ const SPONSOR_CONTENT = {
           "Support communautaire",
           "Newsletter exclusive",
           "Accès aux résultats",
-          "Rencontres avec l'équipe"
-        ]
-      }
+          "Rencontres avec l'équipe",
+        ],
+      },
     },
     ctaTitle: "Rejoignez Notre Aventure",
-    ctaDescription: "Devenez partie intégrante de notre succès et bénéficiez d'une visibilité exceptionnelle dans le monde du STEM Racing.",
-    ctaButton: "DEVENIR SPONSOR"
+    ctaDescription:
+      "Devenez partie intégrante de notre succès et bénéficiez d'une visibilité exceptionnelle dans le monde du STEM Racing.",
+    ctaButton: "DEVENIR SPONSOR",
   },
   en: {
     title: "Our Sponsors",
     subtitle: "Partners in Our Success",
-    introduction: "Our journey to excellence is made possible through the support of our visionary partners. Together, we push the boundaries of innovation and performance.",
+    introduction:
+      "Our journey to excellence is made possible through the support of our visionary partners. Together, we push the boundaries of innovation and performance.",
     currentSponsors: "Current Sponsors",
     previousSponsors: "Previous Sponsors",
     becomeSponsor: "Become a Sponsor",
@@ -87,8 +93,8 @@ const SPONSOR_CONTENT = {
           "Exclusive events",
           "Mentions on all materials",
           "Dedicated branding space",
-          "Access to technical data"
-        ]
+          "Access to technical data",
+        ],
       },
       gold: {
         name: "Gold",
@@ -99,8 +105,8 @@ const SPONSOR_CONTENT = {
           "Event invitations",
           "Dedicated content",
           "Priority technical support",
-          "Presence on the pit stand"
-        ]
+          "Presence on the pit stand",
+        ],
       },
       silver: {
         name: "Silver",
@@ -111,8 +117,8 @@ const SPONSOR_CONTENT = {
           "Technical support",
           "Communication kit",
           "Professional photos",
-          "Team interviews"
-        ]
+          "Team interviews",
+        ],
       },
       bronze: {
         name: "Bronze",
@@ -123,160 +129,94 @@ const SPONSOR_CONTENT = {
           "Community support",
           "Exclusive newsletter",
           "Access to results",
-          "Team meetups"
-        ]
-      }
+          "Team meetups",
+        ],
+      },
     },
     ctaTitle: "Join Our Journey",
-    ctaDescription: "Become an integral part of our success and gain exceptional visibility in the world of STEM Racing.",
-    ctaButton: "BECOME A SPONSOR"
-  }
+    ctaDescription:
+      "Become an integral part of our success and gain exceptional visibility in the world of STEM Racing.",
+    ctaButton: "BECOME A SPONSOR",
+  },
 };
 
 const SPONSORS_DATA = {
   current: [
     {
       id: 1,
-      name: "TechInnovate",
-      logo: "🔬",
+      name: "NoLavision",
+      logo: "/sponsor.png", // Path to your sponsor logo
       tier: "platinum",
-      description: "Leading technology innovation partner",
+      description: "Home connect - Visionary technology partner",
       since: 2024,
-      website: "https://techinnovate.com"
+      website: "https://nolavision.com", // Update with actual website if available
     },
-    {
-      id: 2,
-      name: "AeroDynamics Pro",
-      logo: "✈️",
-      tier: "gold",
-      description: "Aerodynamic solutions specialist",
-      since: 2024,
-      website: "https://aerodynamicspro.com"
-    },
-    {
-      id: 3,
-      name: "Precision Engineering",
-      logo: "⚙️",
-      tier: "silver",
-      description: "Precision manufacturing experts",
-      since: 2024,
-      website: "https://precision-eng.com"
-    },
-    {
-      id: 4,
-      name: "Quantum Materials",
-      logo: "🔮",
-      tier: "silver",
-      description: "Advanced materials supplier",
-      since: 2024,
-      website: "https://quantummaterials.com"
-    },
-    {
-      id: 5,
-      name: "Local Motors",
-      logo: "🏍️",
-      tier: "bronze",
-      description: "Local automotive support",
-      since: 2024,
-      website: "https://localmotors.com"
-    },
-    {
-      id: 6,
-      name: "Energy Solutions",
-      logo: "⚡",
-      tier: "bronze",
-      description: "Power and energy systems",
-      since: 2024,
-      website: "https://energysolutions.com"
-    }
   ],
-  previous: [
-    {
-      id: 7,
-      name: "StartUp Tech",
-      logo: "🚀",
-      tier: "bronze",
-      description: "Initial technology supporter",
-      since: 2023,
-      until: 2024
-    },
-    {
-      id: 8,
-      name: "Campus Partners",
-      logo: "🎓",
-      tier: "bronze",
-      description: "University partnership program",
-      since: 2023,
-      until: 2024
-    }
-  ]
+  previous: [], // Empty previous sponsors array
 };
 
 const SponsorCard = ({ sponsor, isCurrent = true }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const [logoError, setLogoError] = useState(false);
 
   const tierGradients = {
     platinum: "bg-gradient-to-r from-purple-500 to-pink-500",
     gold: "bg-gradient-to-r from-yellow-500 to-orange-500",
     silver: "bg-gradient-to-r from-gray-400 to-gray-600",
-    bronze: "bg-gradient-to-r from-amber-700 to-amber-900"
+    bronze: "bg-gradient-to-r from-amber-700 to-amber-900",
   };
 
   return (
     <motion.div
-      className="relative bg-white/90 backdrop-blur-md rounded-2xl p-6 shadow-2xl border border-gray-200/50 hover:shadow-3xl transition-all duration-300 cursor-pointer overflow-hidden"
-      whileHover={{ scale: 1.02 }}
+      className="relative bg-white rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 cursor-pointer overflow-hidden"
+      whileHover={{ scale: 1.05 }}
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
     >
-      {/* Background Pattern */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-green-50/50 opacity-60"></div>
-      
       {/* Tier Badge */}
-      <div className={`absolute -top-3 left-6 px-3 py-1 rounded-full text-white text-xs font-bold ${tierGradients[sponsor.tier]} shadow-lg z-10`}>
+      <div
+        className={`absolute -top-3 left-6 px-3 py-1 rounded-full text-white text-xs font-bold ${
+          tierGradients[sponsor.tier]
+        } shadow-lg z-10`}
+      >
         {sponsor.tier.toUpperCase()}
       </div>
 
-      {/* Sponsor Logo */}
-      <div className="text-6xl text-center mb-4 h-20 flex items-center justify-center relative z-10">
-        {sponsor.logo}
-      </div>
-
-      {/* Sponsor Name */}
-      <h3 className="text-xl font-bold text-center text-gray-800 mb-2 relative z-10">
-        {sponsor.name}
-      </h3>
-
-      {/* Sponsor Description */}
-      <p className="text-gray-600 text-center text-sm mb-4 relative z-10">
-        {sponsor.description}
-      </p>
-
-      {/* Sponsor Details */}
-      <div className="text-xs text-gray-500 text-center space-y-1 relative z-10">
-        <p>Since {sponsor.since}</p>
-        {!isCurrent && sponsor.until && (
-          <p>Until {sponsor.until}</p>
+      {/* Sponsor Logo - INCREASED SIZE HERE */}
+      <div 
+        // Increased container height (h-32 from h-24) and added more vertical margin (my-8 from my-6)
+        className="text-6xl text-center my-8 h-32 flex items-center justify-center relative z-10"
+      >
+        {sponsor.logo.includes("/") ? (
+          <img
+            src={sponsorLogo}
+            alt={`${sponsor.name} logo`}
+            // Increased max-height (max-h-28 from max-h-20)
+            className="h-full max-w-full object-cover" 
+            onError={() => setLogoError(true)}
+          />
+        ) : (
+          <span className="text-4xl text-gray-400">{sponsor.logo}</span>
         )}
       </div>
 
-      {/* Hover Overlay */}
+      {/* Hover Overlay - Simplified background for clarity */}
       <AnimatePresence>
         {isHovered && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="absolute inset-0 bg-gradient-to-br from-blue-600/90 to-green-600/90 rounded-2xl flex items-center justify-center z-20"
+            className="absolute inset-0 bg-blue-600/95 rounded-2xl flex items-center justify-center z-20"
           >
             <motion.button
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               exit={{ scale: 0 }}
-              className="px-4 py-2 bg-white text-gray-800 rounded-lg font-semibold text-sm hover:scale-105 transition-transform"
+              className="px-6 py-3 bg-white text-blue-700 font-bold text-base hover:scale-105 transition-transform shadow-lg"
               onClick={(e) => {
                 e.stopPropagation();
-                if (sponsor.website) window.open(sponsor.website, '_blank');
+                if (sponsor.website) window.open(sponsor.website, "_blank");
               }}
             >
               Learn More
@@ -296,63 +236,73 @@ const PartnershipTier = ({ tier, content, isHighlighted = false }) => {
       gradient: "from-purple-500 to-pink-500",
       bg: "bg-gradient-to-br from-purple-50 to-pink-50",
       border: "border-purple-200",
-      shadow: "shadow-purple-200/50"
+      shadow: "shadow-purple-200/50",
     },
     gold: {
       gradient: "from-yellow-500 to-orange-500",
       bg: "bg-gradient-to-br from-yellow-50 to-orange-50",
       border: "border-yellow-200",
-      shadow: "shadow-yellow-200/50"
+      shadow: "shadow-yellow-200/50",
     },
     silver: {
       gradient: "from-gray-400 to-gray-600",
       bg: "bg-gradient-to-br from-gray-50 to-gray-100",
       border: "border-gray-200",
-      shadow: "shadow-gray-200/50"
+      shadow: "shadow-gray-200/50",
     },
     bronze: {
       gradient: "from-amber-700 to-amber-900",
       bg: "bg-gradient-to-br from-amber-50 to-amber-100",
       border: "border-amber-200",
-      shadow: "shadow-amber-200/50"
-    }
+      shadow: "shadow-amber-200/50",
+    },
   };
 
   const style = tierStyles[tier];
 
   return (
     <motion.div
-      className={`${style.bg} border-2 ${style.border} rounded-2xl p-6 shadow-lg ${style.shadow} ${
-        isHighlighted ? 'scale-105 shadow-2xl ring-2 ring-purple-300' : ''
+      className={`${style.bg} border-2 ${
+        style.border
+      } rounded-2xl p-6 shadow-lg ${style.shadow} ${
+        isHighlighted ? "scale-105 shadow-2xl ring-2 ring-purple-300" : ""
       } transition-all duration-300 relative overflow-hidden`}
       whileHover={{ scale: 1.05 }}
     >
       {/* Background Pattern */}
       <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1558603668-6572836d70c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80')] opacity-5 bg-cover bg-center"></div>
-      
+
       {/* Tier Header */}
       <div className="text-center mb-6 relative z-10">
-        <div className={`inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r ${style.gradient} text-white font-bold text-sm mb-3 shadow-lg`}>
+        <div
+          className={`inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r ${style.gradient} text-white font-bold text-sm mb-3 shadow-lg`}
+        >
           {content.name}
         </div>
-        <h3 className="text-2xl font-bold text-gray-800 mb-2">{content.name} Partner</h3>
+        <h3 className="text-2xl font-bold text-gray-800 mb-2">
+          {content.name} Partner
+        </h3>
         <p className="text-gray-600">{content.description}</p>
       </div>
 
       {/* Benefits List */}
       <div className="space-y-3 relative z-10">
-        {content.benefits.slice(0, isExpanded ? content.benefits.length : 3).map((benefit, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: index * 0.1 }}
-            className="flex items-center text-gray-700"
-          >
-            <div className={`w-2 h-2 rounded-full bg-gradient-to-r ${style.gradient} mr-3 flex-shrink-0`} />
-            <span className="text-sm">{benefit}</span>
-          </motion.div>
-        ))}
+        {content.benefits
+          .slice(0, isExpanded ? content.benefits.length : 3)
+          .map((benefit, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: index * 0.1 }}
+              className="flex items-center text-gray-700"
+            >
+              <div
+                className={`w-2 h-2 rounded-full bg-gradient-to-r ${style.gradient} mr-3 flex-shrink-0`}
+              />
+              <span className="text-sm">{benefit}</span>
+            </motion.div>
+          ))}
       </div>
 
       {/* Show More/Less Button */}
@@ -360,12 +310,12 @@ const PartnershipTier = ({ tier, content, isHighlighted = false }) => {
         <button
           onClick={() => setIsExpanded(!isExpanded)}
           className={`w-full mt-4 py-2 rounded-lg font-semibold transition-all duration-300 relative z-10 ${
-            isExpanded 
-              ? 'bg-gray-200 text-gray-700 hover:bg-gray-300' 
+            isExpanded
+              ? "bg-gray-200 text-gray-700 hover:bg-gray-300"
               : `bg-gradient-to-r ${style.gradient} text-white hover:shadow-lg`
           }`}
         >
-          {isExpanded ? 'Show Less' : 'Show More Benefits'}
+          {isExpanded ? "Show Less" : "Show More Benefits"}
         </button>
       )}
     </motion.div>
@@ -382,7 +332,7 @@ const SponsorsPage = () => {
     window.scrollTo({
       top: 0,
       left: 0,
-      behavior: 'smooth'
+      behavior: "smooth",
     });
   }, []);
 
@@ -391,30 +341,31 @@ const SponsorsPage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 text-gray-900 relative overflow-hidden">
-      {/* Main Background Image */}
+      {/* Main Background Image (Unchanged) */}
       <div className="absolute inset-0">
-        <div 
+        <div
           className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000 ${
-            imageLoaded ? 'opacity-20' : 'opacity-0'
+            imageLoaded ? "opacity-20" : "opacity-0"
           }`}
           style={{
-            backgroundImage: 'url("https://images.unsplash.com/photo-1562157873-818bc0726f68?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2825&q=80")',
+            backgroundImage:
+              'url("https://images.unsplash.com/photo-1562157873-818bc0726f68?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2825&q=80")',
           }}
         >
           {/* Preload image */}
-          <img 
-            src="https://images.unsplash.com/photo-1562157873-818bc0726f68?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2825&q=80" 
-            alt="" 
-            className="hidden" 
+          <img
+            src="https://images.unsplash.com/photo-1562157873-818bc0726f68?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2825&q=80"
+            alt=""
+            className="hidden"
             onLoad={() => setImageLoaded(true)}
           />
         </div>
-        
+
         {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-br from-blue-900/10 via-purple-900/5 to-green-900/10"></div>
       </div>
 
-      {/* Animated Background Elements */}
+      {/* Animated Background Elements (Unchanged) */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
           className="absolute top-20 right-10 w-72 h-72 bg-blue-200 rounded-full mix-blend-multiply filter blur-xl opacity-30"
@@ -454,14 +405,15 @@ const SponsorsPage = () => {
         />
       </div>
 
-      {/* Hero Section */}
+      {/* Hero Section (Unchanged) */}
       <section className="relative py-20 md:py-28 text-center min-h-[50vh] flex items-center justify-center">
         {/* Additional Hero Background */}
         <div className="absolute inset-0">
-          <div 
+          <div
             className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40"
             style={{
-              backgroundImage: 'url("https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80")',
+              backgroundImage:
+                'url("https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80")',
             }}
           />
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/30 to-white/50"></div>
@@ -500,33 +452,12 @@ const SponsorsPage = () => {
         </div>
       </section>
 
-      {/* Sponsors Grid Section */}
-      <section className="relative py-20">
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.h2
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="text-3xl md:text-4xl font-bold text-center mb-12 bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent"
-          >
-            {currentContent.currentSponsors}
-          </motion.h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {sponsorsData.current.map((sponsor) => (
-              <SponsorCard key={sponsor.id} sponsor={sponsor} isCurrent={true} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Partnership Tiers Section */}
+      {/* Partnership Tiers Section (Unchanged) */}
       <section className="relative py-20">
         <div className="relative z-10 max-w-7xl mx-auto px-0 sm:px-0 md:px-0">
           {/* Section Background */}
           <div className="absolute inset-0 -inset-y-24 bg-gradient-to-b from-white/40 via-blue-50/60 to-indigo-50/70 backdrop-blur-sm rounded-3xl"></div>
-          
+
           <motion.h2
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -548,22 +479,79 @@ const SponsorsPage = () => {
           </motion.p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-4 sm:px-5 md:px-5 lg:px-6 xl:px-16 relative z-10">
-            <PartnershipTier tier="platinum" content={currentContent.tiers.platinum} isHighlighted={true} />
+            <PartnershipTier
+              tier="platinum"
+              content={currentContent.tiers.platinum}
+              isHighlighted={true}
+            />
             <PartnershipTier tier="gold" content={currentContent.tiers.gold} />
-            <PartnershipTier tier="silver" content={currentContent.tiers.silver} />
-            <PartnershipTier tier="bronze" content={currentContent.tiers.bronze} />
+            <PartnershipTier
+              tier="silver"
+              content={currentContent.tiers.silver}
+            />
+            <PartnershipTier
+              tier="bronze"
+              content={currentContent.tiers.bronze}
+            />
+          </div>
+        </div>
+      </section>
+      
+      {/* Sponsors Grid Section (Unchanged from previous step) */}
+      <section className="relative py-20 min-h-[70vh] flex items-center justify-center">
+        {/* ADDED: A subtle, clean background for the sponsor section for better contrast */}
+        <div className="absolute inset-0 bg-white/50 backdrop-blur-sm rounded-3xl mx-auto max-w-7xl shadow-inner my-10"></div> 
+
+        <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.h2
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-3xl md:text-4xl font-bold text-center mb-16 bg-gradient-to-r from-green-700 to-blue-700 bg-clip-text text-transparent"
+          >
+            {currentContent.currentSponsors}
+          </motion.h2>
+
+          {/* Enhanced centered sponsor with cleaner display */}
+          <div className="flex flex-col items-center justify-center space-y-8">
+            {sponsorsData.current.map((sponsor) => (
+              <motion.div
+                key={sponsor.id}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.3 }}
+                className="text-center w-full max-w-md"
+              >
+                {/* SponsorCard now has a larger logo */}
+                <div> 
+                  <SponsorCard sponsor={sponsor} isCurrent={true} />
+                </div>
+
+                {/* Additional sponsor info below the card */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.6 }}
+                  className="mt-8 text-center"
+                ></motion.div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* CTA Section (Unchanged) */}
       <section className="relative py-24 text-center">
         {/* CTA Background */}
         <div className="absolute inset-0">
-          <div 
+          <div
             className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-15"
             style={{
-              backgroundImage: 'url("https://images.unsplash.com/photo-1562157873-818bc0726f68?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2825&q=80")',
+              backgroundImage:
+                'url("https://images.unsplash.com/photo-1562157873-818bc0726f68?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2825&q=80")',
             }}
           />
           <div className="absolute inset-0 bg-gradient-to-r from-green-600/90 via-blue-600/90 to-purple-600/90"></div>
@@ -583,13 +571,15 @@ const SponsorsPage = () => {
             <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto leading-relaxed">
               {currentContent.ctaDescription}
             </p>
+          <Link to='/contact'>
             <motion.button
-              className="px-12 py-4 bg-white text-green-700 font-black text-lg rounded-2xl shadow-2xl hover:scale-105 transition-transform duration-300 hover:shadow-3xl"
+              className="px-12 py-4 bg-white cursor-pointer text-green-700 font-black text-lg rounded-2xl shadow-2xl hover:scale-105 transition-transform duration-300 hover:shadow-3xl"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
               {currentContent.ctaButton}
             </motion.button>
+          </Link>
           </motion.div>
         </div>
       </section>
