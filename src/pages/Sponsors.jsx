@@ -4,7 +4,6 @@ import { useLanguage } from "../contexts/LanguageContext";
 import sponsorLogo from "/Sponsor/spon.png";
 import { Link } from "react-router-dom";
 
-// ... (SPONSOR_CONTENT and SPONSORS_DATA remain unchanged) ...
 const SPONSOR_CONTENT = {
   fr: {
     title: "Nos Sponsors",
@@ -18,8 +17,8 @@ const SPONSOR_CONTENT = {
     benefits: "Avantages du Sponsoring",
     tiers: {
       title: "Niveaux de Partenariat",
-      platinum: {
-        name: "Platine",
+      championship: {
+        name: "Championnat",
         description: "Partenaire Principal",
         benefits: [
           "Logo principal sur la voiture",
@@ -30,8 +29,8 @@ const SPONSOR_CONTENT = {
           "Accès aux données techniques",
         ],
       },
-      gold: {
-        name: "Or",
+      grandPrix: {
+        name: "Grand Prix",
         description: "Partenaire Stratégique",
         benefits: [
           "Logo visible sur la voiture",
@@ -42,8 +41,8 @@ const SPONSOR_CONTENT = {
           "Présence sur le stand",
         ],
       },
-      silver: {
-        name: "Argent",
+      sprint: {
+        name: "Sprint",
         description: "Partenaire Officiel",
         benefits: [
           "Logo sur le stand",
@@ -54,8 +53,8 @@ const SPONSOR_CONTENT = {
           "Interviews d'équipe",
         ],
       },
-      bronze: {
-        name: "Bronze",
+      start: {
+        name: "Start",
         description: "Partenaire Soutien",
         benefits: [
           "Logo sur le site web",
@@ -84,8 +83,8 @@ const SPONSOR_CONTENT = {
     benefits: "Sponsorship Benefits",
     tiers: {
       title: "Partnership Tiers",
-      platinum: {
-        name: "Platinum",
+      championship: {
+        name: "Championship",
         description: "Title Partner",
         benefits: [
           "Primary logo on the car",
@@ -96,8 +95,8 @@ const SPONSOR_CONTENT = {
           "Access to technical data",
         ],
       },
-      gold: {
-        name: "Gold",
+      grandPrix: {
+        name: "Grand Prix",
         description: "Strategic Partner",
         benefits: [
           "Prominent logo on the car",
@@ -108,8 +107,8 @@ const SPONSOR_CONTENT = {
           "Presence on the pit stand",
         ],
       },
-      silver: {
-        name: "Silver",
+      sprint: {
+        name: "Sprint",
         description: "Official Partner",
         benefits: [
           "Logo on the pit stand",
@@ -120,8 +119,8 @@ const SPONSOR_CONTENT = {
           "Team interviews",
         ],
       },
-      bronze: {
-        name: "Bronze",
+      start: {
+        name: "Start",
         description: "Supporting Partner",
         benefits: [
           "Logo on website",
@@ -145,14 +144,14 @@ const SPONSORS_DATA = {
     {
       id: 1,
       name: "NoLavision",
-      logo: "/sponsor.png", // Path to your sponsor logo
-      tier: "platinum",
+      logo: "/sponsor.png",
+      tier: "start",
       description: "Home connect - Visionary technology partner",
       since: 2024,
-      website: "https://nolavision.com", // Update with actual website if available
+      website: "https://nolavision.com",
     },
   ],
-  previous: [], // Empty previous sponsors array
+  previous: [],
 };
 
 const SponsorCard = ({ sponsor, isCurrent = true }) => {
@@ -160,39 +159,42 @@ const SponsorCard = ({ sponsor, isCurrent = true }) => {
   const [logoError, setLogoError] = useState(false);
 
   const tierGradients = {
-    platinum: "bg-gradient-to-r from-purple-500 to-pink-500",
-    gold: "bg-gradient-to-r from-yellow-500 to-orange-500",
-    silver: "bg-gradient-to-r from-gray-400 to-gray-600",
-    bronze: "bg-gradient-to-r from-amber-700 to-amber-900",
+    championship: "bg-gradient-to-r from-purple-500 to-pink-500",
+    grandPrix: "bg-gradient-to-r from-yellow-500 to-orange-500",
+    sprint: "bg-gradient-to-r from-gray-400 to-gray-600",
+    start: "bg-gradient-to-r from-amber-700 to-amber-900",
+  };
+
+  const tierDisplayNames = {
+    championship: "CHAMPIONSHIP",
+    grandPrix: "GRAND PRIX",
+    sprint: "SPRINT",
+    start: "START",
   };
 
   return (
     <motion.div
-      className="relative bg-white rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 cursor-pointer overflow-hidden"
+      className="relative border-1 border-gray-400 rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 cursor-pointer overflow-hidden"
       whileHover={{ scale: 1.05 }}
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
     >
       {/* Tier Badge */}
       <div
-        className={`absolute -top-3 left-6 px-3 py-1 rounded-full text-white text-xs font-bold ${
+        className={`absolute top-0 left-3 px-3 py-1 rounded-full text-white text-xs font-bold ${
           tierGradients[sponsor.tier]
         } shadow-lg z-10`}
       >
-        {sponsor.tier.toUpperCase()}
+        {tierDisplayNames[sponsor.tier]}
       </div>
 
-      {/* Sponsor Logo - INCREASED SIZE HERE */}
-      <div 
-        // Increased container height (h-32 from h-24) and added more vertical margin (my-8 from my-6)
-        className="text-6xl text-center my-8 h-32 flex items-center justify-center relative z-10"
-      >
+      {/* Sponsor Logo */}
+      <div className="text-6xl text-center my-8 h-32 flex items-center justify-center relative z-10">
         {sponsor.logo.includes("/") ? (
           <img
             src={sponsorLogo}
             alt={`${sponsor.name} logo`}
-            // Increased max-height (max-h-28 from max-h-20)
-            className="h-full max-w-full object-cover" 
+            className="h-full max-w-full object-cover"
             onError={() => setLogoError(true)}
           />
         ) : (
@@ -200,7 +202,7 @@ const SponsorCard = ({ sponsor, isCurrent = true }) => {
         )}
       </div>
 
-      {/* Hover Overlay - Simplified background for clarity */}
+      {/* Hover Overlay */}
       <AnimatePresence>
         {isHovered && (
           <motion.div
@@ -232,25 +234,25 @@ const PartnershipTier = ({ tier, content, isHighlighted = false }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const tierStyles = {
-    platinum: {
+    championship: {
       gradient: "from-purple-500 to-pink-500",
       bg: "bg-gradient-to-br from-purple-50 to-pink-50",
       border: "border-purple-200",
       shadow: "shadow-purple-200/50",
     },
-    gold: {
+    grandPrix: {
       gradient: "from-yellow-500 to-orange-500",
       bg: "bg-gradient-to-br from-yellow-50 to-orange-50",
       border: "border-yellow-200",
       shadow: "shadow-yellow-200/50",
     },
-    silver: {
+    sprint: {
       gradient: "from-gray-400 to-gray-600",
       bg: "bg-gradient-to-br from-gray-50 to-gray-100",
       border: "border-gray-200",
       shadow: "shadow-gray-200/50",
     },
-    bronze: {
+    start: {
       gradient: "from-amber-700 to-amber-900",
       bg: "bg-gradient-to-br from-amber-50 to-amber-100",
       border: "border-amber-200",
@@ -262,20 +264,21 @@ const PartnershipTier = ({ tier, content, isHighlighted = false }) => {
 
   return (
     <motion.div
-      className={`${style.bg} border-2 ${
-        style.border
-      } rounded-2xl p-6 shadow-lg ${style.shadow} ${
-        isHighlighted ? "scale-105 shadow-2xl ring-2 ring-purple-300" : ""
-      } transition-all duration-300 relative overflow-hidden`}
-      whileHover={{ scale: 1.05 }}
+      className={`${style.bg} border-2 ${style.border} rounded-2xl p-6 shadow-lg ${style.shadow}
+      ${isHighlighted ? "ring-2 ring-purple-300 z-10" : ""} /* Removed scale-105 and shadow-2xl, added z-10 */
+      transition-all duration-300 relative overflow-hidden flex flex-col min-h-[350px]`}
+      whileHover={{ scale: 1.04 }}
+      layout
     >
       {/* Background Pattern */}
-      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1558603668-6572836d70c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80')] opacity-5 bg-cover bg-center"></div>
+      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1558603668-6572836d70c?auto=format&fit=crop&w=1000&q=80')] opacity-5 bg-cover bg-center"></div>
 
-      {/* Tier Header */}
+      {/* Header */}
       <div className="text-center mb-6 relative z-10">
         <div
-          className={`inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r ${style.gradient} text-white font-bold text-sm mb-3 shadow-lg`}
+          className={`inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r ${style.gradient} text-white font-bold text-sm mb-3 shadow-lg ${
+            isHighlighted ? "scale-110" : "" /* Added subtle scale only to the badge */
+          }`}
         >
           {content.name}
         </div>
@@ -285,8 +288,8 @@ const PartnershipTier = ({ tier, content, isHighlighted = false }) => {
         <p className="text-gray-600">{content.description}</p>
       </div>
 
-      {/* Benefits List */}
-      <div className="space-y-3 relative z-10">
+      {/* Benefits */}
+      <div className="space-y-2 relative z-10 mb-4">
         {content.benefits
           .slice(0, isExpanded ? content.benefits.length : 3)
           .map((benefit, index) => (
@@ -305,29 +308,33 @@ const PartnershipTier = ({ tier, content, isHighlighted = false }) => {
           ))}
       </div>
 
-      {/* Show More/Less Button */}
+      {/* Show More / Show Less */}
       {content.benefits.length > 3 && (
-        <button
-          onClick={() => setIsExpanded(!isExpanded)}
-          className={`w-full mt-4 py-2 rounded-lg font-semibold transition-all duration-300 relative z-10 ${
-            isExpanded
-              ? "bg-gray-200 text-gray-700 hover:bg-gray-300"
-              : `bg-gradient-to-r ${style.gradient} text-white hover:shadow-lg`
-          }`}
-        >
-          {isExpanded ? "Show Less" : "Show More Benefits"}
-        </button>
+        <div className="mt-auto relative z-10">
+          <motion.button
+            onClick={() => setIsExpanded(!isExpanded)}
+            className={`w-full py-3 rounded-lg font-semibold transition-all duration-300 ${
+              isExpanded
+                ? "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                : `bg-gradient-to-r ${style.gradient} text-white hover:shadow-lg`
+            }`}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            {isExpanded ? "Show Less" : "Show More Benefits"}
+          </motion.button>
+        </div>
       )}
     </motion.div>
   );
 };
+
 
 const SponsorsPage = () => {
   const { currentLanguage } = useLanguage();
   const [imageLoaded, setImageLoaded] = useState(false);
   const currentContent = SPONSOR_CONTENT[currentLanguage] || SPONSOR_CONTENT.en;
 
-  // FIXED: Scroll to top when component mounts - moved to main component
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -336,12 +343,11 @@ const SponsorsPage = () => {
     });
   }, []);
 
-  // Memoized sponsors data
   const sponsorsData = useMemo(() => SPONSORS_DATA, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 text-gray-900 relative overflow-hidden">
-      {/* Main Background Image (Unchanged) */}
+      {/* Main Background Image */}
       <div className="absolute inset-0">
         <div
           className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000 ${
@@ -352,7 +358,6 @@ const SponsorsPage = () => {
               'url("https://images.unsplash.com/photo-1562157873-818bc0726f68?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2825&q=80")',
           }}
         >
-          {/* Preload image */}
           <img
             src="https://images.unsplash.com/photo-1562157873-818bc0726f68?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2825&q=80"
             alt=""
@@ -361,11 +366,10 @@ const SponsorsPage = () => {
           />
         </div>
 
-        {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-br from-blue-900/10 via-purple-900/5 to-green-900/10"></div>
       </div>
 
-      {/* Animated Background Elements (Unchanged) */}
+      {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
           className="absolute top-20 right-10 w-72 h-72 bg-blue-200 rounded-full mix-blend-multiply filter blur-xl opacity-30"
@@ -405,9 +409,8 @@ const SponsorsPage = () => {
         />
       </div>
 
-      {/* Hero Section (Unchanged) */}
+      {/* Hero Section */}
       <section className="relative py-20 md:py-28 text-center min-h-[50vh] flex items-center justify-center">
-        {/* Additional Hero Background */}
         <div className="absolute inset-0">
           <div
             className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40"
@@ -452,10 +455,9 @@ const SponsorsPage = () => {
         </div>
       </section>
 
-      {/* Partnership Tiers Section (Unchanged) */}
+      {/* Partnership Tiers Section */}
       <section className="relative py-20">
         <div className="relative z-10 max-w-7xl mx-auto px-0 sm:px-0 md:px-0">
-          {/* Section Background */}
           <div className="absolute inset-0 -inset-y-24 bg-gradient-to-b from-white/40 via-blue-50/60 to-indigo-50/70 backdrop-blur-sm rounded-3xl"></div>
 
           <motion.h2
@@ -478,28 +480,28 @@ const SponsorsPage = () => {
             {currentContent.benefits}
           </motion.p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-4 sm:px-5 md:px-5 lg:px-6 xl:px-16 relative z-10">
+          {/* Added min-h-[500px] to ensure consistent height */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-5 sm:px-10 md:px-8 lg:px-6 xl:px-16 relative z-10 min-h-[200px]">
             <PartnershipTier
-              tier="platinum"
-              content={currentContent.tiers.platinum}
+              tier="championship"
+              content={currentContent.tiers.championship}
               isHighlighted={true}
             />
-            <PartnershipTier tier="gold" content={currentContent.tiers.gold} />
+            <PartnershipTier tier="grandPrix" content={currentContent.tiers.grandPrix} />
             <PartnershipTier
-              tier="silver"
-              content={currentContent.tiers.silver}
+              tier="sprint"
+              content={currentContent.tiers.sprint}
             />
             <PartnershipTier
-              tier="bronze"
-              content={currentContent.tiers.bronze}
+              tier="start"
+              content={currentContent.tiers.start}
             />
           </div>
         </div>
       </section>
       
-      {/* Sponsors Grid Section (Unchanged from previous step) */}
+      {/* Sponsors Grid Section */}
       <section className="relative py-20 min-h-[70vh] flex items-center justify-center">
-        {/* ADDED: A subtle, clean background for the sponsor section for better contrast */}
         <div className="absolute inset-0 bg-white/50 backdrop-blur-sm rounded-3xl mx-auto max-w-7xl shadow-inner my-10"></div> 
 
         <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -513,7 +515,6 @@ const SponsorsPage = () => {
             {currentContent.currentSponsors}
           </motion.h2>
 
-          {/* Enhanced centered sponsor with cleaner display */}
           <div className="flex flex-col items-center justify-center space-y-8">
             {sponsorsData.current.map((sponsor) => (
               <motion.div
@@ -524,28 +525,17 @@ const SponsorsPage = () => {
                 transition={{ duration: 0.8, delay: 0.3 }}
                 className="text-center w-full max-w-md"
               >
-                {/* SponsorCard now has a larger logo */}
                 <div> 
                   <SponsorCard sponsor={sponsor} isCurrent={true} />
                 </div>
-
-                {/* Additional sponsor info below the card */}
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: 0.6 }}
-                  className="mt-8 text-center"
-                ></motion.div>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section (Unchanged) */}
+      {/* CTA Section */}
       <section className="relative py-24 text-center">
-        {/* CTA Background */}
         <div className="absolute inset-0">
           <div
             className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-15"

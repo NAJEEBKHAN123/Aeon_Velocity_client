@@ -19,15 +19,13 @@ const Hero = () => {
   const content = {
     en: {
       mainTitle: "STEM RACING",
-      tagline1: "We don't aim to compete",
-      tagline2: "We are built to dominate",
+      tagline: "Engineered to Win", // 👈 REPLACE BOTH TAGLINES WITH THIS
       teamName: "Aeon Velocity",
       button: "Join The Revolution",
     },
     fr: {
       mainTitle: "STEM RACING",
-      tagline1: "Nous ne visons pas la compétition",
-      tagline2: "Nous sommes conçus pour dominer",
+      tagline: "Conçu pour Gagner", // 👈 FRENCH VERSION
       teamName: "Aeon Velocity",
       button: "Rejoignez la Révolution",
     },
@@ -56,38 +54,30 @@ const Hero = () => {
           {/* Text Content - Left aligned on all screens */}
           <div className="text-start w-full max-w-3xl mx-auto md:mx-0 md:pl-8 lg:pl-12 xl:pl-16">
             {/* Main Title */}
-           <motion.h1
-  initial="hidden"
-  animate="visible"
-  custom={0}
-  variants={textVariants}
-  className="text-4xl xs:text-3xl mt-10 sm:text-4xl lg:text-5xl font-extrabold uppercase tracking-tight 
+            <motion.h1
+              initial="hidden"
+              animate="visible"
+              custom={0}
+              variants={textVariants}
+              className="text-4xl xs:text-3xl mt-10 sm:text-4xl lg:text-5xl font-extrabold uppercase tracking-tight 
              bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 
              bg-clip-text text-transparent 
              leading-tight sm:leading-normal"
->
-  {currentContent.mainTitle}
-</motion.h1>
+            >
+              {currentContent.mainTitle}
+            </motion.h1>
 
             {/* Taglines */}
-            <motion.div className="space-y-3 xs:space-y-4 sm:space-y-2 mt-6 xs:mt-8 sm:mt-10 md:mt-5 md:pl-3 md:border-l-4 md:border-cyan-400/40">
+            <motion.div className="mt-6 xs:mt-8 sm:mt-10 md:mt-5  md:border-l-4 md:border-cyan-400/40">
+          
               <motion.p
                 custom={1}
                 initial="hidden"
                 animate="visible"
                 variants={textVariants}
-                className="text-gray-200 font-semibold uppercase text-base xs:text-lg sm:text-xl md:text-2xl tracking-wide drop-shadow-[0_0_8px_rgba(255,255,255,0.7)] md:drop-shadow-[0_0_10px_rgba(255,255,255,0.7)]"
+                className="text-white font-black uppercase text-xl xs:text-2xl sm:text-3xl md:text-4xl tracking-tight bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(255,255,255,0.8)] leading-tight mt-6 xs:mt-8"
               >
-                {currentContent.tagline1}
-              </motion.p>
-              <motion.p
-                custom={2}
-                initial="hidden"
-                animate="visible"
-                variants={textVariants}
-                className="text-white font-black uppercase text-lg xs:text-xl sm:text-2xl md:text-3xl lg:text-4xl tracking-tight bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent drop-shadow-[0_0_12px_rgba(255,255,255,0.8)] md:drop-shadow-[0_0_15px_rgba(255,255,255,0.8)] leading-tight mt-2 xs:mt-3"
-              >
-                {currentContent.tagline2}
+                {currentContent.tagline}
               </motion.p>
             </motion.div>
 
@@ -97,7 +87,7 @@ const Hero = () => {
               initial="hidden"
               animate="visible"
               variants={textVariants}
-              className="mt-8 xs:mt-10 sm:mt-12 md:mt-10"
+              className="mt-0"
             >
               <div className="relative">
                 <p

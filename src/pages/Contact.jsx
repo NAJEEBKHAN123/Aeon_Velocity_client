@@ -13,36 +13,65 @@ const ContactPage = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [error, setError] = useState('');
   const navigate = useNavigate();
-  const { currentLanguage } = useLanguage(); // Get language from context
+  const { currentLanguage } = useLanguage();
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
+    // Clear error when user starts typing
+    if (error) setError('');
   };
+  
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setIsSubmitting(true);
+  setError('');
+  
+  try {
+    const response = await fetch('http://localhost:5000/api/contact/submit', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    });
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
+    const result = await response.json();
+
+    if (!response.ok) {
+      if (result.details && result.details.length > 0) {
+        throw new Error(result.details[0].msg || 'Validation failed');
+      }
+      throw new Error(result.message || 'Failed to send message');
+    }
+
+    // Success
     setIsSubmitting(false);
     setIsSubmitted(true);
     setFormData({ name: '', email: '', company: '', subject: '', message: '' });
     
     setTimeout(() => setIsSubmitted(false), 4000);
-  };
+    
+  } catch (error) {
+    console.error('Error sending message:', error);
+    setIsSubmitting(false);
+    setError(error.message || 'Failed to send message. Please try again.');
+    
+    setTimeout(() => setError(''), 5000);
+  }
+};
+
   useEffect(() => {
-  window.scrollTo({
-    top: 0,
-    left: 0,
-    behavior: 'smooth'
-  });
-}, []);
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+  }, []);
 
   // Language content
   const content = {
@@ -82,6 +111,11 @@ const ContactPage = () => {
         title: "Message envoyé avec succès !",
         message: "Nous vous recontacterons bientôt."
       },
+      error: {
+        title: "Erreur",
+        validation: "Veuillez vérifier les informations du formulaire",
+        general: "Une erreur est survenue. Veuillez réessayer."
+      },
       contactInfo: {
         title: "Informations de Contact",
         email: "Email",
@@ -99,7 +133,6 @@ const ContactPage = () => {
           support: "Urgence 24/7"
         }
       },
-
       cta: {
         title: "Prêt à Commencer ?",
         subtitle: "Envoyez-nous vos idées et nous vous répondrons avec une proposition détaillée.",
@@ -143,6 +176,11 @@ const ContactPage = () => {
         title: "Message sent successfully!",
         message: "We'll get back to you soon."
       },
+      error: {
+        title: "Error",
+        validation: "Please check the form information",
+        general: "An error occurred. Please try again."
+      },
       contactInfo: {
         title: "Contact Information",
         email: "Email",
@@ -160,7 +198,6 @@ const ContactPage = () => {
           support: "24/7 Emergency"
         }
       },
-
       cta: {
         title: "Ready to Get Started?",
         subtitle: "Send us your ideas and we'll get back to you with a detailed proposal.",
@@ -202,12 +239,11 @@ const ContactPage = () => {
     }
   ];
 
-
   return (
     <div className="min-h-screen bg-slate-50">
       {/* Header */}
       <div className="bg-white border-b">
-        <div className="max-w-4xl mx-auto px-6 py-20 mt-4  text-center">
+        <div className="max-w-4xl mx-auto px-6 py-20 mt-4 text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
             {lang.title}
           </h1>
@@ -247,6 +283,8 @@ const ContactPage = () => {
                       value={formData.name}
                       onChange={handleChange}
                       required
+                      minLength="2"
+                      maxLength="50"
                       placeholder={lang.placeholders.name}
                       className="w-full pl-10 pr-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                     />
@@ -285,6 +323,7 @@ const ContactPage = () => {
                       name="company"
                       value={formData.company}
                       onChange={handleChange}
+                      maxLength="100"
                       placeholder={lang.placeholders.company}
                       className="w-full pl-10 pr-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                     />
@@ -331,12 +370,40 @@ const ContactPage = () => {
                     value={formData.message}
                     onChange={handleChange}
                     required
+                    minLength="10"
+                    maxLength="1000"
                     rows="5"
                     placeholder={lang.placeholders.message}
                     className="w-full pl-10 pr-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors resize-none"
                   />
                 </div>
               </div>
+
+              {/* Error Message */}
+              {error && (
+                <div className="bg-red-50 border border-red-200 rounded-lg p-4 flex items-center gap-3">
+                  <div className="w-5 h-5 text-red-500 flex-shrink-0">
+                    <svg fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="text-red-800 font-medium">{lang.error.title}</p>
+                    <p className="text-red-600 text-sm">{error}</p>
+                  </div>
+                </div>
+              )}
+
+              {/* Success Message */}
+              {isSubmitted && (
+                <div className="bg-green-50 border border-green-200 rounded-lg p-4 flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <div>
+                    <p className="text-green-800 font-medium">{lang.success.title}</p>
+                    <p className="text-green-600 text-sm">{lang.success.message}</p>
+                  </div>
+                </div>
+              )}
 
               <button
                 type="submit"
@@ -355,16 +422,6 @@ const ContactPage = () => {
                   </>
                 )}
               </button>
-
-              {isSubmitted && (
-                <div className="bg-green-50 border border-green-200 rounded-lg p-4 flex items-center gap-3">
-                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
-                  <div>
-                    <p className="text-green-800 font-medium">{lang.success.title}</p>
-                    <p className="text-green-600 text-sm">{lang.success.message}</p>
-                  </div>
-                </div>
-              )}
             </form>
           </div>
 
@@ -412,8 +469,6 @@ const ContactPage = () => {
                 </div>
               </div>
             </div>
-
-          
           </div>
         </div>
       </div>

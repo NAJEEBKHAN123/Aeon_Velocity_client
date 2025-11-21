@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useLanguage } from "../../contexts/LanguageContext";
-import { FaInstagram, FaTiktok, FaFacebook, FaYoutube, FaTwitter, FaArrowRight } from "react-icons/fa";
+import { FaInstagram, FaTiktok, FaFacebook, FaYoutube, FaLinkedin , FaArrowRight } from "react-icons/fa";
 
 const SocialMediaSection = () => {
   const { currentLanguage } = useLanguage();
@@ -27,38 +27,39 @@ const SocialMediaSection = () => {
 
   const currentContent = content[currentLanguage];
 
-  const socialLinks = [
-    { 
-      icon: <FaInstagram className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7" />, 
-      url: "https://instagram.com/aeonvelocity",
-      name: "Instagram",
-      color: "hover:text-pink-500"
-    },
-    { 
-      icon: <FaTiktok className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7" />, 
-      url: "https://tiktok.com/@aeonvelocity",
-      name: "TikTok",
-      color: "hover:text-black"
-    },
-    { 
-      icon: <FaFacebook className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7" />, 
-      url: "https://facebook.com/aeonvelocity",
-      name: "Facebook",
-      color: "hover:text-blue-600"
-    },
-    { 
-      icon: <FaYoutube className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7" />, 
-      url: "https://youtube.com/@aeonvelocity",
-      name: "YouTube",
-      color: "hover:text-red-600"
-    },
-    { 
-      icon: <FaTwitter className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7" />, 
-      url: "https://twitter.com/aeonvelocity",
-      name: "Twitter",
-      color: "hover:text-blue-400"
-    },
-  ];
+const socialLinks = [
+  { 
+    icon: <FaInstagram className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7" />, 
+    url: "https://instagram.com/aeonvelocity",
+    name: "Instagram",
+    color: "hover:text-pink-500"
+  },
+  { 
+    icon: <FaTiktok className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7" />, 
+    url: "https://tiktok.com/@aeonvelocity",
+    name: "TikTok",
+    color: "hover:text-black"
+  },
+  { 
+    icon: <FaFacebook className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7" />, 
+    url: "https://facebook.com/aeonvelocity",
+    name: "Facebook",
+    color: "hover:text-blue-600"
+  },
+  { 
+    icon: <FaYoutube className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7" />, 
+    url: "https://youtube.com/@aeonvelocity?si=FEK4kfJI_nPb58IO",
+    name: "YouTube",
+    color: "hover:text-red-600"
+  },
+  { 
+    icon: <FaLinkedin className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7" />, 
+    url: "https://www.linkedin.com/company/aeonvelocity/",
+    name: "LinkedIn",
+    color: "hover:text-blue-700"
+  },
+];
+
 
   const containerVariants = {
     hidden: { opacity: 0 },

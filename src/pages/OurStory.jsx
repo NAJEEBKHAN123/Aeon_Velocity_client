@@ -32,123 +32,231 @@ const STORY_CONTENT = {
   },
 };
 
-const TIMELINE_DATA = [
-  {
-    date: "December 2023",
-    title: "Birth of a dream",
-    description:
-      "First team formed with one goal: discover the challenge and enter the competition.",
-    icon: "🎯",
-    gradient: "from-purple-500 to-pink-500",
-    status: "Completed",
-    achievements: [
-      "Team formation",
-      "Challenge discovery",
-      "Initial planning",
-    ],
-  },
-  {
-    date: "May 2024",
-    title: "First national finals (6th place)",
-    description:
-      "Just a few months after our beginnings, we conclude our first final in 6th place. First proof that we can exist among the best.",
-    icon: "🏆",
-    gradient: "from-yellow-500 to-orange-500",
-    status: "Achieved",
-    achievements: [
-      "6th place national",
-      "First competition",
-      "Team validation",
-    ],
-  },
-  {
-    date: "June – December 2024",
-    title: "Analysis and reconstruction",
-    description:
-      "We identify our weaknesses and rethink our entire strategy: engineering, aerodynamics, funding, communication.",
-    icon: "🔄",
-    gradient: "from-green-500 to-cyan-500",
-    status: "Completed",
-    achievements: [
-      "Strategy overhaul",
-      "Weakness analysis",
-      "Process improvement",
-    ],
-  },
-  {
-    date: "March 2025",
-    title: "Second national final (6th place)",
-    description:
-      "Consistent, but a ceiling is reached. This ranking becomes a trigger: it's no longer enough 'to be there'.",
-    icon: "⚡",
-    gradient: "from-blue-500 to-purple-600",
-    status: "Achieved",
-    achievements: [
-      "Consistent performance",
-      "Benchmark established",
-      "New goals set",
-    ],
-  },
-  {
-    date: "April 2025",
-    title: "Transformation: birth of Aeon Velocity",
-    description:
-      "New name, new vision, new structure. The ambition is now assumed: aim for national victory in 2026.",
-    icon: "🚀",
-    gradient: "from-red-500 to-pink-600",
-    status: "In Progress",
-    achievements: [
-      "Brand identity",
-      "Structural changes",
-      "Vision refinement",
-    ],
-  },
-  {
-    date: "2025 – 2026",
-    title: "The Aeon Velocity era",
-    description:
-      "We adopt a team model inspired by professional structures: advanced aerodynamic work, continuous optimization, skills development, strong brand identity, structured sponsorship strategy.",
-    icon: "⭐",
-    gradient: "from-indigo-500 to-blue-600",
-    status: "Current",
-    achievements: [
-      "Professional structure",
-      "Advanced engineering",
-      "Sponsorship strategy",
-    ],
-  },
-  {
-    date: "March 2026",
-    title: "Objective: win the national finals",
-    description:
-      "This season is approached as a campaign: every decision must bring us closer to victory.",
-    icon: "🎯",
-    gradient: "from-cyan-500 to-teal-500",
-    status: "Upcoming",
-    achievements: [
-      "Victory campaign",
-      "Strategic decisions",
-      "Performance optimization",
-    ],
-  },
-  {
-    date: "After 2026",
-    title: "After France: the world",
-    description:
-      "The next objective is already set: obtain a place in the world finals and join the circle of the world's best teams.",
-    icon: "🌍",
-    gradient: "from-emerald-500 to-green-600",
-    status: "Future",
-    achievements: [
-      "World competition",
-      "Global recognition",
-      "Elite team status",
-    ],
-  },
-];
+const TIMELINE_DATA = {
+  fr: [
+    {
+      date: "Décembre 2023",
+      title: "Naissance d'un rêve",
+      description: "Première équipe formée avec un objectif : découvrir le challenge et participer à la compétition.",
+      icon: "🎯",
+      gradient: "from-purple-500 to-pink-500",
+      status: "Terminé",
+      achievements: [
+        "Formation de l'équipe",
+        "Découverte du challenge",
+        "Planification initiale",
+      ],
+    },
+    {
+      date: "Mai 2024",
+      title: "Première finale nationale (6ème place)",
+      description: "Quelques mois seulement après nos débuts, nous concluons notre première finale à la 6ème place. Première preuve que nous pouvons exister parmi les meilleurs.",
+      icon: "🏆",
+      gradient: "from-yellow-500 to-orange-500",
+      status: "Réalisé",
+      achievements: [
+        "6ème place nationale",
+        "Première compétition",
+        "Validation de l'équipe",
+      ],
+    },
+    {
+      date: "Juin – Décembre 2024",
+      title: "Analyse et reconstruction",
+      description: "Nous identifions nos faiblesses et repensons toute notre stratégie : ingénierie, aérodynamique, financement, communication.",
+      icon: "🔄",
+      gradient: "from-green-500 to-cyan-500",
+      status: "Terminé",
+      achievements: [
+        "Refonte stratégique",
+        "Analyse des faiblesses",
+        "Amélioration des processus",
+      ],
+    },
+    {
+      date: "Mars 2025",
+      title: "Deuxième finale nationale (6ème place)",
+      description: "Régulier, mais un plafond est atteint. Ce classement devient un déclic : il ne suffit plus 'd'être présent'.",
+      icon: "⚡",
+      gradient: "from-blue-500 to-purple-600",
+      status: "Réalisé",
+      achievements: [
+        "Performance constante",
+        "Référence établie",
+        "Nouveaux objectifs fixés",
+      ],
+    },
+    {
+      date: "Avril 2025",
+      title: "Transformation : naissance d'Aeon Velocity",
+      description: "Nouveau nom, nouvelle vision, nouvelle structure. L'ambition est désormais assumée : viser la victoire nationale en 2026.",
+      icon: "🚀",
+      gradient: "from-red-500 to-pink-600",
+      status: "En Cours",
+      achievements: [
+        "Identité de marque",
+        "Changements structurels",
+        "Affinement de la vision",
+      ],
+    },
+    {
+      date: "2025 – 2026",
+      title: "L'ère Aeon Velocity",
+      description: "Nous adoptons un modèle d'équipe inspiré des structures professionnelles : travail aérodynamique avancé, optimisation continue, développement des compétences, identité de marque forte, stratégie de sponsoring structurée.",
+      icon: "⭐",
+      gradient: "from-indigo-500 to-blue-600",
+      status: "Actuel",
+      achievements: [
+        "Structure professionnelle",
+        "Ingénierie avancée",
+        "Stratégie de sponsoring",
+      ],
+    },
+    {
+      date: "Mars 2026",
+      title: "Objectif : gagner la finale nationale",
+      description: "Cette saison est abordée comme une campagne : chaque décision doit nous rapprocher de la victoire.",
+      icon: "🎯",
+      gradient: "from-cyan-500 to-teal-500",
+      status: "À Venir",
+      achievements: [
+        "Campagne victoire",
+        "Décisions stratégiques",
+        "Optimisation des performances",
+      ],
+    },
+    {
+      date: "Après 2026",
+      title: "Après la France : le monde",
+      description: "Le prochain objectif est déjà fixé : obtenir une place en finale mondiale et rejoindre le cercle des meilleures équipes mondiales.",
+      icon: "🌍",
+      gradient: "from-emerald-500 to-green-600",
+      status: "Futur",
+      achievements: [
+        "Compétition mondiale",
+        "Reconnaissance internationale",
+        "Statut d'équipe d'élite",
+      ],
+    },
+  ],
+  en: [
+    {
+      date: "December 2023",
+      title: "Birth of a dream",
+      description: "First team formed with one goal: discover the challenge and enter the competition.",
+      icon: "🎯",
+      gradient: "from-purple-500 to-pink-500",
+      status: "Completed",
+      achievements: [
+        "Team formation",
+        "Challenge discovery",
+        "Initial planning",
+      ],
+    },
+    {
+      date: "May 2024",
+      title: "First national finals (6th place)",
+      description: "Just a few months after our beginnings, we conclude our first final in 6th place. First proof that we can exist among the best.",
+      icon: "🏆",
+      gradient: "from-yellow-500 to-orange-500",
+      status: "Achieved",
+      achievements: [
+        "6th place national",
+        "First competition",
+        "Team validation",
+      ],
+    },
+    {
+      date: "June – December 2024",
+      title: "Analysis and reconstruction",
+      description: "We identify our weaknesses and rethink our entire strategy: engineering, aerodynamics, funding, communication.",
+      icon: "🔄",
+      gradient: "from-green-500 to-cyan-500",
+      status: "Completed",
+      achievements: [
+        "Strategy overhaul",
+        "Weakness analysis",
+        "Process improvement",
+      ],
+    },
+    {
+      date: "March 2025",
+      title: "Second national final (6th place)",
+      description: "Consistent, but a ceiling is reached. This ranking becomes a trigger: it's no longer enough 'to be there'.",
+      icon: "⚡",
+      gradient: "from-blue-500 to-purple-600",
+      status: "Achieved",
+      achievements: [
+        "Consistent performance",
+        "Benchmark established",
+        "New goals set",
+      ],
+    },
+    {
+      date: "April 2025",
+      title: "Transformation: birth of Aeon Velocity",
+      description: "New name, new vision, new structure. The ambition is now assumed: aim for national victory in 2026.",
+      icon: "🚀",
+      gradient: "from-red-500 to-pink-600",
+      status: "In Progress",
+      achievements: [
+        "Brand identity",
+        "Structural changes",
+        "Vision refinement",
+      ],
+    },
+    {
+      date: "2025 – 2026",
+      title: "The Aeon Velocity era",
+      description: "We adopt a team model inspired by professional structures: advanced aerodynamic work, continuous optimization, skills development, strong brand identity, structured sponsorship strategy.",
+      icon: "⭐",
+      gradient: "from-indigo-500 to-blue-600",
+      status: "Current",
+      achievements: [
+        "Professional structure",
+        "Advanced engineering",
+        "Sponsorship strategy",
+      ],
+    },
+    {
+      date: "March 2026",
+      title: "Objective: win the national finals",
+      description: "This season is approached as a campaign: every decision must bring us closer to victory.",
+      icon: "🎯",
+      gradient: "from-cyan-500 to-teal-500",
+      status: "Upcoming",
+      achievements: [
+        "Victory campaign",
+        "Strategic decisions",
+        "Performance optimization",
+      ],
+    },
+    {
+      date: "After 2026",
+      title: "After France: the world",
+      description: "The next objective is already set: obtain a place in the world finals and join the circle of the world's best teams.",
+      icon: "🌍",
+      gradient: "from-emerald-500 to-green-600",
+      status: "Future",
+      achievements: [
+        "World competition",
+        "Global recognition",
+        "Elite team status",
+      ],
+    },
+  ],
+};
 
 const StatusBadge = ({ status }) => {
   const statusConfig = useMemo(() => ({
+    // French statuses
+    Terminé: "bg-green-100 text-green-800 border border-green-200",
+    Réalisé: "bg-blue-100 text-blue-800 border border-blue-200",
+    "En Cours": "bg-yellow-100 text-yellow-800 border border-yellow-200",
+    Actuel: "bg-purple-100 text-purple-800 border border-purple-200",
+    "À Venir": "bg-orange-100 text-orange-800 border border-orange-200",
+    Futur: "bg-gray-100 text-gray-800 border border-gray-200",
+    // English statuses
     Completed: "bg-green-100 text-green-800 border border-green-200",
     Achieved: "bg-blue-100 text-blue-800 border border-blue-200",
     "In Progress": "bg-yellow-100 text-yellow-800 border border-yellow-200",
@@ -159,7 +267,7 @@ const StatusBadge = ({ status }) => {
 
   return (
     <span
-      className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${statusConfig[status] || statusConfig.Future}`}
+      className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${statusConfig[status] || statusConfig.Futur}`}
     >
       {status}
     </span>
@@ -301,8 +409,7 @@ const TimelineItem = ({
   index, 
   isActive, 
   onToggle, 
-  currentContent,
-  showConnection 
+  currentContent
 }) => {
   const handleKeyDown = (e) => {
     if (e.key === 'Enter' || e.key === ' ') {
@@ -319,17 +426,6 @@ const TimelineItem = ({
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.6, delay: index * 0.1 }}
     >
-      {/* Connection Line */}
-      {showConnection && (
-        <motion.div
-          className="hidden lg:block absolute top-1/2 -right-4 w-8 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 z-0"
-          initial={{ scaleX: 0 }}
-          whileInView={{ scaleX: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: index * 0.1 + 0.3 }}
-        />
-      )}
-
       <div
         role="button"
         tabIndex={0}
@@ -357,85 +453,87 @@ const TimelineItem = ({
           <StatusBadge status={item.status} />
         </div>
 
-        <div className="flex-1">
-          <p className="text-xs md:text-sm uppercase tracking-widest text-cyan-600 font-bold mb-2">
-            {item.date}
-          </p>
-          <h3 className="text-xl md:text-2xl font-bold mb-3 md:mb-4 text-gray-800 leading-tight">
-            {item.title}
-          </h3>
-          <p className="text-gray-600 leading-relaxed text-sm md:text-base mb-3 md:mb-4">
-            {item.description}
-          </p>
+        <div className="flex-1 flex flex-col">
+          <div className="flex-1">
+            <p className="text-xs md:text-sm uppercase tracking-widest text-cyan-600 font-bold mb-2">
+              {item.date}
+            </p>
+            <h3 className="text-xl md:text-2xl font-bold mb-3 md:mb-4 text-gray-800 leading-tight">
+              {item.title}
+            </h3>
+            <p className="text-gray-600 leading-relaxed text-sm md:text-base mb-3 md:mb-4">
+              {item.description}
+            </p>
 
-          {/* Expandable Achievements - ONLY RENDER WHEN ACTIVE */}
-          <AnimatePresence>
-            {isActive && (
-              <motion.div
-                initial={{ opacity: 0, height: 0, marginTop: 0 }}
-                animate={{ 
-                  opacity: 1, 
-                  height: "auto",
-                  marginTop: "1rem"
-                }}
-                exit={{ 
-                  opacity: 0, 
-                  height: 0,
-                  marginTop: 0
-                }}
-                transition={{ 
-                  duration: 0.3,
-                  ease: "easeInOut"
-                }}
-                className="overflow-hidden"
-              >
-                <div className="border-t border-gray-200 pt-3 md:pt-4">
-                  <h4 className="font-semibold text-gray-800 mb-2 md:mb-3 text-sm md:text-base">
-                    {currentContent.achievementsTitle}:
-                  </h4>
-                  <ul className="space-y-1 md:space-y-2">
-                    {item.achievements.map((achievement, idx) => (
-                      <motion.li
-                        key={idx}
-                        initial={{ opacity: 0, x: -10 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: idx * 0.1 + 0.2 }}
-                        className="flex items-center text-xs md:text-sm text-gray-600"
-                      >
-                        <div
-                          className={`w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-gradient-to-r ${item.gradient} mr-2 md:mr-3 flex-shrink-0`}
-                        />
-                        {achievement}
-                      </motion.li>
-                    ))}
-                  </ul>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
+            {/* Expandable Achievements */}
+            <AnimatePresence>
+              {isActive && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ 
+                    opacity: 1, 
+                    height: "auto"
+                  }}
+                  exit={{ 
+                    opacity: 0, 
+                    height: 0
+                  }}
+                  transition={{ 
+                    duration: 0.3,
+                    ease: "easeInOut"
+                  }}
+                  className="overflow-hidden"
+                >
+                  <div className="border-t border-gray-200 pt-3 md:pt-4">
+                    <h4 className="font-semibold text-gray-800 mb-2 md:mb-3 text-sm md:text-base">
+                      {currentContent.achievementsTitle}:
+                    </h4>
+                    <ul className="space-y-1 md:space-y-2">
+                      {item.achievements.map((achievement, idx) => (
+                        <motion.li
+                          key={idx}
+                          initial={{ opacity: 0, x: -10 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: idx * 0.1 + 0.2 }}
+                          className="flex items-center text-xs md:text-sm text-gray-600"
+                        >
+                          <div
+                            className={`w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-gradient-to-r ${item.gradient} mr-2 md:mr-3 flex-shrink-0`}
+                          />
+                          {achievement}
+                        </motion.li>
+                      ))}
+                    </ul>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
 
-          {/* Expand Indicator - ALWAYS VISIBLE */}
-          <div
-            className={`flex items-center justify-center mt-3 md:mt-4 pt-3 md:pt-4 border-t border-gray-200/50 text-xs md:text-sm font-semibold transition-colors duration-300 ${
-              isActive ? "text-cyan-600" : "text-gray-500"
-            }`}
-          >
-            {isActive ? currentContent.showLess : currentContent.showMore}
-            <motion.svg
-              className={`w-3 h-3 md:w-4 md:h-4 ml-1 md:ml-2 transition-transform duration-300 ${
-                isActive ? "rotate-180" : ""
+          {/* Expand Indicator - Always at bottom */}
+          <div className="mt-auto pt-3 md:pt-4 border-t border-gray-200/50">
+            <div
+              className={`flex items-center justify-center text-xs md:text-sm font-semibold transition-colors duration-300 ${
+                isActive ? "text-cyan-600" : "text-gray-500"
               }`}
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M19 9l-7 7-7-7"
-              />
-            </motion.svg>
+              {isActive ? currentContent.showLess : currentContent.showMore}
+              <motion.svg
+                className={`w-3 h-3 md:w-4 md:h-4 ml-1 md:ml-2 transition-transform duration-300 ${
+                  isActive ? "rotate-180" : ""
+                }`}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M19 9l-7 7-7-7"
+                />
+              </motion.svg>
+            </div>
           </div>
         </div>
       </div>
@@ -444,19 +542,22 @@ const TimelineItem = ({
 };
 
 const TimelineSection = ({ currentContent, timeline }) => {
-  const [activeIndex, setActiveIndex] = useState(null);
+  const [activeItems, setActiveItems] = useState({});
 
   const togglePhase = useCallback((index) => {
-    setActiveIndex(prevIndex => prevIndex === index ? null : index);
+    setActiveItems(prev => ({
+      ...prev,
+      [index]: !prev[index]
+    }));
   }, []);
 
   const isPhaseActive = useCallback((index) => {
-    return activeIndex === index;
-  }, [activeIndex]);
+    return !!activeItems[index];
+  }, [activeItems]);
 
   return (
     <section className="relative py-16 md:py-24" aria-labelledby="timeline-title">
-      <div className="relative z-10 max-w-7xl mx-auto sm:px-2 ">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6">
         <motion.h2
           id="timeline-title"
           initial={{ opacity: 0, y: 40 }}
@@ -468,7 +569,7 @@ const TimelineSection = ({ currentContent, timeline }) => {
           {currentContent.timelineTitle}
         </motion.h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 px-3 md:px-14 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {timeline.map((item, index) => (
             <TimelineItem
               key={index}
@@ -477,7 +578,6 @@ const TimelineSection = ({ currentContent, timeline }) => {
               isActive={isPhaseActive(index)}
               onToggle={togglePhase}
               currentContent={currentContent}
-              showConnection={index < timeline.length - 1}
             />
           ))}
         </div>
@@ -560,8 +660,9 @@ const CTASection = ({ currentContent }) => (
 const StoryPage = () => {
   const { currentLanguage } = useLanguage();
   const currentContent = STORY_CONTENT[currentLanguage] || STORY_CONTENT.en;
+  const currentTimeline = TIMELINE_DATA[currentLanguage] || TIMELINE_DATA.en;
 
-  // Scroll to top when component mounts - MOVED TO MAIN COMPONENT
+  // Scroll to top when component mounts
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -581,7 +682,7 @@ const StoryPage = () => {
       <main>
         <TimelineSection 
           currentContent={currentContent} 
-          timeline={TIMELINE_DATA} 
+          timeline={currentTimeline} 
         />
       </main>
 
