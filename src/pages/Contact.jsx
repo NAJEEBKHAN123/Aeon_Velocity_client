@@ -37,6 +37,23 @@ const handleSubmit = async (e) => {
       ? import.meta.env.VITE_API_URL_PROD 
       : import.meta.env.VITE_API_URL_DEV;
 
+    console.log('🌐 API Configuration:');
+    console.log('- Environment:', import.meta.env.VITE_NODE_ENV);
+    console.log('- API URL:', API_URL);
+    console.log('- Full endpoint:', `${API_URL}/api/contact/submit`);
+    console.log('- Form data:', formData);
+
+    // Validate required fields
+    if (!formData.name || !formData.email || !formData.subject || !formData.message) {
+      throw new Error('Please fill in all required fields');
+    }
+
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      throw new Error('Please enter a valid email address');
+    }
+
     const response = await fetch(`${API_URL}/api/contact/submit`, {
       method: 'POST',
       headers: {
@@ -45,29 +62,70 @@ const handleSubmit = async (e) => {
       body: JSON.stringify(formData),
     });
 
-    // Rest of your code remains the same...
-    const result = await response.json();
+    console.log('📡 Response status:', response.status);
+    console.log('📡 Response ok:', response.ok);
 
-    if (!response.ok) {
-      if (result.details && result.details.length > 0) {
-        throw new Error(result.details[0].msg || 'Validation failed');
-      }
-      throw new Error(result.message || 'Failed to send message');
+    let result;
+    try {
+      result = await response.json();
+      console.log('📦 Response data:', result);
+    } catch (parseError) {
+      console.error('❌ JSON parse error:', parseError);
+      throw new Error('Invalid response from server');
     }
 
-    // Success
+    if (!response.ok) {
+      // Handle validation errors from backend
+      if (result.details && result.details.length > 0) {
+        const errorMessage = result.details[0].msg || 'Validation failed';
+        throw new Error(errorMessage);
+      }
+      // Handle other backend errors
+      if (result.message) {
+        throw new Error(result.message);
+      }
+      // Handle HTTP errors
+      throw new Error(`Server error: ${response.status} ${response.statusText}`);
+    }
+
+    // Success - Message sent successfully
+    console.log('✅ Message sent successfully:', result);
     setIsSubmitting(false);
     setIsSubmitted(true);
-    setFormData({ name: '', email: '', company: '', subject: '', message: '' });
+    setFormData({ 
+      name: '', 
+      email: '', 
+      company: '', 
+      subject: '', 
+      message: '' 
+    });
     
-    setTimeout(() => setIsSubmitted(false), 4000);
+    // Hide success message after 5 seconds
+    setTimeout(() => setIsSubmitted(false), 5000);
     
   } catch (error) {
-    console.error('Error sending message:', error);
+    console.error('❌ Error sending message:', error);
     setIsSubmitting(false);
-    setError(error.message || 'Failed to send message. Please try again.');
     
-    setTimeout(() => setError(''), 5000);
+    // User-friendly error messages
+    let errorMessage = 'Failed to send message. Please try again.';
+    
+    if (error.message.includes('Failed to fetch')) {
+      errorMessage = 'Cannot connect to server. Please check your internet connection.';
+    } else if (error.message.includes('NetworkError')) {
+      errorMessage = 'Network error. Please check your connection.';
+    } else if (error.message.includes('Validation failed')) {
+      errorMessage = 'Please check your form information.';
+    } else if (error.message.includes('valid email')) {
+      errorMessage = 'Please enter a valid email address.';
+    } else if (error.message) {
+      errorMessage = error.message;
+    }
+    
+    setError(errorMessage);
+    
+    // Clear error after 6 seconds
+    setTimeout(() => setError(''), 6000);
   }
 };
 
