@@ -32,7 +32,12 @@ const handleSubmit = async (e) => {
   setError('');
   
   try {
-    const response = await fetch('http://localhost:5000/api/contact/submit', {
+    // Auto-select API URL based on environment
+    const API_URL = import.meta.env.VITE_NODE_ENV === 'production' 
+      ? import.meta.env.VITE_API_URL_PROD 
+      : import.meta.env.VITE_API_URL_DEV;
+
+    const response = await fetch(`${API_URL}/api/contact/submit`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -40,6 +45,7 @@ const handleSubmit = async (e) => {
       body: JSON.stringify(formData),
     });
 
+    // Rest of your code remains the same...
     const result = await response.json();
 
     if (!response.ok) {
