@@ -1,7 +1,7 @@
 import React, { useState, useMemo, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "../contexts/LanguageContext";
-import sponsorLogo from "/Sponsor/spon.png";
+import sponsorLogo from "../assets/sponsor_logo.png";
 import { Link } from "react-router-dom";
 import Img from '../assets/Our_sponsor_img.jpeg'
 
