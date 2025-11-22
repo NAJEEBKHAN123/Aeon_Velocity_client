@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import Img from '../assets/StemRaching/stem_racing_left.jpeg';
 
 const BlogPage = () => {
   const { currentLanguage } = useLanguage();
@@ -46,7 +47,8 @@ const BlogPage = () => {
   };
 
   const currentContent = content[currentLanguage];
-    useEffect(() => {
+  
+  useEffect(() => {
     window.scrollTo({
       top: 0,
       left: 0,
@@ -172,33 +174,31 @@ const BlogPage = () => {
       <section className="relative py-24 overflow-hidden min-h-[70vh] flex items-center justify-center">
         {/* Clean Background Image */}
         <div className="absolute inset-0">
-          <div 
-            className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000 ${
-              imageLoaded ? 'opacity-15' : 'opacity-0'
+          <img 
+            src={Img} 
+            alt="STEM Racing Team"
+            className={`w-full h-full object-cover transition-opacity duration-1000 ${
+              imageLoaded ? 'opacity-100' : 'opacity-0'
             }`}
             style={{
-              backgroundImage: 'url("https://images.unsplash.com/photo-1699412947675-0f83e129ad4b?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fGRpc2N1c3N0aW9uJTIwcGhvdG8lMjBvZiUyMGYxJTIwc3RlbSUyMHJhY2luZ3xlbnwwfHwwfHx8MA%3D%3D")',
+              imageRendering: 'auto',
             }}
-          >
-            {/* Preload image */}
-            <img 
-              src="https://images.unsplash.com/photo-1699412947675-0f83e129ad4b?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fGRpc2N1c3N0aW9uJTIwcGhvdG8lMjBvZiUyMGYxJTIwc3RlbSUyMHJhY2luZ3xlbnwwfHwwfHx8MA%3D%3D" 
-              alt="" 
-              className="hidden" 
-              onLoad={() => setImageLoaded(true)}
-            />
-          </div>
+            onLoad={() => setImageLoaded(true)}
+            onError={() => {
+              console.warn('Failed to load background image');
+              setImageLoaded(true);
+            }}
+          />
           
-          {/* Light Gradient Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-br from-white/60 via-blue-50/40 to-indigo-100/30"></div>
+          {/* Light Clean Overlay */}
+          <div className="absolute inset-0 bg-white/70"></div>
           
-          {/* Subtle Animated Background Elements */}
+          {/* Subtle Clean Background Elements */}
           <div className="absolute inset-0 overflow-hidden">
             <motion.div
-              className="absolute top-20 right-10 w-72 h-72 bg-cyan-100 rounded-full mix-blend-multiply filter blur-xl opacity-20"
+              className="absolute top-20 right-10 w-72 h-72 bg-cyan-100 rounded-full opacity-10"
               animate={{
                 scale: [1, 1.1, 1],
-                rotate: [0, 90, 0],
               }}
               transition={{
                 duration: 8,
@@ -207,10 +207,9 @@ const BlogPage = () => {
               }}
             />
             <motion.div
-              className="absolute bottom-40 left-10 w-72 h-72 bg-blue-100 rounded-full mix-blend-multiply filter blur-xl opacity-20"
+              className="absolute bottom-40 left-10 w-72 h-72 bg-blue-100 rounded-full opacity-10"
               animate={{
                 scale: [1.1, 1, 1.1],
-                rotate: [90, 0, 90],
               }}
               transition={{
                 duration: 10,
@@ -233,7 +232,7 @@ const BlogPage = () => {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="inline-flex items-center px-6 py-3 bg-white/80 backdrop-blur-md border border-gray-200/50 rounded-2xl mb-8 shadow-lg"
+              className="inline-flex items-center px-6 py-3 bg-white border border-gray-200 rounded-2xl mb-8"
             >
               <div className="w-3 h-3 bg-cyan-500 rounded-full mr-3 animate-pulse"></div>
               <span className="text-gray-700 text-lg font-semibold tracking-wider uppercase">
@@ -246,8 +245,7 @@ const BlogPage = () => {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
-                         className="text-4xl md:text-6xl font-extrabold italic tracking-wider uppercase mb-6 md:mb-8 leading-tight px-4 bg-gradient-to-r from-green-600 via-blue-600 to-purple-600 bg-clip-text text-transparent"
-
+              className="text-4xl md:text-6xl font-extrabold italic tracking-wider uppercase mb-6 md:mb-8 leading-tight px-4 bg-gradient-to-r from-green-600 via-blue-600 to-purple-600 bg-clip-text text-transparent"
             >
               {currentContent.title}
             </motion.h1>
@@ -259,13 +257,13 @@ const BlogPage = () => {
               transition={{ duration: 0.8, delay: 0.5 }}
               className="flex justify-center items-center space-x-4 mb-8 mx-auto"
             >
-              <div className="w-20 h-1 bg-gradient-to-r from-transparent to-cyan-500"></div>
+              <div className="w-20 h-0.5 bg-gradient-to-r from-transparent to-cyan-500"></div>
               <motion.div 
-                className="w-4 h-4 bg-cyan-500 rounded-full"
-                animate={{ scale: [1, 1.5, 1] }}
+                className="w-3 h-3 bg-cyan-500 rounded-full"
+                animate={{ scale: [1, 1.3, 1] }}
                 transition={{ duration: 2, repeat: Infinity }}
               />
-              <div className="w-20 h-1 bg-gradient-to-r from-cyan-500 to-transparent"></div>
+              <div className="w-20 h-0.5 bg-gradient-to-r from-cyan-500 to-transparent"></div>
             </motion.div>
             
             {/* Description */}
@@ -273,7 +271,7 @@ const BlogPage = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.7 }}
-              className="text-2xl md:text-3xl text-gray-700 leading-relaxed max-w-4xl mx-auto font-light bg-white/70 backdrop-blur-sm p-8 rounded-3xl border border-gray-200/50 shadow-lg"
+              className="text-2xl md:text-3xl text-gray-700 leading-relaxed max-w-4xl mx-auto font-light bg-white p-8 rounded-3xl border border-gray-200"
             >
               {currentContent.description}
             </motion.p>
@@ -286,12 +284,12 @@ const BlogPage = () => {
               className="mt-12"
             >
               <motion.div
-                animate={{ y: [0, 10, 0] }}
+                animate={{ y: [0, 8, 0] }}
                 transition={{ duration: 2, repeat: Infinity }}
                 className="text-cyan-600 text-sm font-semibold tracking-widest uppercase flex flex-col items-center"
               >
                 <span>{currentLanguage === 'fr' ? 'Explorer les Articles' : 'Explore Posts'}</span>
-                <svg className="w-6 h-6 mt-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 mt-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                 </svg>
               </motion.div>
@@ -301,7 +299,7 @@ const BlogPage = () => {
       </section>
 
       {/* Category Filter */}
-      <section className="py-12 bg-white/50 backdrop-blur-sm">
+      <section className="py-12 bg-white/80">
         <div className="max-w-6xl mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -317,8 +315,8 @@ const BlogPage = () => {
                 onClick={() => setActiveCategory(category.id)}
                 className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 ${
                   activeCategory === category.id
-                    ? 'bg-cyan-500 text-white shadow-lg shadow-cyan-500/25'
-                    : 'bg-white/80 text-gray-700 hover:bg-gray-100 hover:text-gray-900 border border-gray-200/50'
+                    ? 'bg-cyan-500 text-white'
+                    : 'bg-white text-gray-700 hover:bg-gray-100 hover:text-gray-900 border border-gray-200'
                 }`}
               >
                 {category.label}
@@ -340,7 +338,7 @@ const BlogPage = () => {
             <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
               {currentContent.latestPosts}
             </h2>
-            <div className="w-24 h-1 bg-cyan-500 mx-auto rounded-full"></div>
+            <div className="w-24 h-0.5 bg-cyan-500 mx-auto"></div>
           </motion.div>
 
           {/* Posts Grid */}
@@ -369,7 +367,7 @@ const BlogPage = () => {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 border-2 border-cyan-500 text-cyan-600 font-semibold rounded-xl hover:bg-cyan-500 hover:text-white transition-all duration-300 bg-white/80 backdrop-blur-sm"
+              className="px-8 py-4 border-2 border-cyan-500 text-cyan-600 font-semibold rounded-xl hover:bg-cyan-500 hover:text-white transition-all duration-300 bg-white"
             >
               {currentContent.viewAll}
             </motion.button>
@@ -398,7 +396,7 @@ const BlogPage = () => {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-500 text-white cursor-pointer font-bold rounded-xl hover:from-cyan-600 hover:to-blue-600 transition-all duration-300 shadow-lg shadow-cyan-500/25"
+              className="px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-500 text-white cursor-pointer font-bold rounded-xl hover:from-cyan-600 hover:to-blue-600 transition-all duration-300"
             >
               {currentContent.cta}
             </motion.button>
@@ -411,25 +409,42 @@ const BlogPage = () => {
 
 // Blog Post Card Component
 const BlogPostCard = ({ post, index, currentLanguage, readMoreText }) => {
+  const colorClasses = {
+    cyan: {
+      bg: 'bg-cyan-100',
+      text: 'text-cyan-700',
+      border: 'border-cyan-200',
+      hover: 'hover:border-cyan-300'
+    },
+    blue: {
+      bg: 'bg-blue-100',
+      text: 'text-blue-700',
+      border: 'border-blue-200',
+      hover: 'hover:border-blue-300'
+    }
+  };
+
+  const colors = colorClasses[post.color] || colorClasses.cyan;
+
   return (
     <motion.article
       layout
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: index * 0.1 }}
-      whileHover={{ y: -8, transition: { duration: 0.3 } }}
+      whileHover={{ y: -5, transition: { duration: 0.3 } }}
       className="group cursor-pointer"
     >
-      <div className="bg-white/80 backdrop-blur-sm rounded-2xl border border-gray-200/50 hover:border-cyan-500/40 transition-all duration-300 overflow-hidden h-full flex flex-col shadow-lg hover:shadow-xl">
+      <div className={`bg-white rounded-2xl border ${colors.border} ${colors.hover} transition-all duration-300 overflow-hidden h-full flex flex-col`}>
         {/* Header with Icon */}
-        <div className={`p-6 bg-gradient-to-br from-${post.color}-100 to-${post.color}-200 border-b border-gray-200/50`}>
+        <div className={`p-6 ${colors.bg} border-b ${colors.border}`}>
           <div className="flex items-center justify-between mb-4">
             <div className="text-4xl">{post.image}</div>
-            <span className={`text-${post.color}-700 text-sm font-semibold px-3 py-1 bg-${post.color}-200/50 rounded-full`}>
+            <span className={`${colors.text} text-sm font-semibold px-3 py-1 ${colors.bg} rounded-full`}>
               {post.readTime}
             </span>
           </div>
-          <span className={`text-${post.color}-600 text-xs font-medium uppercase tracking-wide`}>
+          <span className={`${colors.text} text-xs font-medium uppercase tracking-wide`}>
             {post.category}
           </span>
         </div>
@@ -456,7 +471,7 @@ const BlogPostCard = ({ post, index, currentLanguage, readMoreText }) => {
         <div className="p-6 pt-0">
           <motion.button
             whileHover={{ x: 5 }}
-            className={`text-${post.color}-600 font-semibold flex items-center group-hover:text-${post.color}-700 transition-colors`}
+            className={`${colors.text} font-semibold flex items-center group-hover:${colors.text} transition-colors`}
           >
             {readMoreText}
             <svg 

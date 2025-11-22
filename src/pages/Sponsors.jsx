@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "../contexts/LanguageContext";
 import sponsorLogo from "/Sponsor/spon.png";
 import { Link } from "react-router-dom";
+import Img from '../assets/Our_sponsor_img.jpeg'
+
 
 const SPONSOR_CONTENT = {
   fr: {
@@ -321,7 +323,7 @@ const SponsorsPage = () => {
       <div className="absolute inset-0">
         <div
           className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000 ${
-            imageLoaded ? "opacity-20" : "opacity-0"
+            imageLoaded ? "opacity-100" : "opacity-0"
           }`}
           style={{
             backgroundImage:
@@ -379,51 +381,66 @@ const SponsorsPage = () => {
         />
       </div>
 
-      {/* Hero Section */}
-      <section className="relative py-20 md:py-28 text-center min-h-[50vh] flex items-center justify-center">
-        <div className="absolute inset-0">
-          <div
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40"
-            style={{
-              backgroundImage:
-                'url("https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80")',
-            }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/30 to-white/50"></div>
-        </div>
+  <section className="relative py-20 md:py-28 text-center min-h-[70vh] flex items-center justify-center overflow-hidden">
+  {/* Background with properly sized image */}
+  <div className="absolute inset-0">
+    {/* Main background image with proper sizing */}
+    <div
+      className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+      style={{
+        backgroundImage: `url(${Img})`,
+        backgroundSize: 'cover', // Ensures image covers container without distortion
+        backgroundPosition: 'center',
+        transform: 'scale(1.1)', // Slight zoom to prevent white edges
+        // For very large images, you might want:
+        // backgroundSize: 'contain' // Shows full image without cropping
+      }}
+    />
+    
+    {/* Enhanced gradient overlays for better text readability */}
+    <div className="absolute inset-0 bg-gradient-to-br from-black/20 via-transparent to-black/10"></div>
+    <div className="absolute inset-0 bg-gradient-to-t from-white/95 via-white/50 to-white/30"></div>
+    <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-white/10"></div>
+    
+    {/* Optional: Add this if image is still too dominant */}
+    <div className="absolute inset-0 bg-white/20 backdrop-blur-[1px]"></div>
+  </div>
 
-        <div className="relative z-10 max-w-4xl mx-auto px-4 md:px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="inline-flex items-center px-6 py-3 bg-white/80 backdrop-blur-md rounded-2xl shadow-lg border border-white/30 mb-6"
-          >
-            <div className="w-3 h-3 bg-gradient-to-r from-green-400 to-blue-500 rounded-full mr-3 animate-pulse shadow-lg shadow-green-400/50"></div>
-            <p className="text-gray-700 uppercase tracking-widest font-bold text-sm">
-              {currentContent.subtitle}
-            </p>
-          </motion.div>
+  {/* Content container */}
+  <div className="relative z-10 max-w-4xl mx-auto px-4 md:px-6">
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+      className="inline-flex items-center px-6 py-3 bg-white/90 backdrop-blur-lg rounded-2xl shadow-lg border border-white/50 mb-8"
+    >
+      <div className="w-3 h-3 bg-gradient-to-r from-green-400 to-blue-500 rounded-full mr-3 animate-pulse"></div>
+      <p className="text-gray-800 uppercase tracking-widest font-bold text-sm">
+        {currentContent.subtitle}
+      </p>
+    </motion.div>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-4xl md:text-6xl font-extrabold italic tracking-wider uppercase mb-6 md:mb-8 leading-tight px-4 bg-gradient-to-r from-green-600 via-blue-600 to-purple-600 bg-clip-text text-transparent"
-          >
-            {currentContent.title}
-          </motion.h1>
+    <motion.h1
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, delay: 0.1 }}
+      className="text-4xl md:text-6xl font-black italic uppercase mb-8 leading-tight"
+    >
+      <span className="bg-gradient-to-r from-green-600 via-blue-600 to-purple-600 bg-clip-text text-transparent">
+        {currentContent.title}
+      </span>
+    </motion.h1>
 
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-xl md:text-2xl text-gray-700 leading-relaxed max-w-3xl mx-auto bg-white/60 backdrop-blur-sm p-6 rounded-2xl shadow-lg border border-white/30"
-          >
-            {currentContent.introduction}
-          </motion.p>
-        </div>
-      </section>
+    <motion.p
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, delay: 0.2 }}
+      className="text-xl md:text-2xl text-gray-800 leading-relaxed max-w-3xl mx-auto bg-white/80 backdrop-blur-md p-6 rounded-2xl shadow-lg border border-white/40"
+    >
+      {currentContent.introduction}
+    </motion.p>
+  </div>
+</section>
 
       {/* Partnership Tiers Section */}
       <section className="relative py-20">

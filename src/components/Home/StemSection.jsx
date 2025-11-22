@@ -1,7 +1,7 @@
 import React from "react";
 import topImg from '../../assets/StemRaching/stem_racing_right1.jpeg'
-import leftImg from '../../assets/StemRaching/stem_racing_left.jpeg'
-import bottom from '../../assets/StemRaching/stem_racing_right2.jpeg'
+import leftImg from '../../assets/StemRaching/stem_racing_leftside.jpeg'
+import bottom from '../../assets/StemRaching/stem_racing_left.jpeg'
 
 import { useLanguage } from '../../contexts/LanguageContext';
 

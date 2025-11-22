@@ -2,6 +2,7 @@ import React, { useState, useMemo, useCallback, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "../contexts/LanguageContext";
 import { Link } from "react-router-dom";
+import Img from '../assets/StemRaching/stem_racing_right2.jpeg';
 
 const STORY_CONTENT = {
   fr: {
@@ -323,22 +324,29 @@ const HeroSection = ({ currentContent }) => {
       className="relative py-8 mt-16 md:mt-4 md:py-24 text-center min-h-[60vh] md:min-h-[80vh] flex items-center justify-center"
       aria-labelledby="hero-title"
     >
-      {/* Background Image with Optimized Loading */}
+      {/* Background Image with Your Imported Image */}
       <div className="absolute inset-0">
         <div 
           className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-700 ${
             imageLoaded ? 'opacity-100' : 'opacity-0'
           }`}
           style={{
-            backgroundImage: 'url("https://media.istockphoto.com/id/1191656154/photo/pit-crew-working-at-pit-stop.jpg?s=612x612&w=0&k=20&c=9m-V_OWpb-fthyx-wgUs3yfVNDbuU01G8KmCDsz_R5w=")',
+            backgroundImage: `url(${Img})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
           }}
         >
-          {/* Preload image */}
+          {/* Preload your actual image */}
           <img 
-            src="https://media.istockphoto.com/id/1191656154/photo/pit-crew-working-at-pit-stop.jpg?s=612x612&w=0&k=20&c=9m-V_OWpb-fthyx-wgUs3yfVNDbuU01G8KmCDsz_R5w=" 
+            src={Img} 
             alt="" 
             className="hidden" 
             onLoad={() => setImageLoaded(true)}
+            onError={() => {
+              console.warn('Failed to load background image');
+              setImageLoaded(true);
+            }}
           />
         </div>
         
@@ -557,7 +565,7 @@ const TimelineSection = ({ currentContent, timeline }) => {
 
   return (
     <section className="relative py-16 md:py-24" aria-labelledby="timeline-title">
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-16">
         <motion.h2
           id="timeline-title"
           initial={{ opacity: 0, y: 40 }}
