@@ -57,104 +57,105 @@ const BlogPage = () => {
   }, []);
 
   // Sample blog posts data
-  const blogPosts = [
-    {
-      id: 1,
-      title: {
-        fr: "Révolution Aérodynamique : Notre Nouvelle Approche",
-        en: "Aerodynamic Revolution: Our New Approach"
-      },
-      excerpt: {
-        fr: "Découvrez comment nous avons repensé complètement notre conception aérodynamique pour gagner des précieux centièmes de seconde...",
-        en: "Discover how we completely rethought our aerodynamic design to gain valuable hundredths of a second..."
-      },
-      category: "innovation",
-      date: "2024-12-15",
-      readTime: "4 min",
-      image: "🚀",
-      color: "cyan"
-    },
-    {
-      id: 2,
-      title: {
-        fr: "La Stratégie pour Dominer 2026",
-        en: "The Strategy to Dominate 2026"
-      },
-      excerpt: {
-        fr: "Notre feuille de route détaillée pour la saison 2026 : chaque décision compte dans notre quête de la victoire nationale...",
-        en: "Our detailed roadmap for the 2026 season: every decision counts in our quest for national victory..."
-      },
-      category: "strategy",
-      date: "2024-12-10",
-      readTime: "6 min",
-      image: "🎯",
-      color: "blue"
-    },
-    {
-      id: 3,
-      title: {
-        fr: "Journée Typique de l'Équipe Technique",
-        en: "Typical Day of the Technical Team"
-      },
-      excerpt: {
-        fr: "Immersion dans une journée de travail intense avec notre équipe d'ingénierie. Tests, optimisations, et innovations au programme...",
-        en: "Immersion in an intense workday with our engineering team. Tests, optimizations, and innovations on the agenda..."
-      },
-      category: "team",
-      date: "2024-12-05",
-      readTime: "5 min",
-      image: "⚙️",
-      color: "cyan"
-    },
-    {
-      id: 4,
-      title: {
-        fr: "Optimisation des Matériaux : Le Choix du Carbone",
-        en: "Material Optimization: The Carbon Choice"
-      },
-      excerpt: {
-        fr: "Pourquoi nous avons choisi le carbone et comment nous poussons ses limites pour des performances maximales...",
-        en: "Why we chose carbon and how we're pushing its limits for maximum performance..."
-      },
-      category: "technical",
-      date: "2024-11-28",
-      readTime: "7 min",
-      image: "🔬",
-      color: "blue"
-    },
-    {
-      id: 5,
-      title: {
-        fr: "Notre Système de Tests Automatisés",
-        en: "Our Automated Testing System"
-      },
-      excerpt: {
-        fr: "Développement d'un système révolutionnaire de tests qui nous permet d'itérer 3x plus vite que la concurrence...",
-        en: "Development of a revolutionary testing system that allows us to iterate 3x faster than the competition..."
-      },
-      category: "innovation",
-      date: "2024-11-20",
-      readTime: "8 min",
-      image: "🤖",
-      color: "cyan"
-    },
-    {
-      id: 6,
-      title: {
-        fr: "L'Esprit d'Équipe qui Fait la Différence",
-        en: "The Team Spirit That Makes the Difference"
-      },
-      excerpt: {
-        fr: "Comment nous cultivons une culture d'excellence et de collaboration qui nous distingue sur la piste...",
-        en: "How we cultivate a culture of excellence and collaboration that distinguishes us on the track..."
-      },
-      category: "team",
-      date: "2024-11-15",
-      readTime: "4 min",
-      image: "👥",
-      color: "blue"
-    }
-  ];
+  // const blogPosts = [
+  //   {
+  //     id: 1,
+  //     title: {
+  //       fr: "Révolution Aérodynamique : Notre Nouvelle Approche",
+  //       en: "Aerodynamic Revolution: Our New Approach"
+  //     },
+  //     excerpt: {
+  //       fr: "Découvrez comment nous avons repensé complètement notre conception aérodynamique pour gagner des précieux centièmes de seconde...",
+  //       en: "Discover how we completely rethought our aerodynamic design to gain valuable hundredths of a second..."
+  //     },
+  //     category: "innovation",
+  //     date: "2024-12-15",
+  //     readTime: "4 min",
+  //     image: "🚀",
+  //     color: "cyan"
+  //   },
+  //   {
+  //     id: 2,
+  //     title: {
+  //       fr: "La Stratégie pour Dominer 2026",
+  //       en: "The Strategy to Dominate 2026"
+  //     },
+  //     excerpt: {
+  //       fr: "Notre feuille de route détaillée pour la saison 2026 : chaque décision compte dans notre quête de la victoire nationale...",
+  //       en: "Our detailed roadmap for the 2026 season: every decision counts in our quest for national victory..."
+  //     },
+  //     category: "strategy",
+  //     date: "2024-12-10",
+  //     readTime: "6 min",
+  //     image: "🎯",
+  //     color: "blue"
+  //   },
+  //   {
+  //     id: 3,
+  //     title: {
+  //       fr: "Journée Typique de l'Équipe Technique",
+  //       en: "Typical Day of the Technical Team"
+  //     },
+  //     excerpt: {
+  //       fr: "Immersion dans une journée de travail intense avec notre équipe d'ingénierie. Tests, optimisations, et innovations au programme...",
+  //       en: "Immersion in an intense workday with our engineering team. Tests, optimizations, and innovations on the agenda..."
+  //     },
+  //     category: "team",
+  //     date: "2024-12-05",
+  //     readTime: "5 min",
+  //     image: "⚙️",
+  //     color: "cyan"
+  //   },
+  //   {
+  //     id: 4,
+  //     title: {
+  //       fr: "Optimisation des Matériaux : Le Choix du Carbone",
+  //       en: "Material Optimization: The Carbon Choice"
+  //     },
+  //     excerpt: {
+  //       fr: "Pourquoi nous avons choisi le carbone et comment nous poussons ses limites pour des performances maximales...",
+  //       en: "Why we chose carbon and how we're pushing its limits for maximum performance..."
+  //     },
+  //     category: "technical",
+  //     date: "2024-11-28",
+  //     readTime: "7 min",
+  //     image: "🔬",
+  //     color: "blue"
+  //   },
+  //   {
+  //     id: 5,
+  //     title: {
+  //       fr: "Notre Système de Tests Automatisés",
+  //       en: "Our Automated Testing System"
+  //     },
+  //     excerpt: {
+  //       fr: "Développement d'un système révolutionnaire de tests qui nous permet d'itérer 3x plus vite que la concurrence...",
+  //       en: "Development of a revolutionary testing system that allows us to iterate 3x faster than the competition..."
+  //     },
+  //     category: "innovation",
+  //     date: "2024-11-20",
+  //     readTime: "8 min",
+  //     image: "🤖",
+  //     color: "cyan"
+  //   },
+  //   {
+  //     id: 6,
+  //     title: {
+  //       fr: "L'Esprit d'Équipe qui Fait la Différence",
+  //       en: "The Team Spirit That Makes the Difference"
+  //     },
+  //     excerpt: {
+  //       fr: "Comment nous cultivons une culture d'excellence et de collaboration qui nous distingue sur la piste...",
+  //       en: "How we cultivate a culture of excellence and collaboration that distinguishes us on the track..."
+  //     },
+  //     category: "team",
+  //     date: "2024-11-15",
+  //     readTime: "4 min",
+  //     image: "👥",
+  //     color: "blue"
+  //   }
+  // ];
+  const blogPosts = [];
 
   const filteredPosts = activeCategory === 'all' 
     ? blogPosts 
