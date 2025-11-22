@@ -36,13 +36,13 @@ const socialLinks = [
   },
   { 
     icon: <FaTiktok className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7" />, 
-    url: "https://tiktok.com/@aeonvelocity",
+    url: "https://www.tiktok.com/@aeon.velocity?_r=1&_t=ZN-91beU2n75C2",
     name: "TikTok",
     color: "hover:text-black"
   },
   { 
     icon: <FaFacebook className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7" />, 
-    url: "https://facebook.com/aeonvelocity",
+    url: "https://www.facebook.com/share/17e9NP8LB3/?mibextid=wwXIfr",
     name: "Facebook",
     color: "hover:text-blue-600"
   },

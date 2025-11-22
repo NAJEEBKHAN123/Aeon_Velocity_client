@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import logo from "../assets/Logo.png";
-import { FaInstagram, FaTiktok, FaFacebook, FaYoutube, FaTwitter } from "react-icons/fa";
+import { FaInstagram, FaTiktok, FaFacebook, FaYoutube, FaLinkedin } from "react-icons/fa";
 
 const Navbar = ({ currentLanguage, onLanguageChange }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,25 +20,25 @@ const Navbar = ({ currentLanguage, onLanguageChange }) => {
     },
     { 
       icon: <FaTiktok className="w-5 h-5" />, 
-      url: "https://tiktok.com/@aeonvelocity",
+      url: "https://www.tiktok.com/@aeon.velocity?_r=1&_t=ZN-91beU2n75C2",
       name: "TikTok",
       color: "hover:text-black"
     },
     { 
       icon: <FaFacebook className="w-5 h-5" />, 
-      url: "https://facebook.com/aeonvelocity",
+      url: "https://www.facebook.com/share/17e9NP8LB3/?mibextid=wwXIfr",
       name: "Facebook",
       color: "hover:text-blue-600"
     },
     { 
       icon: <FaYoutube className="w-5 h-5" />, 
-      url: "https://youtube.com/@aeonvelocity",
+      url: "https://youtube.com/@aeonvelocity?si=FEK4kfJI_nPb58IO",
       name: "YouTube",
       color: "hover:text-red-600"
     },
     { 
-      icon: <FaTwitter className="w-5 h-5" />, 
-      url: "https://twitter.com/aeonvelocity",
+      icon: <FaLinkedin className="w-5 h-5" />, 
+      url: "https://www.linkedin.com/company/aeonvelocity/",
       name: "Twitter",
       color: "hover:text-blue-400"
     },

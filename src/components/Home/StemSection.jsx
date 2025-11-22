@@ -1,6 +1,8 @@
 import React from "react";
-import topImg from '../../assets/StemRaching/topImg.jpg'
-import leftImg from '../../assets/StemRaching/leftImg.jpg'
+import topImg from '../../assets/StemRaching/stem_racing_right1.jpeg'
+import leftImg from '../../assets/StemRaching/stem_racing_left.jpeg'
+import bottom from '../../assets/StemRaching/stem_racing_right2.jpeg'
+
 import { useLanguage } from '../../contexts/LanguageContext';
 
 const StemRacing = () => {
@@ -10,7 +12,7 @@ const StemRacing = () => {
   const unsplashImages = {
     topImg: topImg,
     leftImg: leftImg,
-    bottomImg: "https://media.istockphoto.com/id/1133992451/photo/racing-team-working-at-pit-stop.webp?a=1&b=1&s=612x612&w=0&k=20&c=ZyqOSr6zEed_IXPsKdKtGfSjQZiJZxczHN9-in4umgM="
+    bottomImg: bottom
   };
 
   const content = {

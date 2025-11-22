@@ -34,7 +34,7 @@ const Hero = () => {
   const currentContent = content[currentLanguage];
 
   return (
-    <section className="relative min-h-[80vh] sm:min-h-screen overflow-hidden bg-black flex items-center justify-center py-8 sm:py-0">
+    <section className="relative min-h-[100vh] sm:min-h-screen overflow-hidden bg-black flex items-center justify-center py-8 sm:py-0">
       {/* Background Image */}
       <div className="absolute inset-0">
         <img
@@ -49,7 +49,7 @@ const Hero = () => {
       <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 shadow-lg shadow-cyan-400/30 z-20"></div>
 
       {/* Main Content Container */}
-      <div className="relative w-full max-w-7xl mx-auto px-4 xs:px-4 sm:px-6 lg:px-4">
+      <div className="relative w-full max-w-7xl mx-auto px-4 xs:px-4 sm:px-6 lg:px-0">
         <div className="flex flex-col justify-center items-start min-h-[70vh] sm:min-h-screen py-4 sm:py-12 md:py-20">
           {/* Text Content - Left aligned on all screens */}
           <div className="text-start w-full max-w-3xl mx-auto md:mx-0 md:pl-8 lg:pl-12 xl:pl-16">

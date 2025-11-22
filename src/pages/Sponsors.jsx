@@ -19,6 +19,7 @@ const SPONSOR_CONTENT = {
       title: "Niveaux de Partenariat",
       championship: {
         name: "Championnat",
+        price: "> 4500€",
         description: "Partenaire Principal",
         benefits: [
           "Logo principal sur la voiture",
@@ -31,6 +32,7 @@ const SPONSOR_CONTENT = {
       },
       grandPrix: {
         name: "Grand Prix",
+        price: "< 4500€",
         description: "Partenaire Stratégique",
         benefits: [
           "Logo visible sur la voiture",
@@ -43,6 +45,7 @@ const SPONSOR_CONTENT = {
       },
       sprint: {
         name: "Sprint",
+        price: "< 1000€",
         description: "Partenaire Officiel",
         benefits: [
           "Logo sur le stand",
@@ -55,6 +58,7 @@ const SPONSOR_CONTENT = {
       },
       start: {
         name: "Start",
+        price: "< 500€",
         description: "Partenaire Soutien",
         benefits: [
           "Logo sur le site web",
@@ -85,6 +89,7 @@ const SPONSOR_CONTENT = {
       title: "Partnership Tiers",
       championship: {
         name: "Championship",
+        price: "> 4500€",
         description: "Title Partner",
         benefits: [
           "Primary logo on the car",
@@ -97,6 +102,7 @@ const SPONSOR_CONTENT = {
       },
       grandPrix: {
         name: "Grand Prix",
+        price: "< 4500€",
         description: "Strategic Partner",
         benefits: [
           "Prominent logo on the car",
@@ -109,6 +115,7 @@ const SPONSOR_CONTENT = {
       },
       sprint: {
         name: "Sprint",
+        price: "< 1000€",
         description: "Official Partner",
         benefits: [
           "Logo on the pit stand",
@@ -121,6 +128,7 @@ const SPONSOR_CONTENT = {
       },
       start: {
         name: "Start",
+        price: "< 500€",
         description: "Supporting Partner",
         benefits: [
           "Logo on website",
@@ -148,7 +156,7 @@ const SPONSORS_DATA = {
       tier: "start",
       description: "Home connect - Visionary technology partner",
       since: 2024,
-      website: "https://nolavision.com",
+    
     },
   ],
   previous: [],
@@ -174,7 +182,7 @@ const SponsorCard = ({ sponsor, isCurrent = true }) => {
 
   return (
     <motion.div
-      className="relative border-1 border-gray-400 rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 cursor-pointer overflow-hidden"
+      className="relative border-1 border-gray-400 rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden"
       whileHover={{ scale: 1.05 }}
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
@@ -202,37 +210,12 @@ const SponsorCard = ({ sponsor, isCurrent = true }) => {
         )}
       </div>
 
-      {/* Hover Overlay */}
-      <AnimatePresence>
-        {isHovered && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="absolute inset-0 bg-blue-600/95 rounded-2xl flex items-center justify-center z-20"
-          >
-            <motion.button
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              exit={{ scale: 0 }}
-              className="px-6 py-3 bg-white text-blue-700 font-bold text-base hover:scale-105 transition-transform shadow-lg"
-              onClick={(e) => {
-                e.stopPropagation();
-                if (sponsor.website) window.open(sponsor.website, "_blank");
-              }}
-            >
-              Learn More
-            </motion.button>
-          </motion.div>
-        )}
-      </AnimatePresence>
+     
     </motion.div>
   );
 };
 
 const PartnershipTier = ({ tier, content, isHighlighted = false }) => {
-  const [isExpanded, setIsExpanded] = useState(false);
-
   const tierStyles = {
     championship: {
       gradient: "from-purple-500 to-pink-500",
@@ -265,7 +248,7 @@ const PartnershipTier = ({ tier, content, isHighlighted = false }) => {
   return (
     <motion.div
       className={`${style.bg} border-2 ${style.border} rounded-2xl p-6 shadow-lg ${style.shadow}
-      ${isHighlighted ? "ring-2 ring-purple-300 z-10" : ""} /* Removed scale-105 and shadow-2xl, added z-10 */
+      ${isHighlighted ? "ring-2 ring-purple-300 z-10" : ""}
       transition-all duration-300 relative overflow-hidden flex flex-col min-h-[350px]`}
       whileHover={{ scale: 1.04 }}
       layout
@@ -277,58 +260,45 @@ const PartnershipTier = ({ tier, content, isHighlighted = false }) => {
       <div className="text-center mb-6 relative z-10">
         <div
           className={`inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r ${style.gradient} text-white font-bold text-sm mb-3 shadow-lg ${
-            isHighlighted ? "scale-110" : "" /* Added subtle scale only to the badge */
+            isHighlighted ? "scale-110" : ""
           }`}
         >
           {content.name}
         </div>
-        <h3 className="text-2xl font-bold text-gray-800 mb-2">
+        
+        {/* Price Display - Simplified without INVESTMENT label */}
+        <div className="mb-3">
+          <div className="text-2xl font-bold text-gray-800">
+            {content.price}
+          </div>
+        </div>
+        
+        <h3 className="text-xl font-bold text-gray-800 mb-2">
           {content.name} Partner
         </h3>
-        <p className="text-gray-600">{content.description}</p>
+        <p className="text-gray-600 text-sm">{content.description}</p>
       </div>
 
-      {/* Benefits */}
-      <div className="space-y-2 relative z-10 mb-4">
-        {content.benefits
-          .slice(0, isExpanded ? content.benefits.length : 3)
-          .map((benefit, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: index * 0.1 }}
-              className="flex items-center text-gray-700"
-            >
-              <div
-                className={`w-2 h-2 rounded-full bg-gradient-to-r ${style.gradient} mr-3 flex-shrink-0`}
-              />
-              <span className="text-sm">{benefit}</span>
-            </motion.div>
-          ))}
-      </div>
-
-      {/* Show More / Show Less */}
-      {content.benefits.length > 3 && (
-        <div className="mt-auto relative z-10">
-          <motion.button
-            onClick={() => setIsExpanded(!isExpanded)}
-            className={`w-full py-3 rounded-lg font-semibold transition-all duration-300 ${
-              isExpanded
-                ? "bg-gray-200 text-gray-700 hover:bg-gray-300"
-                : `bg-gradient-to-r ${style.gradient} text-white hover:shadow-lg`
-            }`}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
+      {/* Benefits - Show all benefits without expand/collapse */}
+      <div className="space-y-2 relative z-10 mb-4 flex-grow">
+        {content.benefits.map((benefit, index) => (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: index * 0.1 }}
+            className="flex items-center text-gray-700"
           >
-            {isExpanded ? "Show Less" : "Show More Benefits"}
-          </motion.button>
-        </div>
-      )}
+            <div
+              className={`w-2 h-2 rounded-full bg-gradient-to-r ${style.gradient} mr-3 flex-shrink-0`}
+            />
+            <span className="text-sm">{benefit}</span>
+          </motion.div>
+        ))}
+      </div>
     </motion.div>
   );
 };
-
 
 const SponsorsPage = () => {
   const { currentLanguage } = useLanguage();
@@ -480,8 +450,7 @@ const SponsorsPage = () => {
             {currentContent.benefits}
           </motion.p>
 
-          {/* Added min-h-[500px] to ensure consistent height */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-5 sm:px-10 md:px-8 lg:px-6 xl:px-16 relative z-10 min-h-[200px]">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-4 sm:px-6 md:px-4 lg:px-4 xl:px-16 relative z-10 min-h-[200px]">
             <PartnershipTier
               tier="championship"
               content={currentContent.tiers.championship}
